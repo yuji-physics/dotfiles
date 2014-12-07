@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/Users/Yuji/.vimperator'
+let g:netrw_dirhist_2='/Users/Yuji/Desktop/OHpaper/contents/HCL2E'
+let g:netrw_dirhist_3='/Users/Yuji/Documents/labo/meeting'
+let g:netrw_dirhist_4='/Users/Yuji/.vimperator'
+let g:netrw_dirhist_5='/Users/Yuji'
+let g:netrw_dirhist_6='/Users/Yuji/.vimperator'
+let g:netrw_dirhist_7='/Users/Yuji'
+let g:netrw_dirhist_8='/Users/Yuji/dotfiles/.vimperator'
+let g:netrw_dirhist_9='/home/yuji-linux/.vimperator'
