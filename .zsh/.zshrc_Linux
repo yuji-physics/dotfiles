@@ -1,4 +1,4 @@
-#.zshrc
+#.zshrc_Linux
 #
 autoload -U compinit
 compinit
@@ -57,18 +57,12 @@ export PATH
 #-------------------------------
 # alias
 #-------------------------------
-alias firefox="open -a Firefox"
-alias chrome="open -a Google\ Chrome"
 alias l="ls --color"
 alias ls="ls --color"
 alias la="ls -a --color"
 alias ll="ls -l --color"
-alias op="open"
 alias todo="vim ~/Documents/todo/todo.txt"
 alias python32="VERSIONER_PYTHON_PREFER_32_BIT=yes python"
 #-------------------------------
 # function
 #-------------------------------
-cd_shell(){
-cd $1
-}
