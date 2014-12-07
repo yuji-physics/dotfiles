@@ -1,4 +1,4 @@
-#.zshrc
+#.zshrc_Darwin
 #
 autoload -U compinit
 compinit
@@ -57,7 +57,7 @@ PATH=/usr/local/texlive/p2009/bin/i386-apple-darwin10.3.0:$PATH
 PATH=/usr/local/bibunsho/bin/i386-darwin:$PATH
 PATH=/Applications/gnuplot.app:/Applications/gnuplot.app/bin:$PATH
 PATH="/Applications/MacVim.app/Contents/MacOS":$PATH
-PATH="/Users/Yuji/myscript":$PATH
+PATH=~/myscript:$PATH
 export PATH
 source /usr/local/karma/.karmarc
 #-------------------------------
@@ -69,7 +69,6 @@ alias l="gls --color"
 alias ls="gls --color"
 alias la="gls -a --color"
 alias ll="gls -l --color"
-alias op="open"
 alias todo="vim ~/Documents/todo/todo.txt"
 alias python32="VERSIONER_PYTHON_PREFER_32_BIT=yes python"
 #-------------------------------
