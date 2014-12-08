@@ -29,10 +29,9 @@ autoload -Uz is-at-least
 # PROMPT
 #----------------------
 PROMPT=""
-PROMPT+="%U%F{blue}%~%f%u"
-PROMPT+="
-"
-PROMPT+="%%[%D %*]%% "
+PROMPT+="[%U%F{blue}%~%f%u] %F{cyan}$%f"
+RPROMPT=""
+RPROMPT+="[%U%D %*%u]"
 # title
 case "${TERM}" in
 xterm*)
