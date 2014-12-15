@@ -1,5 +1,9 @@
 ".vimrc
 
+"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
+" PLUGIN SETTING
+"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
+
 "=============================================================
 " NeoBundle
 "=============================================================
@@ -22,6 +26,7 @@ NeoBundle 'Shougo/vimshell'
 NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'itchyny/lightline.vim'
+NeoBundle 'mattn/emmet-vim'
 
 call neobundle#end()
 
@@ -30,7 +35,7 @@ filetype plugin indent on
 NeoBundleCheck
 
 "============================================================
-"lightline
+" Lightline
 "============================================================
 "from http://itchyny.hatenablog.com/entry/20130828/1377653592
 let g:lightline = {
@@ -94,12 +99,55 @@ function! MyMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction"
 
+"============================================================
+" Vim-LaTeX
+"============================================================
+
+filetype plugin on
+filetype indent on
+set shellslash
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor='latex'
+let g:Imap_UsePlaceHolders = 1
+let g:Imap_DeleteEmptyPlaceHolders = 1
+let g:Imap_StickyPlaceHolders = 0
+let g:Tex_DefaultTargetFormat = 'pdf'
+let g:Tex_MultipleCompileFormats='dvi,pdf'
+let g:Tex_FormatDependency_pdf = 'dvi,pdf'
+let g:Tex_FormatDependency_ps = 'dvi,ps'
+let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
+let g:Tex_CompileRule_ps = '/usr/texbin/dvips -Ppdf -o $*.ps $*.dvi'
+let g:Tex_CompileRule_dvi = 'platex  --interaction=nonstopmode $*'
+let g:Tex_BibtexFlavor = '/usr/texbin/upbibtex'
+let g:Tex_MakeIndexFlavor = '/usr/texbin/mendex -U $*.idx'
+let g:Tex_UseEditorSettingInDVIViewer = 1
+let g:Tex_ViewRule_pdf = '/usr/bin/open -a Preview.app'
+
 "=============================================================
-" MY SETTINGS
+" Unite
 "=============================================================
-"language
+
+" let g:unite_winwidth = 40
+
+
+"=============================================================
+" vimfiler
+"=============================================================
+
+" let g:vimfiler_safe_mode_by_default = 0
+let g:vimfiler_enable_auto_cd = 1
+
+"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+" END OF PLUGIN SETTINGS
+"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+"=============================================================
+" Set values
+"=============================================================
+" language
 set encoding=utf-8
-set fileencodings=ucs-bom,cp932,sjis,euc-jp,utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8,ucs-bom,cp932,sjis,euc-jp
 
 " highlight 
 if &t_Co > 2 || has("gui_running")
@@ -160,27 +208,31 @@ set wildmode=full
 
 " mouse
 set mouse=a
-"-------------------------------------------------------------
-" MAPPING
-"-------------------------------------------------------------
+"=============================================================
+" Mapping
+"=============================================================
 " cursor move
 nnoremap j gj
 nnoremap k gk
 " window size
-nnoremap <silent> <S-Left> :5wincmd <<CR>
-nnoremap <silent> <S-Right> :5wincmd ><CR>
-nnoremap <silent> <S-Up> :5wincmd +<CR>
-nnoremap <silent> <S-Down> :5wincmd -<CR>
+" <S-up/down/left/right> key bind cannot be used in tmux by default?
+"nnoremap <silent> <S-Left> :5wincmd <<CR>
+"nnoremap <silent> <S-Right> :5wincmd ><CR>
+"nnoremap <silent> <S-Up> :5wincmd +<CR>
+"nnoremap <silent> <S-Down> :5wincmd -<CR>
+nnoremap <silent> <Left> :5wincmd <<CR>
+nnoremap <silent> <Right> :5wincmd ><CR>
+nnoremap <silent> <Up> :5wincmd +<CR>
+nnoremap <silent> <Down> :5wincmd -<CR>
 
 " search
 nnoremap g; g;zz
 nnoremap n nzz
 nnoremap N Nzz
 nnoremap <silent> <C-n> :noh<CR>
-" Clang complete
+
+" Clang completion
 nnoremap // I//
-nnoremap ss A;
-inoremap <C-s> A;
 
 " input <Space> <Enter> in normal mode
 nnoremap <Space> i<Space><ESC><Right>
@@ -193,65 +245,26 @@ inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-l> <Right>
 "括弧、クォートの補完
-"もう少しうまいことやりたい
-inoremap {<Enter> {}<Left><CR><ESC><S-o>
+"括弧 + Enterで改行および括弧補完をし、カーソルを中央へ
+"F10 keyで補完のトグルをする（予定）
 inoremap (<Enter> ()<Left><CR><ESC><S-o>
-inoremap [<Enter> []<Left><CR><ESC><S-o>
-inoremap () ()
 inoremap ( ()<Left>
-inoremap {} {}
+
+inoremap {<Enter> {}<Left><CR><ESC><S-o>
 inoremap { {}<Left>
-inoremap [] []
+
 inoremap [ []<Left>
-inoremap <> <><Left>
-"inoremap <> <>
-"inoremap < <><Left>
-inoremap "" ""
+
+inoremap < <><Left>
+
+inoremap "<Enter> ""<Left><CR><ESC><S-o>
 inoremap " ""<Left>
-inoremap '' ''
+
+inoremap '<Enter> ''<Left><CR><ESC><S-o>
 inoremap ' ''<Left>
-inoremap `` ``
+
+inoremap `<Enter> ``<Left><CR><ESC><S-o>
 inoremap ` ``<Left>
+
+"for python
 inoremap __ ____<Left><Left>
-"========================================
-" Plugin
-"========================================
-
-"----------------------------------------
-" Vim-LaTeX
-"----------------------------------------
-
-filetype plugin on
-filetype indent on
-set shellslash
-set grepprg=grep\ -nH\ $*
-let g:tex_flavor='latex'
-let g:Imap_UsePlaceHolders = 1
-let g:Imap_DeleteEmptyPlaceHolders = 1
-let g:Imap_StickyPlaceHolders = 0
-let g:Tex_DefaultTargetFormat = 'pdf'
-let g:Tex_MultipleCompileFormats='dvi,pdf'
-let g:Tex_FormatDependency_pdf = 'dvi,pdf'
-let g:Tex_FormatDependency_ps = 'dvi,ps'
-let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
-let g:Tex_CompileRule_ps = '/usr/texbin/dvips -Ppdf -o $*.ps $*.dvi'
-let g:Tex_CompileRule_dvi = 'platex  --interaction=nonstopmode $*'
-let g:Tex_BibtexFlavor = '/usr/texbin/upbibtex'
-let g:Tex_MakeIndexFlavor = '/usr/texbin/mendex -U $*.idx'
-let g:Tex_UseEditorSettingInDVIViewer = 1
-let g:Tex_ViewRule_pdf = '/usr/bin/open -a Preview.app'
-
-"-------------------------------------------------------------
-" Unite
-"-------------------------------------------------------------
-
-" let g:unite_winwidth = 40
-
-
-"-------------------------------------------------------------
-" vimfiler
-"-------------------------------------------------------------
-
-" let g:vimfiler_safe_mode_by_default = 0
-let g:vimfiler_enable_auto_cd = 1
-

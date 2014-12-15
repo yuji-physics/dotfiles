@@ -70,6 +70,10 @@ alias la="gls -a --color"
 alias ll="gls -l --color"
 alias todo="vim ~/Documents/todo/todo.txt"
 alias python32="VERSIONER_PYTHON_PREFER_32_BIT=yes python"
+alias vimf="vim +VimFiler"
+alias vimrc="vim ~/.vimrc"
+alias zshrc="vim ~/.zsh/.zshrc_Darwin"
+alias reload="source ~/.zsh/.zshrc"
 #-------------------------------
 # function
 #-------------------------------

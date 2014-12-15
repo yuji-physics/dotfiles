@@ -1,2 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =0
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/Yuji/Desktop/OHpaper/contents/Reference'
+let g:netrw_dirhist_2='/Users/Yuji/Desktop/OHpaper/contents/LVGprogram'
+let g:netrw_dirhist_3='/Users/Yuji/Desktop/OHpaper/contents/script'
+let g:netrw_dirhist_4='/Users/Yuji/Desktop/OHpaper/contents'
+let g:netrw_dirhist_5='/Users/Yuji/Desktop/OHpaper/contents/Figures'
+let g:netrw_dirhist_6='/Users/Yuji/Desktop/OHpaper/contents/Oph'
