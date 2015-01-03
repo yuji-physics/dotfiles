@@ -43,11 +43,10 @@ esac
 #----------------------
 # ls color
 #----------------------
-# ls
 #export LSCOLORS=exfxcxdxfxexexaxaxexex
-export LS_COLORS='di=04;34:ln=35:so=32:pi=33:ex=35:bd=39:cd=39:su=39:sg=39:tw=04;34:ow=04;34'
-# zshï‚äÆêF
-zstyle ':completion:*' list-colors 'di=04;34' 'ln=35' 'so=32' 'ex=35' 'bd=39' 'cd=39' 'su=39' 'sg=39' 'tw=04;34' 'ow=04;34'
+export LS_COLORS='di=04;34:ln=04;36:so=32:pi=33:ex=31:bd=39:cd=39:su=39:sg=39:tw=04;34:ow=04;34'
+# color of zsh auto completion
+zstyle ':completion:*' list-colors 'di=04;34' 'ln=04;36' 'so=32' 'ex=31' 'bd=39' 'cd=39' 'su=39' 'sg=39' 'tw=04;34' 'ow=04;34'
 #-------------------------------
 # PATH
 #-------------------------------
@@ -74,6 +73,8 @@ alias vimf="vim +VimFiler"
 alias vimrc="vim ~/.vimrc"
 alias zshrc="vim ~/.zsh/.zshrc_Darwin"
 alias reload="source ~/.zsh/.zshrc"
+alias iconvert="/usr/local/bin/convert"
+alias date="datex.sh"
 #-------------------------------
 # function
 #-------------------------------

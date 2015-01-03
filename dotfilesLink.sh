@@ -8,4 +8,4 @@ ln -sfn ~/dotfiles/.vimperatorrc ~/.vimperatorrc
 ln -sfn ~/dotfiles/.vimrc ~/.vimrc
 ln -sfn ~/dotfiles/.zsh ~/.zsh
 ln -sfn ~/dotfiles/.zshenv ~/.zshenv
-
+ln -sfn ~/dotfiles/.tmux.conf ~/.tmux.conf

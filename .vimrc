@@ -23,7 +23,7 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/vimproc'
 NeoBundle 'Shougo/vimshell'
-NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
+"NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'mattn/emmet-vim'
@@ -103,25 +103,25 @@ endfunction"
 " Vim-LaTeX
 "============================================================
 
-filetype plugin on
-filetype indent on
-set shellslash
-set grepprg=grep\ -nH\ $*
-let g:tex_flavor='latex'
-let g:Imap_UsePlaceHolders = 1
-let g:Imap_DeleteEmptyPlaceHolders = 1
-let g:Imap_StickyPlaceHolders = 0
-let g:Tex_DefaultTargetFormat = 'pdf'
-let g:Tex_MultipleCompileFormats='dvi,pdf'
-let g:Tex_FormatDependency_pdf = 'dvi,pdf'
-let g:Tex_FormatDependency_ps = 'dvi,ps'
-let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
-let g:Tex_CompileRule_ps = '/usr/texbin/dvips -Ppdf -o $*.ps $*.dvi'
-let g:Tex_CompileRule_dvi = 'platex  --interaction=nonstopmode $*'
-let g:Tex_BibtexFlavor = '/usr/texbin/upbibtex'
-let g:Tex_MakeIndexFlavor = '/usr/texbin/mendex -U $*.idx'
-let g:Tex_UseEditorSettingInDVIViewer = 1
-let g:Tex_ViewRule_pdf = '/usr/bin/open -a Preview.app'
+"filetype plugin on
+"filetype indent on
+"set shellslash
+"set grepprg=grep\ -nH\ $*
+""let g:tex_flavor='latex'
+"let g:Imap_UsePlaceHolders = 1
+"let g:Imap_DeleteEmptyPlaceHolders = 1
+"let g:Imap_StickyPlaceHolders = 0
+"let g:Tex_DefaultTargetFormat = 'pdf'
+"let g:Tex_MultipleCompileFormats='dvi,pdf'
+"let g:Tex_FormatDependency_pdf = 'dvi,pdf'
+"let g:Tex_FormatDependency_ps = 'dvi,ps'
+"let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
+"let g:Tex_CompileRule_ps = '/usr/texbin/dvips -Ppdf -o $*.ps $*.dvi'
+"let g:Tex_CompileRule_dvi = 'platex  --interaction=nonstopmode $*'
+"let g:Tex_BibtexFlavor = '/usr/texbin/upbibtex'
+"let g:Tex_MakeIndexFlavor = '/usr/texbin/mendex -U $*.idx'
+"let g:Tex_UseEditorSettingInDVIViewer = 1
+"let g:Tex_ViewRule_pdf = '/usr/bin/open -a Preview.app'
 
 "=============================================================
 " Unite
@@ -176,7 +176,7 @@ set nocindent
 " backup
 set noundofile
 set noswapfile
-"set nobackup
+set nobackup
 
 " tab
 set tabstop=2
@@ -234,6 +234,8 @@ nnoremap <silent> <C-n> :noh<CR>
 " Clang completion
 nnoremap // I//
 
+nnoremap br A<br><ESC>
+
 " input <Space> <Enter> in normal mode
 nnoremap <Space> i<Space><ESC><Right>
 nnoremap <Enter> i<CR><ESC>
@@ -255,16 +257,21 @@ inoremap { {}<Left>
 
 inoremap [ []<Left>
 
-inoremap < <><Left>
+"inoremap < <><Left>
+
+inoremap $$ $$<Left>
 
 inoremap "<Enter> ""<Left><CR><ESC><S-o>
-inoremap " ""<Left>
+inoremap "" ""<Left>
 
 inoremap '<Enter> ''<Left><CR><ESC><S-o>
-inoremap ' ''<Left>
+inoremap '' ''<Left>
 
 inoremap `<Enter> ``<Left><CR><ESC><S-o>
-inoremap ` ``<Left>
+inoremap `` ``<Left>
+
 
 "for python
 inoremap __ ____<Left><Left>
+
+"for tex
