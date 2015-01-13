@@ -63,6 +63,7 @@ source /usr/local/karma/.karmarc
 #-------------------------------
 alias firefox="open -a Firefox"
 alias vim="/usr/local/Cellar/vim/7.4.488/bin/vim"
+alias git="/usr/local/Cellar/git/2.2.1/bin/git"
 alias chrome="open -a Google\ Chrome"
 alias l="gls --color"
 alias ls="gls --color"
