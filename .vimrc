@@ -27,6 +27,8 @@ NeoBundle 'Shougo/vimshell'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'mattn/emmet-vim'
+NeoBundle 'matze/vim-tex-fold'
+NeoBundle 'scrooloose/syntastic'
 
 call neobundle#end()
 
@@ -137,12 +139,25 @@ endfunction"
 " let g:vimfiler_safe_mode_by_default = 0
 let g:vimfiler_enable_auto_cd = 1
 
+"=============================================================
+" Vim-tex-fold
+"=============================================================
+let g:tex_fold_additional_envs=1
+
+
+"=============================================================
+" Syntastic
+"=============================================================
+let g:syntastic_check_on_open=0
+let g:syntastic_check_on_wq=0
+let g:syntastic_c_check_header=1
+
 "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 " END OF PLUGIN SETTINGS
 "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 "=============================================================
-" Set values
+" Basic settings
 "=============================================================
 " language
 set encoding=utf-8
@@ -167,7 +182,19 @@ set cursorcolumn
 set number
 
 "fold
+"let javascript_fold=1
+"let perl_fold=1
+"let php_folding=1
+"let r_syntax_folding=1
+"let ruby_fold=1
+"let sh_fold_enabled=1
+"let vimsyn_folding='af'
+"let xml_syntax_folding=1
+"set foldmethod=syntax
+set foldmethod=marker
 set foldcolumn=4
+set foldlevel=0
+
 " indent
 set smartindent
 set autoindent
@@ -179,6 +206,7 @@ set noswapfile
 set nobackup
 
 " tab
+"set noexpandtab
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
@@ -274,4 +302,3 @@ inoremap `` ``<Left>
 "for python
 inoremap __ ____<Left><Left>
 
-"for tex
