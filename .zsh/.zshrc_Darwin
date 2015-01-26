@@ -30,8 +30,8 @@ autoload -Uz is-at-least
 #----------------------
 PROMPT=""
 PROMPT+="[%U%F{blue}%~%f%u] %F{cyan}$%f"
-RPROMPT=""
-RPROMPT+="[%U%D %*%u]"
+#RPROMPT=""
+#RPROMPT+="[%U%D %*%u]"
 # title
 case "${TERM}" in
 xterm*)
@@ -57,23 +57,20 @@ PATH=/Applications/gnuplot.app:/Applications/gnuplot.app/bin:$PATH
 PATH="/Applications/MacVim.app/Contents/MacOS":$PATH
 PATH=~/myscript:$PATH
 export PATH
+export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig
+export TK_LIBRARY=/usr/local/Cellar/tcl-tk/8.6.3/lib/tk8.6
+export TCL_LIBRARY=/usr/local/Cellar/tcl-tk/8.6.3/lib/tcl8.6
 source /usr/local/karma/.karmarc
 #-------------------------------
 # alias
 #-------------------------------
-alias firefox="open -a Firefox"
 alias vim="/usr/local/Cellar/vim/7.4.488/bin/vim"
 alias git="/usr/local/Cellar/git/2.2.1/bin/git"
-alias chrome="open -a Google\ Chrome"
 alias l="gls --color"
 alias ls="gls --color"
 alias la="gls -a --color"
 alias ll="gls -l --color"
-alias todo="vim ~/Documents/todo/todo.txt"
 alias python32="VERSIONER_PYTHON_PREFER_32_BIT=yes python"
-alias vimf="vim +VimFiler"
-alias vimrc="vim ~/.vimrc"
-alias zshrc="vim ~/.zsh/.zshrc_Darwin"
 alias reload="source ~/.zsh/.zshrc"
 alias iconvert="/usr/local/bin/convert"
 alias date="datex.sh"

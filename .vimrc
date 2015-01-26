@@ -207,6 +207,7 @@ set nobackup
 
 " tab
 "set noexpandtab
+set expandtab
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
@@ -239,41 +240,42 @@ set mouse=a
 "=============================================================
 " Mapping
 "=============================================================
+
+" exchange word motion 'w' and 'b' to 'W' and 'B'
+nnoremap w W
+nnoremap W w
+nnoremap b B
+nnoremap B b
+
 " cursor move
 nnoremap j gj
 nnoremap k gk
+
 " window size
-" <S-up/down/left/right> key bind cannot be used in tmux by default?
-"nnoremap <silent> <S-Left> :5wincmd <<CR>
-"nnoremap <silent> <S-Right> :5wincmd ><CR>
-"nnoremap <silent> <S-Up> :5wincmd +<CR>
-"nnoremap <silent> <S-Down> :5wincmd -<CR>
 nnoremap <silent> <Left> :5wincmd <<CR>
 nnoremap <silent> <Right> :5wincmd ><CR>
 nnoremap <silent> <Up> :5wincmd +<CR>
 nnoremap <silent> <Down> :5wincmd -<CR>
 
-" search
+" move cursor to the middle after a search
 nnoremap g; g;zz
 nnoremap n nzz
 nnoremap N Nzz
+
+" off search highlight
 nnoremap <silent> <C-n> :noh<CR>
 
-" Clang completion
-nnoremap // I//
-
-nnoremap br A<br><ESC>
-
-" input <Space> <Enter> in normal mode
+" insert <Space> and <Enter> in normal mode
 nnoremap <Space> i<Space><ESC><Right>
 nnoremap <Enter> i<CR><ESC>
 
-" insert modeでのカーソル移動
+" move cursor in the insert mode
 "<C-j>はVimLatexの<++>移動と競合するため、 ~/.vim/plugin/imaps.vimの490行付近を<C-F>に変更
 inoremap <C-h> <Left>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-l> <Right>
+
 "括弧、クォートの補完
 "括弧 + Enterで改行および括弧補完をし、カーソルを中央へ
 "F10 keyで補完のトグルをする（予定）
