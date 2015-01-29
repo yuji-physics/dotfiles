@@ -14,12 +14,12 @@ setopt combining_chars
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 #bindkey -v
 typeset -U path cdpath fpath manpath
-path=(
-$HOME/bin(N-/)
-/usr/local/bin(N-/)
-/usr/local/sbin(N-/)
-$path
-)
+#path=(
+#$HOME/bin(N-/)
+#/usr/local/bin(N-/)
+#/usr/local/sbin(N-/)
+#$path
+#)
 autoload -U promptinit
 promptinit
 autoload -Uz colors; colors
@@ -30,8 +30,8 @@ autoload -Uz is-at-least
 #----------------------
 PROMPT=""
 PROMPT+="[%U%F{blue}%~%f%u] %F{cyan}$%f"
-#RPROMPT=""
-#RPROMPT+="[%U%D %*%u]"
+RPROMPT=""
+RPROMPT+="[%U%D %*%u]"
 # title
 case "${TERM}" in
 xterm*)
@@ -50,29 +50,10 @@ zstyle ':completion:*' list-colors 'di=04;34' 'ln=04;36' 'so=32' 'ex=31' 'bd=39'
 #-------------------------------
 # PATH
 #-------------------------------
-PATH=/usr/local/texlive/2009/bin/universal-darwin:$PATH
-PATH=/usr/local/texlive/p2009/bin/i386-apple-darwin10.3.0:$PATH
-PATH=/usr/local/bibunsho/bin/i386-darwin:$PATH
-PATH=/Applications/gnuplot.app:/Applications/gnuplot.app/bin:$PATH
-PATH="/Applications/MacVim.app/Contents/MacOS":$PATH
-PATH=~/myscript:$PATH
-export PATH
-export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig
-#export TK_LIBRARY=/usr/local/Cellar/tcl-tk/8.6.3/lib/tk8.6
-#export TCL_LIBRARY=/usr/local/Cellar/tcl-tk/8.6.3/lib/tcl8.6
-source /usr/local/karma/.karmarc
+
 #-------------------------------
 # alias
 #-------------------------------
-alias vim="/usr/local/Cellar/vim/7.4.488/bin/vim"
-alias git="/usr/local/Cellar/git/2.2.1/bin/git"
-alias ls="gls --color"
-alias la="gls -a --color"
-alias ll="gls -l --color"
-alias python32="VERSIONER_PYTHON_PREFER_32_BIT=yes python"
-alias reload="source ~/.zsh/.zshrc"
-alias iconvert="/usr/local/bin/convert"
-alias date="datex.sh"
-#-------------------------------
-# function
-#-------------------------------
+alias ls="ls --color"
+alias la="ls -a --color"
+alias ll="ls -l --color"

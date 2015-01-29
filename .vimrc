@@ -1,12 +1,7 @@
 ".vimrc
+" === PLUGINS === {{{
 
-"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
-" PLUGIN SETTING
-"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
-
-"=============================================================
-" NeoBundle
-"=============================================================
+" NeoBundle{{{
 if !1 | finish | endif
 
 if has('vim_starting')
@@ -29,16 +24,23 @@ NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'matze/vim-tex-fold'
 NeoBundle 'scrooloose/syntastic'
-
+NeoBundle 'rbtnn/rabbit-ui.vim'
+NeoBundle 'rbtnn/rabbit-ui-collection.vim'
+NeoBundle 'osyo-manga/vim-over'
+NeoBundle 'pelodelfuego/vim-swoop'
+NeoBundle 'terryma/vim-multiple-cursors'
+NeoBundle 'szw/vim-ctrlspace'
+" color scheme
+NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'nanotech/jellybeans.vim'
 call neobundle#end()
 
 filetype plugin indent on
 
 NeoBundleCheck
-
-"============================================================
-" Lightline
-"============================================================
+" }}}
+" Lightline{{{
 "from http://itchyny.hatenablog.com/entry/20130828/1377653592
 let g:lightline = {
         \ 'colorscheme': 'wombat',
@@ -100,10 +102,8 @@ endfunction
 function! MyMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction"
-
-"============================================================
-" Vim-LaTeX
-"============================================================
+" }}}
+" Vim-LaTeX{{{
 
 "filetype plugin on
 "filetype indent on
@@ -124,41 +124,29 @@ endfunction"
 "let g:Tex_MakeIndexFlavor = '/usr/texbin/mendex -U $*.idx'
 "let g:Tex_UseEditorSettingInDVIViewer = 1
 "let g:Tex_ViewRule_pdf = '/usr/bin/open -a Preview.app'
-
-"=============================================================
-" Unite
-"=============================================================
+" }}}
+" Unite {{{
 
 " let g:unite_winwidth = 40
 
-
-"=============================================================
-" vimfiler
-"=============================================================
+" }}}
+" vimfiler{{{
 
 " let g:vimfiler_safe_mode_by_default = 0
 let g:vimfiler_enable_auto_cd = 1
-
-"=============================================================
-" Vim-tex-fold
-"=============================================================
+" }}}
+" Vim-tex-fold {{{
 let g:tex_fold_additional_envs=1
-
-
-"=============================================================
-" Syntastic
-"=============================================================
+" }}}
+" Syntastic{{{
 let g:syntastic_check_on_open=0
 let g:syntastic_check_on_wq=0
 let g:syntastic_c_check_header=1
 
-"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-" END OF PLUGIN SETTINGS
-"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+" }}}
 
-"=============================================================
-" Basic settings
-"=============================================================
+" }}}
+" === OPTIONS === {{{
 " language
 set encoding=utf-8
 set fileencoding=utf-8
@@ -226,6 +214,7 @@ set nowrap
 set showmatch
 
 " key
+let mapleader = ","
 set backspace=indent,eol,start
 set history=50
 
@@ -237,9 +226,8 @@ set wildmode=full
 
 " mouse
 set mouse=a
-"=============================================================
-" Mapping
-"=============================================================
+" }}}
+" === KEY MAPPINGS === {{{
 
 " exchange word motion 'w' and 'b' to 'W' and 'B'
 nnoremap w W
@@ -261,9 +249,6 @@ nnoremap <silent> <Down> :5wincmd -<CR>
 nnoremap g; g;zz
 nnoremap n nzz
 nnoremap N Nzz
-
-" off search highlight
-nnoremap <silent> <C-n> :noh<CR>
 
 " insert <Space> and <Enter> in normal mode
 nnoremap <Space> i<Space><ESC><Right>
@@ -300,7 +285,7 @@ inoremap '' ''<Left>
 inoremap `<Enter> ``<Left><CR><ESC><S-o>
 inoremap `` ``<Left>
 
-
+nnoremap <Leader>m :OverCommandLine<CR>
 "for python
 inoremap __ ____<Left><Left>
-
+" }}}
