@@ -73,6 +73,8 @@ alias python32="VERSIONER_PYTHON_PREFER_32_BIT=yes python"
 alias reload="source ~/.zsh/.zshrc"
 alias iconvert="/usr/local/bin/convert"
 alias date="datex.sh"
+alias sed="/usr/local/bin/gsed"
+alias rm="rm -i"
 #-------------------------------
 # function
 #-------------------------------

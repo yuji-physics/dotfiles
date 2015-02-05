@@ -1,6 +1,5 @@
 ".vimrc
 " === PLUGINS === {{{
-
 " NeoBundle{{{
 if !1 | finish | endif
 
@@ -17,7 +16,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/vimproc'
-NeoBundle 'Shougo/vimshell'
+"NeoBundle 'Shougo/vimshell'
 "NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'itchyny/lightline.vim'
@@ -29,11 +28,18 @@ NeoBundle 'rbtnn/rabbit-ui-collection.vim'
 NeoBundle 'osyo-manga/vim-over'
 NeoBundle 'pelodelfuego/vim-swoop'
 NeoBundle 'terryma/vim-multiple-cursors'
-NeoBundle 'szw/vim-ctrlspace'
+NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'junegunn/vim-easy-align'
+NeoBundle 'Lokaltog/vim-easymotion'
+"NeoBundle 'szw/vim-ctrlspace'
 " color scheme
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'nanotech/jellybeans.vim'
+NeoBundle 'sickill/vim-monokai'
+NeoBundle 'chriskempson/vim-tomorrow-theme'
+NeoBundle 'jonathanfilip/vim-lucius'
 call neobundle#end()
 
 filetype plugin indent on
@@ -142,9 +148,14 @@ let g:tex_fold_additional_envs=1
 let g:syntastic_check_on_open=0
 let g:syntastic_check_on_wq=0
 let g:syntastic_c_check_header=1
-
 " }}}
-
+" vim-indent-guides{{{
+let g:indent_guides_auto_colors=0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=236
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=239
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_guide_size = 1
+" }}}
 " }}}
 " === OPTIONS === {{{
 " language
@@ -152,21 +163,24 @@ set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,ucs-bom,cp932,sjis,euc-jp
 
-" highlight 
+" color setting
 if &t_Co > 2 || has("gui_running")
-	set t_Co=256
+  set t_Co=256
   syntax on
   set hlsearch
 endif
+
 set background=dark
-"colorscheme solarized
 colorscheme hybrid
+"colorscheme jellybeans
+"colorscheme solarized
+"colorscheme monokai
 
 " show cursorline 
 highlight CursorLine term=none cterm=none ctermfg=none ctermbg=236
 highlight CursorColumn term=none cterm=none ctermfg=none ctermbg=236
 set cursorline
-set cursorcolumn
+"set cursorcolumn
 set number
 
 "fold
