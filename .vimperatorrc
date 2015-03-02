@@ -1,13 +1,34 @@
 "3.8.2 (created: 2014/02/13 23:52:43)
 
-source! /Users/Yuji/.vimperatorrc.local
+source! ~/.vimperatorrc.local
+" vim: set ft=vim:
 
-" vim: set ft=vimperator:
+" ==================
+" Plugins
+" ==================
+" Plugin loader
+let g:plugin_loader_roots="~/.vimperator/vimperator-plugins"
+let g:plugin_loader_plugins='stella,copy,carent-hint'
+
+" copy.js
+javascript <<EOM
+liberator.globalVariables.copy_templates = [
+  {label:'Url', value:'%URL%'},
+  {label:'TitleAndUrl', value:'%TITLE% %URL%'},
+  {label:'hatena', value:'[%URL%:title=%TITLE%]'},
+  {label:'wiki', value:'[[%TITLE%|%URL%]]'},
+  {label:'redmine', value:'"%TITLE%":%URL%'},
+  {label:'Title', value:'%TITLE%'},
+  {label:'HTML', value:'<a href=%URL%>%TITLE%</a>'} 
+]
+EOM
 
 "====================
-" setting
+" options
 "====================
 colorscheme black
+set focuscontent
+set gui=addons,nobookmarks,nomenu,nonavigation,tabs
 set hintchars=0123456789qwertyuopasdfghjklzxcvbnm
 set ignorecase
 set complete=lb
@@ -16,29 +37,45 @@ set editor='bash -lc "mvim -f \$*" mvim '
 "--------------------
 " key mapping
 "--------------------
+" reload .vimperatorrc
+nnoremap <C-r> :source ~/.vimperatorrc<CR>
+" cursor motion
 noremap h 5h
 noremap <S-h> 15h
-noremap <C-h> :back<CR>
 noremap j 5j
 noremap <S-j> 15j
 noremap k 5k
 noremap <S-k> 15k
 noremap l 5l
 noremap <S-l> 15l
+
+" page history motion
 noremap <C-l> :forward<CR>
+noremap <C-h> :back<CR>
 noremap <C-j> :jumps<CR>;o
+
+" stop load 
+nnoremap x :stop<CR>
+nnoremap X :stopall<CR>
+
+" undo history
+nnoremap U :undo<Space>
+" to quit Firefox when no tab exists
 noremap d :q<CR>
 
-" google shortcut
-noremap gs :open https://www.google.co.jp/<CR>
-noremap gm :open https://mail.google.com/mail/<CR>
-noremap gc :open https://www.google.com/calendar/render<CR>
-noremap <S-g><S-s> :tabopen https://www.google.co.jp/<CR>
-noremap <S-g><S-m> :tabopen https://mail.google.com/mail/<CR>
-noremap <S-g><S-c> :tabopen https://www.google.com/calendar/render<CR>
+" Quick marks 
+" go[qmark] to open in current tab
+" gn[qmark] to open in new tab
+" Other qmarks are set in .vimperatorrc.local
+qmark g https://www.google.co.jp/
+qmark m https://mail.google.com/mail/
+qmark c https://www.google.com/calendar/render
 
+" delete in insert mode
 inoremap <C-b> <BS>
 inoremap <C-d> <DEL>
+
+" cursor motion in insert mode
 inoremap <C-h> <Left>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>

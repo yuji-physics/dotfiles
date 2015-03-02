@@ -1,5 +1,10 @@
 #.zshrc_Darwin
 #
+# enable online help
+unalias run-help
+autoload run-help
+HELPDIR=/usr/loca/share/zsh/help
+
 autoload -U compinit
 compinit
 setopt correct
@@ -60,21 +65,22 @@ export PATH
 export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig
 #export TK_LIBRARY=/usr/local/Cellar/tcl-tk/8.6.3/lib/tk8.6
 #export TCL_LIBRARY=/usr/local/Cellar/tcl-tk/8.6.3/lib/tcl8.6
+export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"
 source /usr/local/karma/.karmarc
 #-------------------------------
 # alias
 #-------------------------------
-alias vim="/usr/local/Cellar/vim/7.4.488/bin/vim"
-alias git="/usr/local/Cellar/git/2.2.1/bin/git"
+alias vim="/usr/local/bin/vim"
+alias git="/usr/local/bin/git"
+alias sed="/usr/local/bin/gsed"
+alias convert="/usr/local/bin/convert"
+alias date="datex.sh"
+alias python32="VERSIONER_PYTHON_PREFER_32_BIT=yes python"
 alias ls="gls --color"
 alias la="gls -a --color"
 alias ll="gls -l --color"
-alias python32="VERSIONER_PYTHON_PREFER_32_BIT=yes python"
-alias reload="source ~/.zsh/.zshrc"
-alias iconvert="/usr/local/bin/convert"
-alias date="datex.sh"
-alias sed="/usr/local/bin/gsed"
 alias rm="rm -i"
+alias du="diskutil"
 #-------------------------------
 # function
 #-------------------------------
