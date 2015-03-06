@@ -28,12 +28,14 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'osyo-manga/vim-over'
+NeoBundle 'osyo-manga/vim-anzu'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'scrooloose/syntastic'
 "NeoBundle 'pelodelfuego/vim-swoop'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'kien/rainbow_parentheses.vim'
 NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'matze/vim-tex-fold'
 "NeoBundle 'yuratomo/w3m.vim'
@@ -183,6 +185,13 @@ silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 " vim-over {{{
 nnoremap <Leader>m :OverCommandLine<CR>
 " }}}
+" anzu{{{
+nmap n <Plug>(anzu-n)
+nmap N <Plug>(anzu-N)
+nmap * <Plug>(anzu-star)
+nmap # <Plug>(anzu-sharp)
+nnoremap <Esc><Esc> <Plug>(anzu#clear_search_status)
+" }}}
 " vim-multiple-cursors{{{
 " use this plugin instead of <VISUAL BLOCK MODE>
 let g:multi_cursor_next_key='<C-n>'
@@ -213,15 +222,38 @@ let g:indent_guides_guide_size = 1 " when 0, same as shiftwidth
 let g:indentguides_start_level = 2
 let g:indent_guides_space_guides = 1
 " }}}
+" raibow_parentheses{{{
+let g:rbpt_colorpairs=[
+      \ ['brown',       'RoyalBlue3'],
+      \ ['Darkblue',    'SeaGreen3'],
+      \ ['darkgray',    'DarkOrchid3'],
+      \ ['darkgreen',   'firebrick3'],
+      \ ['darkcyan',    'RoyalBlue3'],
+      \ ['darkred',     'SeaGreen3'],
+      \ ['darkmagenta', 'DarkOrchid3'],
+      \ ['brown',       'firebrick3'],
+      \ ['gray',        'RoyalBlue3'],
+      \ ['black',       'SeaGreen3'],
+      \ ['darkmagenta', 'DarkOrchid3'],
+      \ ['Darkblue',    'firebrick3'],
+      \ ['darkgreen',   'RoyalBlue3'],
+      \ ['darkcyan',    'SeaGreen3'],
+      \ ['darkred',     'DarkOrchid3'],
+      \ ['red',         'firebrick3'],
+      \] 
+let g:rbpt_max=16
+let g:rbpt_loadcmd_toggle=0
+" }}}
 " Lightline{{{
 " from http://itchyny.hatenablog.com/entry/20130828/1377653592
 let g:lightline = {
         \ 'colorscheme': 'wombat',
         \ 'mode_map': {'c': 'NORMAL'},
         \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+        \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'fugitive', 'filename', 'anzu' ] ]
         \ },
         \ 'component_function': {
+        \   'anzu': 'anzu#search_status',
         \   'modified': 'MyModified',
         \   'readonly': 'MyReadonly',
         \   'fugitive': 'MyFugitive',
@@ -326,37 +358,91 @@ autocmd MyAutoCmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 " use jedi for python completion
 autocmd MyAutoCmd FileType python setlocal omnifunc=jedi#completions
 " autocmd MyAutoCmd FileType python setlocal omnifunc=pythoncomplete#Complete
+
+" always on raibow_parentheses
+autocmd MyAutoCmd VimEnter * RainbowParenthesesToggle
+autocmd MyAutoCmd syntax * RainbowParenthesesLoadRound
+autocmd MyAutoCmd syntax * RainbowParenthesesLoadSquare
+autocmd MyAutoCmd syntax * RainbowParenthesesLoadBraces
+
+" clear anzu search
+autocmd MyAutoCmd CursorHold,CursorHoldI,WinLeave,TabLeave * call anzu#clear_search_status()
+
 " }}}
-" === OPTIONS === {{{
+" === OPTIONS ( + etc.) === {{{
 let mapleader = ","
 
-" language
-set encoding=utf-8
-set fileencoding=utf-8
-set fileencodings=utf-8,ucs-bom,cp932,sjis,euc-jp
+" --- 1. important ---
+set pastetoggle=<F8>
 
-" color setting
+" --- 2. moving around, searching and patterns ---
+set noautochdir " Vimfiler does not work if autochdir is set.
+set incsearch
+set ignorecase
+set smartcase
+
+" --- 3. tags ---
+
+" --- 4. displaying text ---
+set nowrap
+set cmdheight=2
+set list
+set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
+set number
+
+" --- 5. syntax, highlighting and spelling ---
 if &t_Co > 2 || has("gui_running")
   set t_Co=256
   syntax on
   set hlsearch
 endif
-
 set background=dark
 colorscheme hybrid
-"colorscheme jellybeans
-"colorscheme solarized
-"colorscheme monokai
-"let g:colors_name="hybrid"
 
-" show cursorline 
-highlight CursorLine term=none cterm=none ctermfg=none ctermbg=236
-highlight CursorColumn term=none cterm=none ctermfg=none ctermbg=236
 set cursorline
 set cursorcolumn
-set number
+highlight CursorLine term=none cterm=none ctermfg=none ctermbg=236
+highlight CursorColumn term=none cterm=none ctermfg=none ctermbg=236
 
-"fold
+" --- 6. multiple windows ---
+set laststatus=2
+set splitbelow
+set splitright
+
+" --- 7. multiple tab pages ---
+
+" --- 8. terminal ---
+set term=xterm-256color
+set notitle
+
+" --- 9. terminal ---
+set mouse=a
+
+" --- 10. printing ---
+
+" --- 11. messages and info ---
+set showcmd
+set ruler
+
+" --- 12. selecting text ---
+
+" --- 13 editing text ---
+set backspace=indent,eol,start
+set showmatch
+set matchpairs=(:),{:},[:],<:>,":",':',`:`
+set textwidth=0
+
+" --- 14 tabs and indenting ---
+set tabstop=2
+set shiftwidth=2
+set smarttab
+set softtabstop=2
+set expandtab
+set autoindent
+set smartindent
+set nocindent
+
+" --- 15 folding ---
 "let javascript_fold=1
 "let perl_fold=1
 "let php_folding=1
@@ -365,57 +451,42 @@ set number
 "let sh_fold_enabled=1
 "let vimsyn_folding='af'
 "let xml_syntax_folding=1
-"set foldmethod=syntax
-set foldmethod=marker
-set foldcolumn=4
+set foldenable
 set foldlevel=0
+set foldmethod=marker
+"set foldmethod=syntax
+set foldcolumn=4
+set foldmarker={{{,}}}
 
-" indent
-set smartindent
-set autoindent
-set nocindent
+" --- 16 diff mode ---
 
-" backup
-set noundofile
-set noswapfile
+" --- 17 mapping ---
+
+" --- 18 reading and writing files ---
 set nobackup
 
-" tab
-set expandtab
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
+" --- 19 the swap file ---
+set noswapfile
 
-" window style
-set showcmd
-set cmdheight=2
-set laststatus=2
-set notitle
-set ruler
-set splitbelow
-set splitright
-
-" text style 
-set nowrap
-set showmatch
-set textwidth=0
-
-" show invisible characters
-set list
-set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
-
-" delete everything with <BS>
-set backspace=indent,eol,start
-
-" search
-set incsearch
-set ignorecase
-set wildmenu
-set wildmode=full
-
-" misc 
-set mouse=a
+" --- 20 command line editing ---
 set history=50
+set wildmode=full
+set wildmenu
+set noundofile
+
+" --- 21 executing external commands ---
+
+" --- 22 running make and jumping to errors ---
+
+" --- 23 language specific ---
+
+" --- 24 multi-byte characters ---
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8,ucs-bom,cp932,sjis,euc-jp
+
+" --- 25 various ---
+
 " }}}
 " === KEY MAPPINGS === {{{
 " move cursor on wrapping line
@@ -424,8 +495,8 @@ nnoremap k gk
 
 " move cursor to the middle screen after a search motion
 nnoremap g; g;zz
-nnoremap n nzz
-nnoremap N Nzz
+"nnoremap n nzz
+"nnoremap N Nzz
 
 " resize window with cursor keys in normal mode
 nnoremap <silent> <Left> :5wincmd <<CR>
@@ -489,6 +560,4 @@ nnoremap <F10> :NeoCompleteToggle<CR>
 " endif
 " let g:hlstate = 1 - hlstate
 "endfunction
-" toggle paste
-nnoremap <F8> :set paste!<CR>
 " }}}

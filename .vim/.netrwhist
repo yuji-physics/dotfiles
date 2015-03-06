@@ -1,4 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_cnt =3
 let g:netrw_dirhist_1='/Users/Yuji/Documents/labo/program/LVGprogram/OH/C_source'
 let g:netrw_dirhist_2='/Users/Yuji/.vimperator'
+let g:netrw_dirhist_3='/Users/Yuji/Documents/labo/mypapers/OHpaper/contents/HCL2E'

@@ -1,53 +1,11 @@
 #.zshrc_Linux
 #
-autoload -U compinit
-compinit
-setopt correct
-setopt nobeep
-setopt prompt_subst
-setopt ignoreeof
-setopt no_tify
-setopt hist_ignore_dups
-setopt auto_pushd
-setopt auto_cd
-setopt combining_chars
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-#bindkey -v
-typeset -U path cdpath fpath manpath
 path=(
 $HOME/bin(N-/)
 /usr/local/bin(N-/)
 /usr/local/sbin(N-/)
 $path
 )
-autoload -U promptinit
-promptinit
-autoload -Uz colors; colors
-autoload -Uz vcs_info
-autoload -Uz is-at-least
-#----------------------
-# PROMPT
-#----------------------
-PROMPT=""
-PROMPT+="[%U%F{blue}%~%f%u] %F{cyan}$%f"
-RPROMPT+=""
-RPROMPT+="[%U%D %*%u]"
-# title
-case "${TERM}" in
-xterm*)
-precmd() {
-echo -ne "\033]0;${PWD}\007"
-}
-;;
-esac
-#----------------------
-# ls color
-#----------------------
-# ls
-#export LSCOLORS=exfxcxdxfxexexaxaxexex
-export LS_COLORS='di=04;34:ln=35:so=32:pi=33:ex=35:bd=39:cd=39:su=39:sg=39:tw=04;34:ow=04;34'
-# zshï‚äÆêF
-zstyle ':completion:*' list-colors 'di=04;34' 'ln=35' 'so=32' 'ex=35' 'bd=39' 'cd=39' 'su=39' 'sg=39' 'tw=04;34' 'ow=04;34'
 #-------------------------------
 # PATH
 #-------------------------------
@@ -59,6 +17,3 @@ export PATH
 alias ls="ls --color"
 alias la="ls -a --color"
 alias ll="ls -l --color"
-#-------------------------------
-# function
-#-------------------------------
