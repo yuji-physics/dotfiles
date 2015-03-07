@@ -1,5 +1,5 @@
 mklink /D "%HOME%/vimperator" "%HOME%/dotfiles/.vimperator"
-::mklink /D "%HOME%/vimfiles" "%HOME%/dotfiles/vimfiles"
+mklink /D "%HOME%/vimfiles" "%HOME%/dotfiles/.vim"
 mklink "%HOME%/.vimperatorrc" "%HOME%/dotfiles/.vimperatorrc"
-::mklink "%HOME%/_vimrc" "%HOME%/dotfiles/.vimrc"
-::mklink "%HOME%/_gvimrc" "%HOME%/dotfiles/.gvimrc"
+mklink "%HOME%/_vimrc" "%HOME%/dotfiles/.vimrc"
+mklink "%HOME%/_gvimrc" "%HOME%/dotfiles/.gvimrc"
