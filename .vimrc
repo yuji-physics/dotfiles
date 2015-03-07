@@ -419,7 +419,9 @@ set background=dark
 colorscheme hybrid
 
 set cursorline
-set cursorcolumn
+if !has('win32')
+  set cursorcolumn
+endif
 highlight CursorLine term=none cterm=none ctermfg=none ctermbg=236
 highlight CursorColumn term=none cterm=none ctermfg=none ctermbg=236
 

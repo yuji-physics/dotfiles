@@ -1,11 +1,6 @@
-PATH=/usr/local/texlive/2009/bin/universal-darwin:$PATH
-PATH=/usr/local/texlive/p2009/bin/i386-apple-darwin10.3.0:$PATH
-PATH=/usr/local/bibunsho/bin/i386-darwin:$PATH
-PATH=/Applications/gnuplot.app:/Applications/gnuplot.app/bin:$PATH
-PATH="/Applications/MacVim.app/Contents/MacOS":$PATH
-export PATH
-source /usr/local/karma/.karmarc
-alias firefox="open -a Firefox"
-alias la="ls -a"
-alias op="open"
-alias todo="vim ~/Documents/todo.txt"
+#prompt
+PS1='\[\e[0;37m\][\[\e[m\]\[\e[1;34m\]\w\[\e[m\]\[\e[0;37m\]]\[\e[m\] \[\e[1;36m\]\$\[\e[m\]\[\e[0;37m\]'
+export LS_COLORS='di=04;34:ln=04;36:so=01;32:pi=01;33:ex=01;31:bd=01;39:cd=01;39:su=01;39:sg=01;39:tw=04;34:ow=04;34'
+alias ls='ls --show-control-chars --color'
+alias la='ls --show-control-chars --color -a'
+alias ll='ls --show-control-chars --color -l'
