@@ -1,0 +1,33 @@
+update
+upgrade
+
+tap sanemat/font || true
+
+install caskroom/cask/brew-cask
+install git
+install zsh --disable-etcdir
+install zsh-completions
+install vim --with-lua
+install macvim --with-cscope --with-lua --HEAD
+install ricty
+install gnuplot
+install imagemagick
+install tmux
+install gnu-sed
+install coreutils
+install nkf
+install w3m
+
+cask install alfred
+cask install firefox
+cask install dropbox
+cask install iterm2
+cask install bettertouchtool
+cask install google-chrome
+cask install xtrafinder
+cask install gimp
+cask install inkscape
+cask install vlc
+cask install appcleaner
+cask install firefox
+cask install skype

@@ -46,3 +46,5 @@ zstyle ':completion:*' list-colors 'di=04;34' 'ln=04;36' 'so=32' 'ex=31' 'bd=39'
 
 # Load settings depend on OS
 [ -f $ZDOTDIR/.zshrc_`uname` ] && . $ZDOTDIR/.zshrc_`uname`
+# Load local settings
+[ -f ~/.zshrc.local ] && . ~/.zshrc.local

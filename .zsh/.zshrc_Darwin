@@ -25,7 +25,6 @@ export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig
 #export TK_LIBRARY=/usr/local/Cellar/tcl-tk/8.6.3/lib/tk8.6
 #export TCL_LIBRARY=/usr/local/Cellar/tcl-tk/8.6.3/lib/tcl8.6
 export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"
-source /usr/local/karma/.karmarc
 #-------------------------------
 # alias
 #-------------------------------
@@ -39,4 +38,7 @@ alias ls="gls --color"
 alias la="gls -a --color"
 alias ll="gls -l --color"
 alias rm="rm -i"
-alias du="diskutil"
+
+if [ -z $TMUX ]; then
+  tmux -2
+fi
