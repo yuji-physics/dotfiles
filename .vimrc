@@ -5,11 +5,18 @@ if !1 | finish | endif
 
 if has('vim_starting')
   set nocompatible               " Be iMproved
-
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
+  if has('win32')
+    set runtimepath+=~/vimfiles/bundle/neobundle.vim/
+  else
+    set runtimepath+=~/.vim/bundle/neobundle.vim/  
+  endif
 endif
 
-call neobundle#begin(expand('~/.vim/bundle/'))
+if has('win32')
+  call neobundle#begin(expand('~/vimfiles/bundle/'))
+else
+  call neobundle#begin(expand('~/.vim/bundle/'))
+endif
 
 NeoBundleFetch 'Shougo/neobundle.vim'
 
@@ -38,7 +45,6 @@ NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'kien/rainbow_parentheses.vim'
 NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'matze/vim-tex-fold'
-"NeoBundle 'yuratomo/w3m.vim'
 "NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
 "NeoBundle 'szw/vim-ctrlspace'
 "NeoBundle 'rbtnn/rabbit-ui.vim'
@@ -341,7 +347,11 @@ augroup END
 
 " load ~/.vim/after/"colorscheme" not to change original colorscheme
 function! s:load_after_colors()
-  let color = expand('~/.vim/after/colors/' . g:colors_name . '.vim')
+  if has('win32')
+    let color = expand('~/vimfiles/after/colors/' . g:colors_name . '.vim')
+   else
+    let color = expand('~/.vim/after/colors/' . g:colors_name . '.vim')
+  endif
   if filereadable(color)
     execute 'source ' color
   endif
@@ -386,12 +396,20 @@ set smartcase
 " --- 4. displaying text ---
 set nowrap
 set cmdheight=2
-set list
-set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
+"set list
+"set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
 set number
 
 " --- 5. syntax, highlighting and spelling ---
-if &t_Co > 2 || has("gui_running")
+if !empty($CONEMUBUILD)
+  set term=xterm
+  set t_Co=256
+  let &t_AB="\e[48;5;%dm"
+  let &t_AF="\e[38;5;%dm"
+  syntax on
+  set hlsearch
+elseif &t_Co > 2 || has("gui_running")
+  set term=xterm
   set t_Co=256
   syntax on
   set hlsearch
@@ -400,7 +418,9 @@ set background=dark
 colorscheme hybrid
 
 set cursorline
-set cursorcolumn
+if !has('win32')
+  set cursorcolumn
+endif
 highlight CursorLine term=none cterm=none ctermfg=none ctermbg=236
 highlight CursorColumn term=none cterm=none ctermfg=none ctermbg=236
 
@@ -412,7 +432,6 @@ set splitright
 " --- 7. multiple tab pages ---
 
 " --- 8. terminal ---
-set term=xterm-256color
 set notitle
 
 " --- 9. terminal ---
@@ -481,10 +500,14 @@ set noundofile
 " --- 23 language specific ---
 
 " --- 24 multi-byte characters ---
+if has('win32') && !has("gui_running")
+  set termencoding=sjis
+else
+  set termencoding=utf-8
+endif
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,ucs-bom,cp932,sjis,euc-jp
-
 " --- 25 various ---
 
 " }}}
