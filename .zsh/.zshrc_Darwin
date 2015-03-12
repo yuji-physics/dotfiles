@@ -5,6 +5,7 @@ unalias run-help
 autoload run-help
 HELPDIR=/usr/loca/share/zsh/help
 
+fpath=(/usr/local/share/zsh-completions $fpath)
 path=(
 $HOME/bin(N-/)
 /usr/local/bin(N-/)
