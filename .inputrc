@@ -1,9 +1,14 @@
-# no beep
-set bell-style none
-# ctrl+left or ctrl+right to move word
-"\e[1;5C": forward-word
-"\e[1;5D": backward-word 
-"\e[5C": forward-word
-"\e[5D": backward-word
-"\e\e[C": forward-word
-"\e\e[D": backward-word
+# settings for bash
+$if Bash
+  # no beep
+  set bell-style none
+  # ignorecase
+  set completion-ignore-case on
+  # ctrl+left or ctrl+right to move word
+  "\e[1;5C": forward-word
+  "\e[1;5D": backward-word 
+  "\e[5C": forward-word
+  "\e[5D": backward-word
+  "\e\e[C": forward-word
+  "\e\e[D": backward-word
+$endif
