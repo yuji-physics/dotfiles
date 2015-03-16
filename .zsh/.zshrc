@@ -9,9 +9,11 @@ setopt ignoreeof
 setopt no_tify
 setopt hist_ignore_dups
 setopt auto_pushd
+# exec `cd` with a directory name
 setopt auto_cd
 setopt combining_chars
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+bindkey -e
 #bindkey -v
 typeset -U path cdpath fpath manpath
 autoload -U promptinit
