@@ -42,7 +42,7 @@ NeoBundle 'scrooloose/syntastic'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'kien/rainbow_parentheses.vim'
+"NeoBundle 'kien/rainbow_parentheses.vim'
 NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'matze/vim-tex-fold'
 "NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
@@ -229,26 +229,26 @@ let g:indentguides_start_level = 2
 let g:indent_guides_space_guides = 1
 " }}}
 " raibow_parentheses{{{
-let g:rbpt_colorpairs=[
-      \ ['brown',       'RoyalBlue3'],
-      \ ['Darkblue',    'SeaGreen3'],
-      \ ['darkgray',    'DarkOrchid3'],
-      \ ['darkgreen',   'firebrick3'],
-      \ ['darkcyan',    'RoyalBlue3'],
-      \ ['darkred',     'SeaGreen3'],
-      \ ['darkmagenta', 'DarkOrchid3'],
-      \ ['brown',       'firebrick3'],
-      \ ['gray',        'RoyalBlue3'],
-      \ ['black',       'SeaGreen3'],
-      \ ['darkmagenta', 'DarkOrchid3'],
-      \ ['Darkblue',    'firebrick3'],
-      \ ['darkgreen',   'RoyalBlue3'],
-      \ ['darkcyan',    'SeaGreen3'],
-      \ ['darkred',     'DarkOrchid3'],
-      \ ['red',         'firebrick3'],
-      \] 
-let g:rbpt_max=16
-let g:rbpt_loadcmd_toggle=0
+"let g:rbpt_colorpairs=[
+"      \ ['brown',       'RoyalBlue3'],
+"      \ ['Darkblue',    'SeaGreen3'],
+"      \ ['darkgray',    'DarkOrchid3'],
+"      \ ['darkgreen',   'firebrick3'],
+"      \ ['darkcyan',    'RoyalBlue3'],
+"      \ ['darkred',     'SeaGreen3'],
+"      \ ['darkmagenta', 'DarkOrchid3'],
+"      \ ['brown',       'firebrick3'],
+"      \ ['gray',        'RoyalBlue3'],
+"      \ ['black',       'SeaGreen3'],
+"      \ ['darkmagenta', 'DarkOrchid3'],
+"      \ ['Darkblue',    'firebrick3'],
+"      \ ['darkgreen',   'RoyalBlue3'],
+"      \ ['darkcyan',    'SeaGreen3'],
+"      \ ['darkred',     'DarkOrchid3'],
+"      \ ['red',         'firebrick3'],
+"      \] 
+"let g:rbpt_max=16
+"let g:rbpt_loadcmd_toggle=0
 " }}}
 " Lightline{{{
 " from http://itchyny.hatenablog.com/entry/20130828/1377653592
@@ -370,10 +370,10 @@ autocmd MyAutoCmd FileType python setlocal omnifunc=jedi#completions
 " autocmd MyAutoCmd FileType python setlocal omnifunc=pythoncomplete#Complete
 
 " always on raibow_parentheses
-autocmd MyAutoCmd VimEnter * RainbowParenthesesToggle
-autocmd MyAutoCmd syntax * RainbowParenthesesLoadRound
-autocmd MyAutoCmd syntax * RainbowParenthesesLoadSquare
-autocmd MyAutoCmd syntax * RainbowParenthesesLoadBraces
+"autocmd MyAutoCmd VimEnter * RainbowParenthesesToggle
+"autocmd MyAutoCmd syntax * RainbowParenthesesLoadRound
+"autocmd MyAutoCmd syntax * RainbowParenthesesLoadSquare
+"autocmd MyAutoCmd syntax * RainbowParenthesesLoadBraces
 
 " clear anzu search
 autocmd MyAutoCmd CursorHold,CursorHoldI,WinLeave,TabLeave * call anzu#clear_search_status()
