@@ -7,7 +7,19 @@ setopt nobeep
 setopt prompt_subst
 setopt ignoreeof
 setopt no_tify
+# History
+export HISTFILE="~/.zsh_history"
+export HISTSIZE=1000
+export SAVEHIST=100000
+setopt share_history
 setopt hist_ignore_dups
+setopt hist_ignore_all_dups
+setopt hist_reduce_blanks
+setopt hist_save_no_dups
+setopt hist_no_store
+setopt inc_append_history
+setopt EXTENDED_HISTORY
+
 setopt auto_pushd
 # exec `cd` with a directory name
 setopt auto_cd
@@ -50,3 +62,9 @@ zstyle ':completion:*' list-colors 'di=04;34' 'ln=04;36' 'so=32' 'ex=31' 'bd=39'
 [ -f $ZDOTDIR/.zshrc_`uname` ] && . $ZDOTDIR/.zshrc_`uname`
 # Load local settings
 [ -f ~/.zshrc.local ] && . ~/.zshrc.local
+
+# Key bind
+bindkey '^P' history-beginning-search-backward
+bindkey '^N' history-beginning-search-forward
+bindkey '^R' history-incremental-search-backward
+bindkey '^S' history-incremental-search-forward
