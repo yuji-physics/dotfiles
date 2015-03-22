@@ -7,9 +7,10 @@ setopt nobeep
 setopt prompt_subst
 setopt ignoreeof
 setopt no_tify
+setopt no_flow_control
 # History
-export HISTFILE="~/.zsh_history"
-export HISTSIZE=1000
+export HISTFILE=$HOME/.zsh_history
+export HISTSIZE=100000
 export SAVEHIST=100000
 setopt share_history
 setopt hist_ignore_dups
@@ -17,6 +18,7 @@ setopt hist_ignore_all_dups
 setopt hist_reduce_blanks
 setopt hist_save_no_dups
 setopt hist_no_store
+setopt hist_verify
 setopt inc_append_history
 setopt EXTENDED_HISTORY
 
