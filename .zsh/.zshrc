@@ -21,6 +21,19 @@ setopt hist_no_store
 setopt hist_verify
 setopt inc_append_history
 setopt EXTENDED_HISTORY
+# donot store some commands in history
+zshaddhistory(){
+local line=${1%%$'\n'}
+local cmd=${line%% *}
+
+[[ ${#line} -ge 5
+${cmd} != (l|l[sal])
+&& ${cmd} != (cd)
+&& ${cmd} != (rm)
+&& ${cmd} != (exit)
+&& ${cmd} != (man)
+]]
+}
 
 setopt auto_pushd
 # exec `cd` with a directory name
