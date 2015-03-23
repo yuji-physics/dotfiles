@@ -10,7 +10,7 @@ install zsh-completions
 install vim --with-lua
 install macvim --with-cscope --with-lua --HEAD
 install ricty
-install gnuplot
+install gnuplot --with-x11 --with-aquaterm
 install imagemagick
 install tmux
 install gnu-sed
