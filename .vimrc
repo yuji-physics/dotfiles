@@ -22,7 +22,13 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler'
-NeoBundle 'Shougo/vimproc'
+NeoBundle 'Shougo/vimproc', {
+      \ 'build' : {
+      \   'windows' : 'make -f make_mingw32.mak',
+      \   'cygwin' : 'make -f make_cygwin.mak',
+      \   'mac' : 'make -f make_mac.mak',
+      \   'unix' : 'make -f make_unix.mak',
+      \ }}
 
 " neocomplete needs lua
 NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
@@ -45,6 +51,7 @@ NeoBundle 'nathanaelkane/vim-indent-guides'
 "NeoBundle 'kien/rainbow_parentheses.vim'
 NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'matze/vim-tex-fold'
+NeoBundle 'AndrewRadev/switch.vim'
 "NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
 "NeoBundle 'szw/vim-ctrlspace'
 "NeoBundle 'rbtnn/rabbit-ui.vim'
