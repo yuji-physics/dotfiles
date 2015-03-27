@@ -29,7 +29,6 @@ NeoBundle 'Shougo/vimproc', {
       \   'mac' : 'make -f make_mac.mak',
       \   'unix' : 'make -f make_unix.mak',
       \ }}
-
 " neocomplete needs lua
 NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
@@ -44,20 +43,19 @@ NeoBundle 'osyo-manga/vim-over'
 NeoBundle 'osyo-manga/vim-anzu'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'scrooloose/syntastic'
-"NeoBundle 'pelodelfuego/vim-swoop'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
-"NeoBundle 'kien/rainbow_parentheses.vim'
 NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'matze/vim-tex-fold'
 NeoBundle 'AndrewRadev/switch.vim'
-"NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
-"NeoBundle 'szw/vim-ctrlspace'
-"NeoBundle 'rbtnn/rabbit-ui.vim'
-"NeoBundle 'rbtnn/rabbit-ui-collection.vim'
 
-" color schemes
+" Plugins I'm interested in now.
+"NeoBundle 'pelodelfuego/vim-swoop'
+"NeoBundle 'szw/vim-ctrlspace'
+"NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
+
+" Color schemes
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'nanotech/jellybeans.vim'
@@ -70,14 +68,13 @@ call neobundle#end()
 filetype plugin indent on
 
 NeoBundleCheck
+NeoBundleClean
 " }}}
 " Unite {{{
-
+" I have to learn the usage as soon as possible.
 " let g:unite_winwidth = 40
-
 " }}}
 " Vimfiler{{{
-
 " let g:vimfiler_safe_mode_by_default = 0
 let g:vimfiler_enable_auto_cd = 1
 " }}}
@@ -149,7 +146,7 @@ elseif neobundle#is_installed('neocomplcache')
 endif
 "}}}
 " jedi-vim{{{
-" use jedi in Neocompete 
+" use jedi completions in Neocompete 
 let g:jedi#completions_enabled = 0
 let g:jedi#auto_initialization = 0
 let g:jedi#auto_vim_configuration = 0
@@ -176,7 +173,6 @@ nmap <Leader>a <Plug>(EasyAlign)
 " }}}
 " vim-easy-motion{{{
 let g:EasyMotion_do_mapping = 0
-
 map f <Plug>(easymotion-bd-fl)
 map t <Plug>(easymotion-bd-tl)
 nmap s <Plug>(easymotion-s2)
@@ -184,13 +180,13 @@ omap z <Plug>(easymotion-s2)
 let g:EasyMotion_enter_jump_first = 1
 let g:EasyMotion_space_jump_first = 1
 
-" colors are modified in ~/.vim/after/colors/hybrid.vim instead
+" define colors in ~/.vim/after/colors/hybrid.vim
+" to define colors in .vimrc, use links below.
 " hi link EasyMotionTarget ErrorMsg
 " hi link EasyMotionShade Comment
 " hi link EasyMotionTarget2First MatchParen
 " hi link EasyMotionTarget2Second MatchParen
 " hi link EasyMotionIncCursor MyEasyMotionIncCursor
-
 " }}}
 " vim-repeat{{{
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count) 
@@ -199,6 +195,7 @@ silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 nnoremap <Leader>m :OverCommandLine<CR>
 " }}}
 " anzu{{{
+" settings about anzu are also wrote in Lightline (anzu-status)
 nmap n <Plug>(anzu-n)
 nmap N <Plug>(anzu-N)
 nmap * <Plug>(anzu-star)
@@ -206,14 +203,14 @@ nmap # <Plug>(anzu-sharp)
 nnoremap <Esc><Esc> <Plug>(anzu#clear_search_status)
 " }}}
 " vim-multiple-cursors{{{
-" use this plugin instead of <VISUAL BLOCK MODE>
+" sometimes useful than <VISUAL BLOCK MODE>
 let g:multi_cursor_next_key='<C-n>'
 let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 " usage{{{
-" 1. <C-n> to start or add multiple cursor
-" 2. <C-p> to delete cursor if necessary
+" 1. <C-n> to begin or add multiple cursor.
+" 2. <C-p> to delete cursor, if necessary.
 " 3. (a) 'v' to select the region (), and 'i' or 'a' to go to <INSERT MODE>
 "    (b) 's' or 'c' to directly go to <INSERT MODE>
 " 4. Edit in multiple cursor.
@@ -226,7 +223,7 @@ let g:syntastic_check_on_wq=0
 let g:syntastic_c_check_header=1
 " }}}
 " vim-indent-guides{{{
-" manually define colors
+" define colors by myself
 let g:indent_guides_auto_colors=0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=234 " same as background
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=237
@@ -234,28 +231,6 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_guide_size = 1 " when 0, same as shiftwidth
 let g:indentguides_start_level = 2
 let g:indent_guides_space_guides = 1
-" }}}
-" raibow_parentheses{{{
-"let g:rbpt_colorpairs=[
-"      \ ['brown',       'RoyalBlue3'],
-"      \ ['Darkblue',    'SeaGreen3'],
-"      \ ['darkgray',    'DarkOrchid3'],
-"      \ ['darkgreen',   'firebrick3'],
-"      \ ['darkcyan',    'RoyalBlue3'],
-"      \ ['darkred',     'SeaGreen3'],
-"      \ ['darkmagenta', 'DarkOrchid3'],
-"      \ ['brown',       'firebrick3'],
-"      \ ['gray',        'RoyalBlue3'],
-"      \ ['black',       'SeaGreen3'],
-"      \ ['darkmagenta', 'DarkOrchid3'],
-"      \ ['Darkblue',    'firebrick3'],
-"      \ ['darkgreen',   'RoyalBlue3'],
-"      \ ['darkcyan',    'SeaGreen3'],
-"      \ ['darkred',     'DarkOrchid3'],
-"      \ ['red',         'firebrick3'],
-"      \] 
-"let g:rbpt_max=16
-"let g:rbpt_loadcmd_toggle=0
 " }}}
 " Lightline{{{
 " from http://itchyny.hatenablog.com/entry/20130828/1377653592
@@ -346,6 +321,16 @@ endfunction"
 " Vim-tex-fold {{{
 let g:tex_fold_additional_envs=1
 " }}}
+" switch {{{
+let g:switch_definitions = [
+        \['=', ' = '],
+        \['+', ' + '],
+        \['-', ' - '],
+        \['*', ' * '],
+        \['/', ' / '],
+      \]
+nnoremap <leader>s :Switch<CR>
+" }}}
 " }}}
 " === AUTO COMMANDS ==={{{
 augroup MyAutoCmd
@@ -367,47 +352,33 @@ endfunction
 autocmd MyAutoCmd VimEnter * call s:load_after_colors()
 autocmd MyAutoCmd ColorScheme * call s:load_after_colors()
 
-" enable omni completions
+" Enable omni completions
 autocmd MyAutoCmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd MyAutoCmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd MyAutoCmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd MyAutoCmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-" use jedi for python completion
+" use jedi for python
 autocmd MyAutoCmd FileType python setlocal omnifunc=jedi#completions
-" autocmd MyAutoCmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"autocmd MyAutoCmd FileType python setlocal omnifunc=pythoncomplete#Complete
 
-" always on raibow_parentheses
-"autocmd MyAutoCmd VimEnter * RainbowParenthesesToggle
-"autocmd MyAutoCmd syntax * RainbowParenthesesLoadRound
-"autocmd MyAutoCmd syntax * RainbowParenthesesLoadSquare
-"autocmd MyAutoCmd syntax * RainbowParenthesesLoadBraces
-
-" clear anzu search
+" clear anzu-status automatically
 autocmd MyAutoCmd CursorHold,CursorHoldI,WinLeave,TabLeave * call anzu#clear_search_status()
 
 " }}}
 " === OPTIONS ( + etc.) === {{{
-let mapleader = ","
+" Languages
+if has('win32') && !has("gui_running")
+  " use sjis in Windows-cui
+  set termencoding=sjis
+else
+  set termencoding=utf-8
+endif
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8,ucs-bom,cp932,sjis,euc-jp
 
-" --- 1. important ---
-set pastetoggle=<F8>
-
-" --- 2. moving around, searching and patterns ---
-set noautochdir " Vimfiler does not work if autochdir is set.
-set incsearch
-set ignorecase
-set smartcase
-
-" --- 3. tags ---
-
-" --- 4. displaying text ---
-set nowrap
-set cmdheight=2
-"set list
-"set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
-set number
-
-" --- 5. syntax, highlighting and spelling ---
+" Appearances
+" colorscheme and highlight
 if !empty($CONEMUBUILD)
   set term=xterm
   set t_Co=256
@@ -415,60 +386,60 @@ if !empty($CONEMUBUILD)
   let &t_AF="\e[38;5;%dm"
   syntax on
   set hlsearch
+  set background=dark
+  colorscheme hybrid
 elseif &t_Co > 2 || has("gui_running")
   set term=xterm
   set t_Co=256
   syntax on
   set hlsearch
+  set background=dark
+  colorscheme hybrid
 endif
-set background=dark
-colorscheme hybrid
 
+" cursor line and cursor column
 set cursorline
-if !has('win32')
+if !has('win32') || has("gui_running")
+  " cursorcolumn behaves badly in Windows-cui
   set cursorcolumn
 endif
 highlight CursorLine term=none cterm=none ctermfg=none ctermbg=236
 highlight CursorColumn term=none cterm=none ctermfg=none ctermbg=236
 
-" --- 6. multiple windows ---
-set laststatus=2
-set splitbelow
-set splitright
-
-" --- 7. multiple tab pages ---
-
-" --- 8. terminal ---
-set notitle
-
-" --- 9. terminal ---
-set mouse=a
-
-" --- 10. printing ---
-
-" --- 11. messages and info ---
-set showcmd
-set ruler
-
-" --- 12. selecting text ---
-
-" --- 13 editing text ---
-set backspace=indent,eol,start
-set showmatch
-set matchpairs=(:),{:},[:],<:>,":",':',`:`
+set number " show columnnumber
+set numberwidth=1 " minimal number to show column number.
+set laststatus=2 " always show status line
+set cmdheight=2
+set nowrap
 set textwidth=0
+" show special characters
+set list
+set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
+set notitle
+set showcmd
+set ruler " show current position (column and raw number)
+set showmatch " highlight matched pair when inserted?
+set matchtime=1 " 5 by default
+set matchpairs=(:),{:},[:],<:>,":",':',`:`
 
-" --- 14 tabs and indenting ---
+" tab
 set tabstop=2
 set shiftwidth=2
 set smarttab
 set softtabstop=2
 set expandtab
+
+" indent
 set autoindent
 set smartindent
-set nocindent
+let mapleader = ","
 
-" --- 15 folding ---
+" window
+set splitbelow
+set splitright
+
+" fold
+" when using syntax foldmethod, let variables below = true
 "let javascript_fold=1
 "let perl_fold=1
 "let php_folding=1
@@ -478,55 +449,44 @@ set nocindent
 "let vimsyn_folding='af'
 "let xml_syntax_folding=1
 set foldenable
-set foldlevel=0
+set foldlevel=0 " fold everything when opening a file
 set foldmethod=marker
-"set foldmethod=syntax
-set foldcolumn=4
+set foldcolumn=4 " width of the leftside columns for folding
 set foldmarker={{{,}}}
 
-" --- 16 diff mode ---
-
-" --- 17 mapping ---
-
-" --- 18 reading and writing files ---
+" Load and save
+set autoread " when a file is modified outside Vim, reload the file automatically.
+set autowriteall
+" do not create backups etc.
 set nobackup
-
-" --- 19 the swap file ---
 set noswapfile
-
-" --- 20 command line editing ---
-set history=50
-set wildmode=full
-set wildmenu
 set noundofile
 
-" --- 21 executing external commands ---
+set pastetoggle=<F8>
 
-" --- 22 running make and jumping to errors ---
+" Search
+set incsearch
+set ignorecase
+set smartcase
+set wildmode=full
+set wildmenu
 
-" --- 23 language specific ---
 
-" --- 24 multi-byte characters ---
-if has('win32') && !has("gui_running")
-  set termencoding=sjis
-else
-  set termencoding=utf-8
-endif
-set encoding=utf-8
-set fileencoding=utf-8
-set fileencodings=utf-8,ucs-bom,cp932,sjis,euc-jp
-" --- 25 various ---
+set mouse=a
+
+set backspace=indent,eol,start
+
+set history=50
 
 " }}}
 " === KEY MAPPINGS === {{{
-" move cursor on wrapping line
+" move cursor on displayed lines (think wrapped line as a line)
 nnoremap j gj
 nnoremap k gk
 
-" move cursor to the middle screen after a search motion
+" place cursor on the middle of the screen after some motions
 nnoremap g; g;zz
-"nnoremap n nzz
-"nnoremap N Nzz
+nnoremap G Gzz
 
 " resize window with cursor keys in normal mode
 nnoremap <silent> <Left> :5wincmd <<CR>
@@ -538,7 +498,7 @@ nnoremap <silent> <Down> :5wincmd -<CR>
 nnoremap <Space> i<Space><ESC><Right>
 nnoremap <CR> i<CR><ESC>
 
-" escape normal mode from insert mode with jj
+" back to normal mode from insert mode
 inoremap jj <Esc>
 
 " move outside brackets or quotations in insert mode
@@ -546,6 +506,7 @@ inoremap jj <Esc>
 "inoremap ll
 
 " move cursor in insert mode
+" waste of inoremap keys?
 "inoremap <C-h> <Esc>ha
 "inoremap <C-j> <Esc>ja
 "inoremap <C-k> <Esc>ka
@@ -555,7 +516,7 @@ inoremap jj <Esc>
 inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" brackets and quotations etc.
+" auto completions about brackets and quotations etc.
 inoremap (<Enter> ()<Left><CR><ESC><S-o>
 inoremap () ()<Left>
 
