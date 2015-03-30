@@ -71,7 +71,12 @@ NeoBundleCheck
 NeoBundleClean
 " }}}
 " Unite {{{
-" I have to learn the usage as soon as possible.
+let g:unite_enable_start_insert = 1
+let g:unite_enable_ignore_case = 1
+let g:unite_enable_smart_case = 1
+
+let g:unite_source_history_yank_enable = 1
+let g:unite_source_file_mru_limit = 200
 " let g:unite_winwidth = 40
 " }}}
 " Vimfiler{{{
