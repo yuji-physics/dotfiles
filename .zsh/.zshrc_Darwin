@@ -38,7 +38,7 @@ alias python32="VERSIONER_PYTHON_PREFER_32_BIT=yes python"
 alias ls="gls --color"
 alias la="gls -a --color"
 alias ll="gls -lh --color"
-alias lc='echo -n "file count:" && ls | wc -w' # count files
+alias lc='echo -n "file count:" && ls -U1 | wc -l' # count files
 alias rm="rm -i"
 
 if [ -z $TMUX ]; then
