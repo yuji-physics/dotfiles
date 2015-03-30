@@ -457,7 +457,6 @@ set foldmarker={{{,}}}
 " Load and save
 set autoread " when a file is modified outside Vim, reload the file automatically.
 set autowriteall
-" do not create backups etc.
 set nobackup
 set noswapfile
 set noundofile
@@ -465,17 +464,18 @@ set noundofile
 set pastetoggle=<F8>
 
 " Search
-set incsearch
-set ignorecase
-set smartcase
-set wildmode=full
+set incsearch " incremental search
+set ignorecase " match both upper/lowercase letters
+set smartcase " if the pattern contains capital letters, do not ignore case.
+
+" cmd completion
+set wildmode=list,full
 set wildmenu
 
 
+" misc
 set mouse=a
-
 set backspace=indent,eol,start
-
 set history=50
 
 " }}}
