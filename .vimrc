@@ -418,8 +418,7 @@ set laststatus=2 " always show status line
 set cmdheight=2
 set nowrap
 set textwidth=0
-" show special characters
-set list
+set list " show special characters
 set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
 set notitle
 set showcmd
