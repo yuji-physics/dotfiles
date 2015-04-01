@@ -82,6 +82,7 @@ let g:unite_source_file_mru_limit = 200
 " Vimfiler{{{
 " let g:vimfiler_safe_mode_by_default = 0
 let g:vimfiler_enable_auto_cd = 1
+let g:vimfiler_as_default_explorer = 1
 " }}}
 " Neocompete or Neocomplcache{{{
 if neobundle#is_installed('neocomplete')
