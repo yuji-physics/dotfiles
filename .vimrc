@@ -1,5 +1,6 @@
 " .vimrc
 " === PLUGINS === {{{
+let mapleader = ","
 " NeoBundle{{{
 if !1 | finish | endif
 
@@ -21,6 +22,7 @@ endif
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
@@ -71,18 +73,29 @@ NeoBundleCheck
 NeoBundleClean
 " }}}
 " Unite {{{
-let g:unite_enable_start_insert = 1
+"let g:unite_enable_start_insert = 1
 let g:unite_enable_ignore_case = 1
 let g:unite_enable_smart_case = 1
-
 let g:unite_source_history_yank_enable = 1
 let g:unite_source_file_mru_limit = 200
 " let g:unite_winwidth = 40
+nnoremap <silent> <leader>ua :<C-u>Unite buffer file_mru<CR>
+nnoremap <silent> <leader>uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> <leader>ub :<C-u>Unite buffer<CR>
+nnoremap <silent> <leader>ur :<C-u>Unite register<CR>
+nnoremap <silent> <leader>uh :<C-u>Unite history/yank<CR>
+nnoremap <silent> <leader>ut :<C-u>Unite tab<CR>
 " }}}
 " Vimfiler{{{
-" let g:vimfiler_safe_mode_by_default = 0
-let g:vimfiler_enable_auto_cd = 1
 let g:vimfiler_as_default_explorer = 1
+"let g:vimfiler_safe_mode_by_default = 0
+let g:vimfiler_enable_auto_cd = 1
+" Like Textmate icons.
+let g:vimfiler_tree_leaf_icon = ' '
+let g:vimfiler_tree_opened_icon = '▾'
+let g:vimfiler_tree_closed_icon = '▸'
+let g:vimfiler_file_icon = '-'
+let g:vimfiler_marked_file_icon = '*'
 " }}}
 " Neocompete or Neocomplcache{{{
 if neobundle#is_installed('neocomplete')
@@ -329,12 +342,15 @@ let g:tex_fold_additional_envs=1
 " }}}
 " switch {{{
 let g:switch_definitions = [
+        \['true', 'false'],
         \['=', ' = '],
         \['+', ' + '],
         \['-', ' - '],
         \['*', ' * '],
-        \['/', ' / '],
+        \['/', ' / ']
       \]
+" do not use default mapping (gs)
+let g:switch_mapping = ""
 nnoremap <leader>s :Switch<CR>
 " }}}
 " }}}
@@ -437,7 +453,6 @@ set expandtab
 " indent
 set autoindent
 set smartindent
-let mapleader = ","
 
 " window
 set splitbelow
