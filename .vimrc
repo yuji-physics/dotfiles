@@ -22,7 +22,11 @@ endif
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 NeoBundle 'Shougo/unite.vim'
+" Unite sources
 NeoBundle 'Shougo/neomru.vim'
+NeoBundle 'ujihisa/unite-colorscheme'
+NeoBundle 'Shougo/unite-outline'
+
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
@@ -85,6 +89,8 @@ nnoremap <silent> <leader>ub :<C-u>Unite buffer<CR>
 nnoremap <silent> <leader>ur :<C-u>Unite register<CR>
 nnoremap <silent> <leader>uh :<C-u>Unite history/yank<CR>
 nnoremap <silent> <leader>ut :<C-u>Unite tab<CR>
+nnoremap <silent> <leader>uc :<C-u>Unite colorscheme<CR>
+nnoremap <silent> <leader>uo :<C-u>Unite outline<CR>
 " }}}
 " Vimfiler{{{
 let g:vimfiler_as_default_explorer = 1
@@ -96,6 +102,7 @@ let g:vimfiler_tree_opened_icon = '▾'
 let g:vimfiler_tree_closed_icon = '▸'
 let g:vimfiler_file_icon = '-'
 let g:vimfiler_marked_file_icon = '*'
+nnoremap <silent> <leader>e :<C-u>VimFilerBufferDir -split -simple -winwidth=40<CR>
 " }}}
 " Neocompete or Neocomplcache{{{
 if neobundle#is_installed('neocomplete')
@@ -211,7 +218,7 @@ let g:EasyMotion_space_jump_first = 1
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count) 
 " "}}}
 " vim-over {{{
-nnoremap <Leader>m :OverCommandLine<CR>
+nnoremap <Leader>o :OverCommandLine<CR>
 " }}}
 " anzu{{{
 " settings about anzu are also wrote in Lightline (anzu-status)
