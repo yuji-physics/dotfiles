@@ -26,6 +26,7 @@ export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig
 #export TK_LIBRARY=/usr/local/Cellar/tcl-tk/8.6.3/lib/tk8.6
 #export TCL_LIBRARY=/usr/local/Cellar/tcl-tk/8.6.3/lib/tcl8.6
 export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"
+export PYTHONDONTWRITEBYTECODE=1
 #-------------------------------
 # alias
 #-------------------------------
