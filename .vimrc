@@ -22,11 +22,9 @@ endif
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 NeoBundle 'Shougo/unite.vim'
-" Unite sources
 NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'Shougo/unite-outline'
-
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
@@ -35,8 +33,7 @@ NeoBundle 'Shougo/vimproc', {
       \   'mac' : 'make -f make_mac.mak',
       \   'unix' : 'make -f make_unix.mak',
       \ }}
-" neocomplete needs lua
-NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
+NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache' " neocomplete needs +lua
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/vimshell'
@@ -56,7 +53,6 @@ NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'matze/vim-tex-fold'
 NeoBundle 'AndrewRadev/switch.vim'
 
-" Plugins I'm interested in now.
 "NeoBundle 'pelodelfuego/vim-swoop'
 "NeoBundle 'szw/vim-ctrlspace'
 "NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
@@ -405,6 +401,7 @@ endif
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,ucs-bom,cp932,sjis,euc-jp
+set helplang=en
 
 " Appearances
 " colorscheme and highlight
@@ -442,7 +439,11 @@ set cmdheight=2
 set nowrap
 set textwidth=0
 set list " show special characters
-set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
+if !has('win32')
+  set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
+else
+  set listchars=tab:^-,trail:-,extends:»,precedes:«,nbsp:%,eol:$
+endif
 set notitle
 set showcmd
 set ruler " show current position (column and raw number)

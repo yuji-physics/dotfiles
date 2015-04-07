@@ -54,7 +54,7 @@ autoload -Uz is-at-least
 #----------------------
 PROMPT=""
 #PROMPT+="[%U%F{blue}%~%f%u] %F{green}%n:%f%F{cyan}$%f"
-PROMPT+=" %F{green}@%n%f %F{cyan}$%f"
+PROMPT+="%F{green}@%n%f %F{cyan}$%f"
 RPROMPT=""
 #RPROMPT+="[%U%D %*%u]"
 RPROMPT+="[%U%F{blue}%~%f%u]"
