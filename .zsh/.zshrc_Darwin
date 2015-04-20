@@ -15,27 +15,24 @@ $path
 #-------------------------------
 # PATH
 #-------------------------------
-PATH=/usr/local/texlive/2009/bin/universal-darwin:$PATH
-PATH=/usr/local/texlive/p2009/bin/i386-apple-darwin10.3.0:$PATH
-PATH=/usr/local/bibunsho/bin/i386-darwin:$PATH
 PATH=/Applications/gnuplot.app:/Applications/gnuplot.app/bin:$PATH
 PATH="/Applications/MacVim.app/Contents/MacOS":$PATH
-PATH=~/myscript:$PATH
-export PATH
+PATH=/Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin:$PATH
 export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig
 #export TK_LIBRARY=/usr/local/Cellar/tcl-tk/8.6.3/lib/tk8.6
 #export TCL_LIBRARY=/usr/local/Cellar/tcl-tk/8.6.3/lib/tcl8.6
 export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"
 export PYTHONDONTWRITEBYTECODE=1
+export PYTHONPATH="/usr/local/lib/python2.7/site-packages"
+export QTDIR=/usr/local/Cellar/qt5/5.4.1/
+PATH=$QTDIR/bin:$PATH
 #-------------------------------
 # alias
 #-------------------------------
 alias vim="/usr/local/bin/vim"
 alias git="/usr/local/bin/git"
 alias sed="/usr/local/bin/gsed"
-alias convert="/usr/local/bin/convert"
-alias date="datex.sh"
-alias python32="VERSIONER_PYTHON_PREFER_32_BIT=yes python"
+alias python32="VERSIONER_PYTHON_PREFER_32_BIT=yes /usr/bin/python" # Homebrew python is 64 bit only?
 alias ls="gls --color"
 alias la="gls -a --color"
 alias ll="gls -lh --color"

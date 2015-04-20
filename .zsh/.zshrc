@@ -1,4 +1,4 @@
-# .zshrc
+#.zshrc
 # Common settings
 autoload -U compinit
 compinit
@@ -8,7 +8,9 @@ setopt prompt_subst
 setopt ignoreeof
 setopt no_tify
 setopt no_flow_control
+#---------------------
 # History
+#---------------------
 export HISTFILE=$HOME/.zsh_history
 export HISTSIZE=100000
 export SAVEHIST=100000
@@ -34,6 +36,8 @@ local cmd=${line%% *}
 && ${cmd} != (man)
 ]]
 }
+
+#---------------------
 
 setopt auto_pushd
 # exec `cd` with a directory name
@@ -75,13 +79,17 @@ export LS_COLORS='di=04;34:ln=04;36:so=32:pi=33:ex=31:bd=39:cd=39:su=39:sg=39:tw
 # color of auto completion
 zstyle ':completion:*' list-colors 'di=04;34' 'ln=04;36' 'so=32' 'ex=31' 'bd=39' 'cd=39' 'su=39' 'sg=39' 'tw=04;34' 'ow=04;34'
 
-# Load settings depend on OS
-[ -f $ZDOTDIR/.zshrc_`uname` ] && . $ZDOTDIR/.zshrc_`uname`
-# Load local settings
-[ -f ~/.zshrc.local ] && . ~/.zshrc.local
-
+#----------------------
 # Key bind
+#----------------------
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward
 bindkey '^R' history-incremental-search-backward
 bindkey '^S' history-incremental-search-forward
+
+#----------------------
+# Other resources
+#----------------------
+[ -f $ZDOTDIR/.zshrc_`uname` ] && . $ZDOTDIR/.zshrc_`uname`
+[ -f ~/.zshrc.local ] && . ~/.zshrc.local
+export PATH
