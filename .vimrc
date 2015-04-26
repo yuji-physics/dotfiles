@@ -33,7 +33,9 @@ NeoBundle 'Shougo/vimproc', {
       \   'mac' : 'make -f make_mac.mak',
       \   'unix' : 'make -f make_unix.mak',
       \ }}
-NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache' " neocomplete needs +lua
+if has('lua')
+  NeoBundle 'Shougo/neocomplete'
+endif
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/vimshell'
@@ -49,7 +51,6 @@ NeoBundle 'scrooloose/syntastic'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'matze/vim-tex-fold'
 NeoBundle 'AndrewRadev/switch.vim'
 
@@ -134,10 +135,10 @@ if neobundle#is_installed('neocomplete')
   let g:neocomplete#keyword_patterns._ = '\h\w*'
 
   " jedi setting
-  if !exists('g:neocomplete#force_omni_input_patterns')
-    let g:neocomplete#force_omni_input_patterns= {}
-  endif
-  let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+  "if !exists('g:neocomplete#force_omni_input_patterns')
+  "  let g:neocomplete#force_omni_input_patterns= {}
+  "endif
+  "let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 
   " Key Mappings
   " select a candidate by <CR>
@@ -167,16 +168,6 @@ elseif neobundle#is_installed('neocomplcache')
   let g:neocomplcache_enable_underbar_completion = 1
 endif
 "}}}
-" jedi-vim{{{
-" use jedi completions in Neocompete 
-let g:jedi#completions_enabled = 0
-let g:jedi#auto_initialization = 0
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#use_tabs_not_buffers = 0
-let g:jedi#use_splits_not_buffers = "left"
-let g:popup_on_dot = 0
-let g:jedi#popup_select_first = 0
-" }}}
 " vim-easy-align {{{
 vmap <CR> <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
@@ -382,9 +373,7 @@ autocmd MyAutoCmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd MyAutoCmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd MyAutoCmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd MyAutoCmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-" use jedi for python
-autocmd MyAutoCmd FileType python setlocal omnifunc=jedi#completions
-"autocmd MyAutoCmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd MyAutoCmd FileType python setlocal omnifunc=pythoncomplete#Complete
 
 " clear anzu-status automatically
 autocmd MyAutoCmd CursorHold,CursorHoldI,WinLeave,TabLeave * call anzu#clear_search_status()
