@@ -29,6 +29,7 @@ cask install gimp
 cask install google-chrome
 cask install inkscape
 cask install iterm2
+cask install mactex
 cask install skype
 cask install vlc
 cask install xtrafinder
