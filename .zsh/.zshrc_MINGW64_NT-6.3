@@ -1,0 +1,20 @@
+#.zshrc_MSYS_NT-6.3
+#
+#-------------------------------
+# PATH
+#-------------------------------
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONPATH="/usr/local/lib/python2.7/site-packages"
+export QTDIR=/usr/local/Cellar/qt5/5.4.1/
+PATH=$QTDIR/bin:$PATH
+#-------------------------------
+# alias
+#-------------------------------
+alias ls="ls --color"
+alias la="ls -a --color"
+alias ll="ls -lh --color"
+alias rm="rm -i"
+
+if [ -z $TMUX ]; then
+  tmux -2
+fi
