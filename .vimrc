@@ -21,10 +21,12 @@ endif
 
 NeoBundleFetch 'Shougo/neobundle.vim'
 
+" Unite & unite sources
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'Shougo/unite-outline'
+
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
@@ -53,9 +55,6 @@ NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'matze/vim-tex-fold'
 NeoBundle 'AndrewRadev/switch.vim'
-
-"NeoBundle 'pelodelfuego/vim-swoop'
-"NeoBundle 'szw/vim-ctrlspace'
 "NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
 
 " Color schemes
@@ -90,7 +89,7 @@ nnoremap <silent> <leader>uc :<C-u>Unite colorscheme<CR>
 nnoremap <silent> <leader>uo :<C-u>Unite outline<CR>
 " }}}
 " Vimfiler{{{
-let g:vimfiler_as_default_explorer = 1
+"let g:vimfiler_as_default_explorer = 1
 "let g:vimfiler_safe_mode_by_default = 0
 let g:vimfiler_enable_auto_cd = 1
 " Like Textmate icons.
@@ -353,7 +352,8 @@ augroup MyAutoCmd
   autocmd!
 augroup END
 
-" load ~/.vim/after/"colorscheme" not to change original colorscheme
+" Load ~/.vim/after/"colorscheme" to add minor changes of colorscheme
+" without changing original one.
 function! s:load_after_colors()
   if has('win32')
     let color = expand('~/vimfiles/after/colors/' . g:colors_name . '.vim')
@@ -378,6 +378,13 @@ autocmd MyAutoCmd FileType python setlocal omnifunc=pythoncomplete#Complete
 " clear anzu-status automatically
 autocmd MyAutoCmd CursorHold,CursorHoldI,WinLeave,TabLeave * call anzu#clear_search_status()
 
+" vimgrep & quickfix
+function! OpenModifiableQF()
+  cw
+  set modifiable
+  set nowrap
+endfunction
+autocmd MyAutoCmd QuickFixCmdPost vimgrep call OpenModifiableQF()
 " }}}
 " === OPTIONS ( + etc.) === {{{
 " Languages
@@ -451,11 +458,11 @@ set expandtab
 set autoindent
 set smartindent
 
-" window
+" split window
 set splitbelow
 set splitright
 
-" fold
+" folding
 " when using syntax foldmethod, let variables below = true
 "let javascript_fold=1
 "let perl_fold=1
@@ -468,8 +475,8 @@ set splitright
 set foldenable
 set foldlevel=0 " fold everything when opening a file
 set foldmethod=marker
-set foldcolumn=4 " width of the leftside columns for folding
 set foldmarker={{{,}}}
+set foldcolumn=4 " width of the leftside columns of folding guide
 
 " Load and save
 set autoread " when a file is modified outside Vim, reload the file automatically.
@@ -505,6 +512,10 @@ nnoremap k gk
 nnoremap g; g;zz
 nnoremap G Gzz
 
+" vimgrep results
+nnoremap <Space>n :cnext<CR>
+nnoremap <Space><S-n> :cprevious<CR>
+
 " resize window with cursor keys in normal mode
 nnoremap <silent> <Left> :5wincmd <<CR>
 nnoremap <silent> <Right> :5wincmd ><CR>
@@ -512,18 +523,13 @@ nnoremap <silent> <Up> :5wincmd +<CR>
 nnoremap <silent> <Down> :5wincmd -<CR>
 
 " insert <Space> and <Enter> in the normal mode
-nnoremap <Space> i<Space><ESC><Right>
+nnoremap <Space><Space> i<Space><ESC><Right>
 nnoremap <CR> i<CR><ESC>
 
-" back to normal mode from insert mode
+" go to normal mode from insert mode with jj
 inoremap jj <Esc>
 
-" move outside brackets or quotations in insert mode
-"inoremap hh
-"inoremap ll
-
 " move cursor in insert mode
-" waste of inoremap keys?
 "inoremap <C-h> <Esc>ha
 "inoremap <C-j> <Esc>ja
 "inoremap <C-k> <Esc>ka
@@ -533,7 +539,7 @@ inoremap jj <Esc>
 inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" auto completions about brackets and quotations etc.
+" brackets and quotations
 inoremap (<Enter> ()<Left><CR><ESC><S-o>
 inoremap () ()<Left>
 
