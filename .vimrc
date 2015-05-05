@@ -35,9 +35,7 @@ NeoBundle 'Shougo/vimproc', {
       \   'mac' : 'make -f make_mac.mak',
       \   'unix' : 'make -f make_unix.mak',
       \ }}
-if has('lua')
-  NeoBundle 'Shougo/neocomplete'
-endif
+NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/vimshell'
@@ -70,7 +68,6 @@ call neobundle#end()
 filetype plugin indent on
 
 NeoBundleCheck
-NeoBundleClean
 " }}}
 " Unite {{{
 "let g:unite_enable_start_insert = 1
@@ -133,7 +130,7 @@ if neobundle#is_installed('neocomplete')
   endif
   let g:neocomplete#keyword_patterns._ = '\h\w*'
 
-  " jedi setting
+  " settings for jedi
   "if !exists('g:neocomplete#force_omni_input_patterns')
   "  let g:neocomplete#force_omni_input_patterns= {}
   "endif
@@ -233,6 +230,9 @@ let g:multi_cursor_quit_key='<Esc>'
 let g:syntastic_check_on_open=0
 let g:syntastic_check_on_wq=0
 let g:syntastic_c_check_header=1
+if !empty($QTDIR)
+  let g:syntastic_cpp_include_dirs=['include','$QTDIR/include']
+endif
 " }}}
 " vim-indent-guides{{{
 " define colors by myself
@@ -401,22 +401,19 @@ set helplang=en
 
 " Appearances
 " colorscheme and highlight
-if !empty($CONEMUBUILD)
-  set term=xterm
-  set t_Co=256
-  let &t_AB="\e[48;5;%dm"
-  let &t_AF="\e[38;5;%dm"
-  syntax on
-  set hlsearch
-  set background=dark
-  colorscheme hybrid
-elseif &t_Co > 2 || has("gui_running")
+if !empty($CONEMUBUILD) || &t_Co > 2 || has("gui_running")
   set term=xterm
   set t_Co=256
   syntax on
   set hlsearch
   set background=dark
   colorscheme hybrid
+  " Variables required to display 256 colors in ConEmu(Windows).
+  " Similar options are written in .bashrc in case of mintty.
+  if !empty($CONEMUBUILD)
+    let &t_AB="\e[48;5;%dm"
+    let &t_AF="\e[38;5;%dm"
+  endif
 endif
 
 " cursor line and cursor column
@@ -435,7 +432,7 @@ set cmdheight=2
 set nowrap
 set textwidth=0
 set list " show special characters
-if !has('win32')
+if !has('win32') || has('gui_running')
   set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
 else
   set listchars=tab:^-,trail:-,extends:»,precedes:«,nbsp:%,eol:$

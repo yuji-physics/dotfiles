@@ -34,6 +34,6 @@ alias ls='ls --show-control-chars --color'
 alias la='ls --show-control-chars --color -a'
 alias ll='ls --show-control-chars --color -l'
 
-if [ -f ~/.bashrc.local ]; then
-  source ~/.bashrc.local
+if [ -f $HOME/.bashrc.local ]; then
+  source $HOME/.bashrc.local
 fi
