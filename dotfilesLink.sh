@@ -5,7 +5,7 @@ echo `uname`
 if [ `uname` = 'Darwin' ]; then
   OS='Mac'
 elif [ `uname` = 'Linux' ]; then
-  OS='Mac'
+  OS='Linux'
 else
   OS='Win'
 fi
@@ -23,9 +23,9 @@ esac
 if [ $OS = "Win" ]; then
   # Use conemu instead of mintty now.
   # ln -sfn ~/dotfiles/.minttyrc ~/.minttyrc
-  ln -sfn ~/dotfiles/.bash_profile ~/.bash_profile
-  ln -sfn ~/dotfiles/.bashrc ~/.bashrc
-  ln -sfn ~/dotfiles/.inputrc ~/.inputrc
+  #ln -sfn ~/dotfiles/.bash_profile ~/.bash_profile
+  #ln -sfn ~/dotfiles/.bashrc ~/.bashrc
+  #ln -sfn ~/dotfiles/.inputrc ~/.inputrc
   echo 'Execute dotfilesLink.bat in "cmd prompt" to make links for DOS.'
   # DOS symbolic links
   # Do not work well now. Execute in cmd.
@@ -42,5 +42,8 @@ else
   ln -sfn ~/dotfiles/.tmux.conf ~/.tmux.conf
   ln -sfn ~/dotfiles/.vimperator ~/.vimperator
   ln -sfn ~/dotfiles/.vimperatorrc ~/.vimperatorrc
+  if [ ${OS} = "Linux" ];then
+    ln -sfn ~/dotfiles/.conkyrc ~/.conkyrc
+  fi
 fi
 echo "complete."
