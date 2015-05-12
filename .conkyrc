@@ -1,0 +1,160 @@
+# Conky, a system monitor, based on torsmo
+#
+# Any original torsmo code is licensed under the BSD license
+#
+# All code written since the fork of torsmo is licensed under the GPL
+#
+# Please see COPYING for details
+#
+# Copyright (c) 2004, Hannu Saransaari and Lauri Hakkarainen
+# Copyright (c) 2005-2010 Brenden Matthews, Philip Kovacs, et. al. (see AUTHORS)
+# All rights reserved.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+##########################
+# Settings above "TEXT"  #
+##########################
+
+background no
+border_width 1
+cpu_avg_samples 2
+default_color white
+default_outline_color white
+default_shade_color white
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+use_xft yes
+#xftfont DejaVu Sans Mono:size=12
+#gap_x 5
+#gap_y 60
+minimum_size 5 5
+net_avg_samples 2
+no_buffers yes
+out_to_console no
+out_to_stderr no
+extra_newline no
+own_window yes
+own_window_class Conky
+own_window_type desktop
+stippled_borders 0
+update_interval 1.0
+uppercase no
+use_spacer none
+show_graph_scale no
+show_graph_range no
+
+
+# alignment of conky windows
+alignment top_right
+gap_x 10
+gap_y 20
+# don't quit when the terminal is closed
+background yes
+
+# stop flickering on display
+double_buffer yes
+
+# window size
+maximum_width 400
+minimum_size 400 1200
+
+# background transparent
+own_window_transparent yes
+own_window_argb_visual true
+
+# font setting
+override_utf8_locale yes
+# anti alias
+use_xft yes
+xftfont TakaoGothic:style=Regular:size=11
+
+########################################
+# display conky window below
+########################################
+# ${hr}: solid line
+# ${stippled_hr}: dotted line
+# ${color #XXXXXX}hogehoge: write "hogehoge" on #XXXXXX color
+# ${scroll 3 1 hogehoge}: 
+# ${alignc}: center
+# ${alignr}: right
+# ${alignl}: left
+TEXT
+
+${color #d8e698}${hr}
+#${color #eae5e3}${scroll 50 ${nodename} - ${sysname} ${kernel} on ${machine} - conky ver ${conky_version} }
+${color #d8e698}${hr}
+${color #d8e698}System information :${color #eae5e3}
+  ${color #ffffff}Date : ${alignr}${color #eae5e3}${time %Y年%m月%d日 %A} ${color #eae5e3}${time %k:%M:%S}
+  ${color #ffffff}Uptime : ${alignr}${color #eae5e3}${uptime}
+  ${color #ffffff}Frequency(GHz): ${color #eae5e3}${freq_g}  ${color #ffffff}Processes:${color #eae5e3} ${processes}  
+  ${color #ffffff}CPU  Usage : ${color #eae5e3}${cpu}% - ${cpubar 5}
+  ${color #ffffff}RAM  Usage : ${color #eae5e3}${mem}/${memmax} - ${memperc}% - ${membar 5}
+  ${color #ffffff}Swap Usage : ${color #eae5e3}${swap}/${swapmax} - ${swapperc}% - ${swapbar 5}
+${color #d8e698}${stippled_hr}
+${color #d8e698}Device temperature :${color #eae5e3}
+${color #ffffff}  CPU ：${color #eae5e3}${execi 60 sensors | grep -A 0 'CPUTIN' | cut -c 14-22}  ${alignr}${color #ffffff}HDD1：  ${color #eae5e3}${execi 60 hddtemp /dev/sda -n -unit=C}.0°C
+#${color #ffffff}  M/B ：${color #eae5e3}${execi 60 sensors | grep -A 0 'SYSTIN' | cut -c 14-22}  ${alignr}${color #ffffff}HDD2：  ${color #eae5e3}${execi 60 hddtemp /dev/sdb -n -unit=C}.0°C
+${color #ffffff}  AUX ：${color #eae5e3}${execi 60 sensors | grep -A 0 'AUXTIN' | cut -c 14-22}
+${color #d8e698}${stippled_hr}
+${color #d8e698}File systems : ${color #eae5e3}
+  /     ${fs_used /}/${fs_size /} ${fs_bar 5 /}
+  /home ${fs_used /home}/${fs_size /home} ${fs_bar 5 /home}
+${color #d8e698}${stippled_hr}${color #eae5e3}
+#${color #d8e698}Disk IO : ${color #eae5e3}
+#  /      Read  ${alignr}${diskio_read /dev/sda}/s
+#  /      Write ${alignr}${diskio_write /dev/sda}/s
+#  ${color #ffffff}${diskiograph_read /dev/sda 20,190 fef4f4 eebbcb}${alignr}${color #ffffff}${diskiograph_write /dev/sda 20,190 fef4f4 eebbcb}
+#  /home  Read  ${alignr}${diskio_read /dev/sdb}/s
+#  /home  Write ${alignr}${diskio_write /dev/sdb}/s
+#  ${color #ffffff}${diskiograph_read /dev/sdb 20,190 fef4f4 eebbcb}${alignr}${color #ffffff}${diskiograph_write /dev/sdb 20,190 fef4f4 eebbcb}
+#${color #d8e698}${stippled_hr}
+#${color #d8e698}Networking : 
+#  ${color #ffffff}Up size    : ${alignr}${color #eae5e3}${totalup}
+#  ${color #ffffff}Down size  : ${alignr}${color #eae5e3}${totaldown}
+#  ${color #ffffff}Up speed   : ${alignr}${color #eae5e3}${upspeed eth0}
+#  ${color #ffffff}Down speed : ${alignr}${color #eae5e3}${downspeed eth0}
+#${color #d8e698}${stippled_hr}
+${color #d8e698}Name                PID    CPU%    MEM%     TIME
+  ${color #eae5e3}${top name 1} ${top pid 1}  ${top cpu 1}  ${top mem 1}  ${top time 1}
+  ${color #eae5e3}${top name 2} ${top pid 2}  ${top cpu 2}  ${top mem 2}  ${top time 2}
+  ${color #eae5e3}${top name 3} ${top pid 3}  ${top cpu 3}  ${top mem 3}  ${top time 3}
+  ${color #eae5e3}${top name 4} ${top pid 4}  ${top cpu 4}  ${top mem 4}  ${top time 4}
+  ${color #eae5e3}${top name 5} ${top pid 5}  ${top cpu 5}  ${top mem 5}  ${top time 5}
+${color #d8e698}${stippled_hr}
+${color #d8e698}Weather report :${color #eae5e3}
+  ${rss http://weather.livedoor.com/forecast/rss/area/130010.xml 60 item_title 1}
+  ${rss http://weather.livedoor.com/forecast/rss/area/130010.xml 60 item_title 2}
+  ${rss http://weather.livedoor.com/forecast/rss/area/130010.xml 60 item_title 3}
+  ${rss http://weather.livedoor.com/forecast/rss/area/130010.xml 60 item_title 4}
+  ${rss http://weather.livedoor.com/forecast/rss/area/130010.xml 60 item_title 5}
+  ${rss http://weather.livedoor.com/forecast/rss/area/130010.xml 60 item_title 6}
+  ${rss http://weather.livedoor.com/forecast/rss/area/130010.xml 60 item_title 7}
+#${color #d8e698}${stippled_hr}
+#${color #d8e698}Storm warning :${color #eae5e3}
+#  ${rss http://weather.livedoor.com/forecast/rss/warn/13.xml 60 item_title 1}
+#  ${rss http://weather.livedoor.com/forecast/rss/warn/13.xml 60 item_title 2}
+#  ${rss http://weather.livedoor.com/forecast/rss/warn/13.xml 60 item_title 3}
+#  ${rss http://weather.livedoor.com/forecast/rss/warn/13.xml 60 item_title 4}
+#  ${rss http://weather.livedoor.com/forecast/rss/warn/13.xml 60 item_title 5}
+#${color #d8e698}${stippled_hr}
+#${color #d8e698}News headline :${color #eae5e3}
+#  ${rss https://news.google.com/news/feeds?hl=ja&ned=us&ie=UTF-8&oe=UTF-8&output=rss 15 item_titles 10}
+#${color #d8e698}${stippled_hr}
+#${color #d8e698}lifehacker :${color #eae5e3}
+#  ${rss http://feeds.lifehacker.jp/rss/lifehacker/index.xml 60 item_titles 5}
+${color #d8e698}${hr}
+
