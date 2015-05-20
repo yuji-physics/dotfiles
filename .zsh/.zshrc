@@ -92,4 +92,4 @@ bindkey '^S' history-incremental-search-forward
 #----------------------
 [ -f $ZDOTDIR/.zshrc_`uname` ] && . $ZDOTDIR/.zshrc_`uname`
 [ -f ~/.zshrc.local ] && . ~/.zshrc.local
-export PATH
+export PATH=/usr/local/bin:$PATH

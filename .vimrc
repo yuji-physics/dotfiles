@@ -65,6 +65,11 @@ NeoBundle 'jonathanfilip/vim-lucius'
 
 call neobundle#end()
 
+" Disable menu.vim in gui-vim
+if has('gui_running')
+  set guioptions=Mc
+endif
+
 filetype plugin indent on
 
 NeoBundleCheck
@@ -408,6 +413,7 @@ if !empty($CONEMUBUILD) || &t_Co > 2 || has("gui_running")
   set hlsearch
   set background=dark
   colorscheme hybrid
+  "colorscheme solarized
   " Variables required to display 256 colors in ConEmu(Windows).
   " Similar options are written in .bashrc in case of mintty.
   if !empty($CONEMUBUILD)
@@ -429,7 +435,7 @@ set number " show columnnumber
 set numberwidth=1 " minimal number to show column number.
 set laststatus=2 " always show status line
 set cmdheight=2
-set nowrap
+set wrap
 set textwidth=0
 set list " show special characters
 if !has('win32') || has('gui_running')
@@ -450,6 +456,7 @@ set shiftwidth=2
 set smarttab
 set softtabstop=2
 set expandtab
+set shiftround
 
 " indent
 set autoindent
@@ -488,10 +495,12 @@ set pastetoggle=<F8>
 set incsearch " incremental search
 set ignorecase " match both upper/lowercase letters
 set smartcase " if the pattern contains capital letters, do not ignore case.
+set wrapscan
 
 " cmd completion
 set wildmode=list,full
 set wildmenu
+set wildignore=*.o,*.obj,*/.git/*,*.pyc,*.ps,*.png,*.jpg,*.eps,*.aux,.DS_Store
 
 
 " misc
@@ -558,6 +567,16 @@ inoremap '' ''<Left>
 inoremap `<Enter> ``<Left><CR><ESC><S-o>
 inoremap `` ``<Left>
 
+" toggles
+" <F7>: vimfiler
+" <F8>: paste
+" <F9>
+" <F10>: Neocomplete
+" <F11>
+" <F12>
+"
+" toggle vimfiler safe mode
+"nnoremap <F7> <Plug>(vimfiler_toggle_safe_mode)
 " toggle neocomplete
 nnoremap <F10> :NeoCompleteToggle<CR>
 " toggle hilightsearch

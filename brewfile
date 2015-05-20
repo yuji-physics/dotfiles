@@ -9,6 +9,7 @@ install git
 install gnu-sed
 install gnuplot --with-x11 --with-aquaterm
 install imagemagick
+install lha
 install macvim --with-cscope --with-lua --HEAD
 install nkf
 install qt5 -L/usr/local/opt/qt5/lib -I/usr/local/opt/qt5/include
