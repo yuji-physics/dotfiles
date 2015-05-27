@@ -21,12 +21,10 @@ endif
 
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-" Unite & unite sources
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'Shougo/unite-outline'
-
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
@@ -43,8 +41,8 @@ NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-repeat'
+NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'osyo-manga/vim-over'
 NeoBundle 'osyo-manga/vim-anzu'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'scrooloose/syntastic'
@@ -205,9 +203,6 @@ let g:EasyMotion_space_jump_first = 1
 " vim-repeat{{{
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count) 
 " "}}}
-" vim-over {{{
-nnoremap <Leader>o :OverCommandLine<CR>
-" }}}
 " anzu{{{
 " settings about anzu are also wrote in Lightline (anzu-status)
 nmap n <Plug>(anzu-n)
@@ -222,14 +217,6 @@ let g:multi_cursor_next_key='<C-n>'
 let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
-" usage{{{
-" 1. <C-n> to begin or add multiple cursor.
-" 2. <C-p> to delete cursor, if necessary.
-" 3. (a) 'v' to select the region (), and 'i' or 'a' to go to <INSERT MODE>
-"    (b) 's' or 'c' to directly go to <INSERT MODE>
-" 4. Edit in multiple cursor.
-" 5. <Esc> to quit multiple cursor.
-" }}}
 " }}}
 " Syntastic{{{
 let g:syntastic_check_on_open=0
@@ -238,6 +225,7 @@ let g:syntastic_c_check_header=1
 if !empty($QTDIR)
   let g:syntastic_cpp_include_dirs=['include','$QTDIR/include']
 endif
+nnoremap <silent> <leader>se :<C-u>Errors<CR>
 " }}}
 " vim-indent-guides{{{
 " define colors by myself
@@ -312,28 +300,6 @@ endfunction
 function! MyMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction"
-" }}}
-" Vim-LaTeX{{{
-
-"filetype plugin on
-"filetype indent on
-"set shellslash
-"set grepprg=grep\ -nH\ $*
-""let g:tex_flavor='latex'
-"let g:Imap_UsePlaceHolders = 1
-"let g:Imap_DeleteEmptyPlaceHolders = 1
-"let g:Imap_StickyPlaceHolders = 0
-"let g:Tex_DefaultTargetFormat = 'pdf'
-"let g:Tex_MultipleCompileFormats='dvi,pdf'
-"let g:Tex_FormatDependency_pdf = 'dvi,pdf'
-"let g:Tex_FormatDependency_ps = 'dvi,ps'
-"let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
-"let g:Tex_CompileRule_ps = '/usr/texbin/dvips -Ppdf -o $*.ps $*.dvi'
-"let g:Tex_CompileRule_dvi = 'platex  --interaction=nonstopmode $*'
-"let g:Tex_BibtexFlavor = '/usr/texbin/upbibtex'
-"let g:Tex_MakeIndexFlavor = '/usr/texbin/mendex -U $*.idx'
-"let g:Tex_UseEditorSettingInDVIViewer = 1
-"let g:Tex_ViewRule_pdf = '/usr/bin/open -a Preview.app'
 " }}}
 " Vim-tex-fold {{{
 let g:tex_fold_additional_envs=1

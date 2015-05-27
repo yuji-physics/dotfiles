@@ -23,7 +23,6 @@ export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig
 #export TCL_LIBRARY=/usr/local/Cellar/tcl-tk/8.6.3/lib/tcl8.6
 export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"
 export PYTHONDONTWRITEBYTECODE=1
-export PYTHONPATH="/usr/local/lib/python2.7/site-packages"
 export QTDIR=/usr/local/Cellar/qt5/5.4.1/
 PATH=$QTDIR/bin:$PATH
 eval `/usr/libexec/path_helper -s`
