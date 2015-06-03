@@ -473,6 +473,7 @@ set wildignore=*.o,*.obj,*/.git/*,*.pyc,*.ps,*.png,*.jpg,*.eps,*.aux,.DS_Store
 set mouse=a
 set backspace=indent,eol,start
 set history=50
+set vb t_vb=
 
 " }}}
 " === KEY MAPPINGS === {{{
