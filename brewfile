@@ -1,8 +1,11 @@
-update
+update -all
 upgrade
 
 tap sanemat/font || true
+tap homebrew/dupes || true
+tap homebrew/apache || true
 
+install httpd24
 install caskroom/cask/brew-cask
 install coreutils
 install git
