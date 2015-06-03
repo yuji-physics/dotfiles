@@ -1,7 +1,9 @@
-"3.8.2 (created: 2014/02/13 23:52:43)
+" Vimperatorrc
 
-source! ~/.vimperatorrc.local
 " vim: set ft=vim:
+
+" Load local settings.
+source! ~/.vimperatorrc.local
 
 " ==================
 " Plugins
@@ -27,46 +29,103 @@ source! ~/.vimperatorrc.local
 " options
 "====================
 colorscheme black
+
+" Do not go to insert mode automatically.
 set focuscontent
-set gui=addons,nobookmarks,nomenu,nonavigation,tabs
+
+" Do not use 'vimperator' as a title string.
+set titlestring="Firefox"
+
+" Animation off.
+set animations=false
+
+" Do not use some chars(i) as a hintchar.
 set hintchars=0123456789qwertyuopasdfghjklzxcvbnm
+
+" Ignore case in search patterns.
 set ignorecase
-set complete=lb
+
+" Use 'Firefox location bar entries' and 'open tabs' for completion.
+set complete=lt
+
+" Maximum number of items to display at once in a listing.
+set maxitems=10
+
+" Highligh previous search pattern matches.
+set hlsearch
+
+" Open :addons, :downloads, :extoptions, :help, :javascript and :pref results in a newtab.
+set newtab=all
+
+" Editor
 set editor='bash -lc "mvim -f \$*" mvim '
+
+"====================
+" Firefox preferences
+"====================
+" Appearance of bars
+set gui=addons,nobookmarks,nomenu,nonavigation,tabs
+
+" Set google as homepage
+set! browser.startup.homepage=https://www.google.co.jp/
+
+" Show windows and tabs from last time at startup.
+set! browser.startup.page=3
+
+" Show speeddial as a newtab.
+set! browser.newtab.url=chrome://speeddial/content/speeddial.xul
+"set! browser.newtab.url=about:newtab
+"
+" Do not check if Firefox is default browser.
+set! browser.shell.checkDefaultBrowser=false
 
 "--------------------
 " key mapping
 "--------------------
-" reload .vimperatorrc
+" Reload .vimperatorrc
 nnoremap <C-r> :source ~/.vimperatorrc<CR>
-" cursor motion
-noremap h 5h
-noremap <S-h> 15h
-noremap j 5j
-noremap <S-j> 15j
-noremap k 5k
-noremap <S-k> 15k
-noremap l 5l
-noremap <S-l> 15l
 
-" page history motion
-noremap <C-l> :forward<CR>
-noremap <C-h> :back<CR>
-noremap <C-j> :jumps<CR>;o
+" More quick cursor motion
+nnoremap h 5h
+nnoremap j 5j
+nnoremap k 5k
+nnoremap l 5l
 
-" stop load 
+" Back, forward and jump histores of a current tab.
+nnoremap <C-l> :forward<CR>
+nnoremap <C-h> :back<CR>
+nnoremap <C-j> :jumps<CR>;o
+
+" Halt loading pages.
 nnoremap x :stop<CR>
 nnoremap X :stopall<CR>
 
-" undo history
+" Undo history
 nnoremap U :undo<Space>
-" to quit Firefox when no tab exists
-noremap d :q<CR>
+
+" Quit Firefox when no tab exists with d key.
+nnoremap d :q<CR>
+
+" Tabgroups
+" Disable gt map (use <C-n> to change tab).
+map gt <Nop>
+" list
+nnoremap gtl :tabgroups<Space>list<CR>
+" add
+nnoremap gta :tabgroups<Space>add<CR>
+" delete
+nnoremap gtd :tabgroups<Space>remove<CR>
+" move the current tab to other group
+nnoremap gtm :tabgroups<Space>stash<Space>
+" add a tab from other group
+nnoremap gtp :tabgroups<Space>pull<Space>
+" switch
+nnoremap gts :tabgroups<Space>switch<Space>
+" show tab group view
+nnoremap gto <C-S-e>
 
 " Quick marks 
-" go[qmark] to open in current tab
-" gn[qmark] to open in new tab
-" Other qmarks are set in .vimperatorrc.local
+" Additional local qmarks are defined in .vimperatorrc.local
 qmark g https://www.google.co.jp/
 qmark m https://mail.google.com/mail/
 qmark c https://www.google.com/calendar/render
