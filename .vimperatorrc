@@ -39,8 +39,8 @@ set titlestring="Firefox"
 " Animation off.
 set animations=false
 
-" Do not use some chars(i) as a hintchar.
-set hintchars=0123456789qwertyuopasdfghjklzxcvbnm
+" Do not use some chars('i') as a hintchar.
+set hintchars=1234567890qwertyuopasdfghjklzxcvbnm
 
 " Ignore case in search patterns.
 set ignorecase
@@ -63,7 +63,7 @@ set editor='bash -lc "mvim -f \$*" mvim '
 "====================
 " Firefox preferences
 "====================
-" Appearance of bars
+" Appearance of bars.
 set gui=addons,nobookmarks,nomenu,nonavigation,tabs
 
 " Set google as homepage
@@ -79,10 +79,10 @@ set! browser.newtab.url=chrome://speeddial/content/speeddial.xul
 " Do not check if Firefox is default browser.
 set! browser.shell.checkDefaultBrowser=false
 
-"--------------------
-" key mapping
-"--------------------
-" Reload .vimperatorrc
+"====================
+" Mappings
+"====================
+" Reload .vimperatorrc(this file).
 nnoremap <C-r> :source ~/.vimperatorrc<CR>
 
 " More quick cursor motion
@@ -91,20 +91,26 @@ nnoremap j 5j
 nnoremap k 5k
 nnoremap l 5l
 
-" Back, forward and jump histores of a current tab.
+" Back, forward and jump pages through histores.
 nnoremap <C-l> :forward<CR>
 nnoremap <C-h> :back<CR>
 nnoremap <C-j> :jumps<CR>;o
+
+" Show undo history.
+nnoremap U :undo<Space>
 
 " Halt loading pages.
 nnoremap x :stop<CR>
 nnoremap X :stopall<CR>
 
-" Undo history
-nnoremap U :undo<Space>
-
 " Quit Firefox when no tab exists with d key.
+" If other tabgroups exists, you must kill them with 'gtd', or 'ZZ' to save
+" the current groups and quit.
 nnoremap d :q<CR>
+
+" View page source (I cannot remember gf).
+nnoremap vs gf
+nnoremap gf <Nop>
 
 " Tabgroups
 " Disable gt map (use <C-n> to change tab).
@@ -125,12 +131,12 @@ nnoremap gts :tabgroups<Space>switch<Space>
 nnoremap gto <C-S-e>
 
 " Quick marks 
-" Additional local qmarks are defined in .vimperatorrc.local
+" Qmarks that depends on computer are defined in .vimperatorrc.local
 qmark g https://www.google.co.jp/
 qmark m https://mail.google.com/mail/
 qmark c https://www.google.com/calendar/render
 
-" delete in insert mode
+" Delete in insert mode
 inoremap <C-b> <BS>
 inoremap <C-d> <DEL>
 
