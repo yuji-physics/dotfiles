@@ -1,4 +1,4 @@
-" .vimrc
+" .nvimrc
 " === PLUGINS === {{{
 let mapleader = ","
 " NeoBundle{{{
@@ -9,14 +9,14 @@ if has('vim_starting')
   if has('win32')
     set runtimepath+=~/vimfiles/bundle/neobundle.vim/
   else
-    set runtimepath+=~/.vim/bundle/neobundle.vim/  
+    set runtimepath+=~/.nvim/bundle/neobundle.vim/  
   endif
 endif
 
 if has('win32')
   call neobundle#begin(expand('~/vimfiles/bundle/'))
 else
-  call neobundle#begin(expand('~/.vim/bundle/'))
+  call neobundle#begin(expand('~/.nvim/bundle/'))
 endif
 
 NeoBundleFetch 'Shougo/neobundle.vim'
@@ -33,7 +33,8 @@ NeoBundle 'Shougo/vimproc', {
       \   'mac' : 'make -f make_mac.mak',
       \   'unix' : 'make -f make_unix.mak',
       \ }}
-NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
+"NeoBundle 'Shougo/deoplete'
+"NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/vimshell'
@@ -100,72 +101,10 @@ let g:vimfiler_file_icon = '-'
 let g:vimfiler_marked_file_icon = '*'
 nnoremap <silent> <leader>e :<C-u>VimFilerBufferDir -split -simple -winwidth=40<CR>
 " }}}
-" Neocompete or Neocomplcache{{{
-if neobundle#is_installed('neocomplete')
-  " Disable AutoComplPop
-  let g:acp_enableAtStartup = 0
-  " Use neocomplete
-  let g:neocomplete#enable_at_startup = 1
-  " Use ignorecase
-  let g:neocomplete#enable_ignore_case = 1
-  " Use smartcase
-  let g:neocomplete#enable_smart_case = 1
-
-  " Pop-up Appearances
-  " maximum number of candidates displayed in a pop-up menu
-  let g:neocomplete#max_list = 30
-  " maximum width of a pop-up menu
-  let g:neocomplete#max_keyword_width = 80
-
-  " Set minimum syntax keyword length
-  let g:neocomplete#sources#syntax#min_keyword_length = 4
-  let g:neocomplete#lock_buffer_name_pattern = "\*ku\*"
-
-  " Define dictionary (same as help file)
-  let g:neocomplete#sources#dictionary#dictionaries = {
-        \ 'default' : '',
-        \ 'vimshell' : $HOME.'/.vimshell_hist',
-        \ 'scheme' : $HOME.'/.gosh_completions'
-        \}
-  " Define keyword (same as help file)
-  if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-  endif
-  let g:neocomplete#keyword_patterns._ = '\h\w*'
-
-  " settings for jedi
-  "if !exists('g:neocomplete#force_omni_input_patterns')
-  "  let g:neocomplete#force_omni_input_patterns= {}
-  "endif
-  "let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-
-  " Key Mappings
-  " select a candidate by <CR>
-  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-  function! s:my_cr_function()
-    return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-  endfunction
-
-  " close pop-up and a backword char by <BS>
-  inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-
-  " close pop-up by <Space>
-  inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
-
-  " manual completion
-  inoremap <expr><C-c>  neocomplete#start_manual_complete()
-
-elseif neobundle#is_installed('neocomplcache')
-  let g:neocomplcache_enable_at_startup = 1
-  let g:neocomplcache_enable_ignore_case = 1
-  let g:neocomplcache_enable_smart_case = 1
-  if !exists('g:neocomplcache_keyword_patterns')
-    let g:neocomplcache_keyword_patterns = {}
-  endif
-  let g:neocomplcache_keyword_patterns._ = '\h\w*'
-  let g:neocomplcache_enable_camel_case_completion = 1
-  let g:neocomplcache_enable_underbar_completion = 1
-endif
+" Deoplete{{{
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_ignore_case = 1
+let g:deoplete#enable_smart_case = 1
 "}}}
 " Neosnippet{{{
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
@@ -377,7 +316,7 @@ set helplang=en
 " Appearances
 " colorscheme and highlight
 if !empty($CONEMUBUILD) || &t_Co > 2 || has("gui_running")
-  set term=xterm
+  "set term=xterm
   set t_Co=256
   syntax on
   set hlsearch
@@ -485,6 +424,8 @@ set vb t_vb=
 
 " }}}
 " === KEY MAPPINGS === {{{
+" mappings in neovim terminal
+tnoremap <Esc> <C-\><C-n>
 " move cursor on displayed lines (think wrapped line as a line)
 nnoremap j gj
 nnoremap k gk
