@@ -18,7 +18,9 @@ $path
 PATH=/Applications/gnuplot.app:/Applications/gnuplot.app/bin:$PATH
 PATH="/Applications/MacVim.app/Contents/MacOS":$PATH
 PATH=/Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin:$PATH
+export EDITOR=vim
 export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig
+export RANGER_LOAD_DEFAULT_RC=FALSE
 #export TK_LIBRARY=/usr/local/Cellar/tcl-tk/8.6.3/lib/tk8.6
 #export TCL_LIBRARY=/usr/local/Cellar/tcl-tk/8.6.3/lib/tcl8.6
 export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"
@@ -32,7 +34,7 @@ eval `/usr/libexec/path_helper -s`
 alias vim="/usr/local/bin/vim"
 alias git="/usr/local/bin/git"
 alias sed="/usr/local/bin/gsed"
-alias python32="VERSIONER_PYTHON_PREFER_32_BIT=yes /usr/bin/python" # Homebrew python is 64 bit only?
+alias python32="PYTHONPATH=\"/usr/local/lib/python2.7/site-packages\" VERSIONER_PYTHON_PREFER_32_BIT=yes /usr/bin/python" # Homebrew python is 64 bit only? 
 alias ls="gls --color"
 alias la="gls -a --color"
 alias ll="gls -lh --color"
