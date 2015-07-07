@@ -1,4 +1,6 @@
 .vim/bundle/*
 !.vim/bundle/neobundle.vim
+.nvim/bundle/*
+!.nvim/bundle/neobundle.vim
 .vimperator/info/*
 .vimperator/vimperator-plugins/*
