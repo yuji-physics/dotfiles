@@ -31,15 +31,17 @@ if [ $OS = "Win" ]; then
   # Do not work well now. Execute in cmd.
   # cmd /C dotfilesLink.bat.lnk
 else
+  ln -sfn ~/dotfiles/.inputrc ~/.inputrc
   ln -sfn ~/dotfiles/.bash_profile ~/.bash_profile
   ln -sfn ~/dotfiles/.bashrc ~/.bashrc
-  ln -sfn ~/dotfiles/.inputrc ~/.inputrc
-  ln -sfn ~/dotfiles/.gvimrc ~/.gvimrc
-  ln -sfn ~/dotfiles/.vim ~/.vim
-  ln -sfn ~/dotfiles/.vimrc ~/.vimrc
   ln -sfn ~/dotfiles/.zsh ~/.zsh
   ln -sfn ~/dotfiles/.zshenv ~/.zshenv
   ln -sfn ~/dotfiles/.tmux.conf ~/.tmux.conf
+  ln -sfn ~/dotfiles/.vim ~/.vim
+  ln -sfn ~/dotfiles/.vimrc ~/.vimrc
+  ln -sfn ~/dotfiles/.gvimrc ~/.gvimrc
+  ln -sfn ~/dotfiles/.nvim ~/.nvim
+  ln -sfn ~/dotfiles/.nvimrc ~/.nvimrc
   ln -sfn ~/dotfiles/.vimperator ~/.vimperator
   ln -sfn ~/dotfiles/.vimperatorrc ~/.vimperatorrc
   if [ ${OS} = "Linux" ];then
