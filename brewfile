@@ -1,25 +1,35 @@
+# brwefile
 update -all
 upgrade
 
 tap sanemat/font || true
 tap homebrew/dupes || true
 tap homebrew/apache || true
+tap neovim/homebrew-neovim
 
-install httpd24
 install caskroom/cask/brew-cask
+# pip3 does not work without --with-brewed-openssl option.
+install python --with-brewed-openssl
+install python3 --with-brewed-openssl
+install ag
 install coreutils
 install git
 install gnu-sed
 install gnuplot --with-x11 --with-aquaterm
+install httpd24
 install imagemagick
 install lha
 install macvim --with-cscope --with-lua --HEAD
+install --HEAD neovim
 install nkf
 install qt5 -L/usr/local/opt/qt5/lib -I/usr/local/opt/qt5/include
+install ranger
+install reattach-to-user-namespace
 install ricty
 install tmux
 install tree
-install vim --with-lua
+install vim --with-luajit
+install wget
 install w3m
 install zsh --disable-etcdir
 install zsh-completions
