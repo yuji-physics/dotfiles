@@ -1,2 +1,11 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =0
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/Users/Yuji/www/astro/device_recipe'
+let g:netrw_dirhist_2='/Users/Yuji/myscript/general/bin'
+let g:netrw_dirhist_3='/Users/Yuji/www/syntaxhighlighter/tests'
+let g:netrw_dirhist_4='/Users/Yuji/www/private/labo'
+let g:netrw_dirhist_5='/Users/Yuji/www/device/device_recipe'
+let g:netrw_dirhist_6='/Users/Yuji/myscript/LVGprogram_bak/OH/exec'
+let g:netrw_dirhist_7='/Users/Yuji/myscript/astro/bin'
+let g:netrw_dirhist_8='/Users/Yuji/myscript/astro/resource'
+let g:netrw_dirhist_9='/usr/local/src/Radex'

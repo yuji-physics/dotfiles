@@ -33,11 +33,15 @@ eval `/usr/libexec/path_helper -s`
 #-------------------------------
 alias vim="/usr/local/bin/vim"
 alias git="/usr/local/bin/git"
-alias sed="/usr/local/bin/gsed"
+if [ -n "$(type gsed)" ];then
+  alias sed="/usr/local/bin/gsed"
+fi
 alias python32="PYTHONPATH=\"/usr/local/lib/python2.7/site-packages\" VERSIONER_PYTHON_PREFER_32_BIT=yes /usr/bin/python" # Homebrew python is 64 bit only? 
-alias ls="gls --color"
-alias la="gls -a --color"
-alias ll="gls -lh --color"
+if [ -n "$(type gls)" ];then
+  alias ls="gls --color"
+  alias la="gls -a --color"
+  alias ll="gls -lh --color"
+fi
 alias lc='echo -n "file count:" && ls -U1 | wc -l' # count files
 alias rm="rm -i"
 

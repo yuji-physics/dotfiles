@@ -51,6 +51,7 @@ NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'matze/vim-tex-fold'
 NeoBundle 'AndrewRadev/switch.vim'
+NeoBundle 'jtratner/vim-flavored-markdown.git'
 "NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
 
 " Color schemes
@@ -208,9 +209,9 @@ let g:EasyMotion_space_jump_first = 1
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count) 
 " "}}}
 " anzu{{{
-" settings about anzu are also wrote in Lightline (anzu-status)
-nmap n <Plug>(anzu-n)
-nmap N <Plug>(anzu-N)
+" Lightline also have anzu settings (to show anzu-status in Lightline).
+nmap n <Plug>(anzu-n)zz
+nmap N <Plug>(anzu-N)zz
 nmap * <Plug>(anzu-star)
 nmap # <Plug>(anzu-sharp)
 nnoremap <Esc><Esc> <Plug>(anzu#clear_search_status)
@@ -309,14 +310,18 @@ endfunction"
 let g:tex_fold_additional_envs=1
 " }}}
 " switch {{{
-let g:switch_definitions = [
-        \['true', 'false'],
-        \['=', ' = '],
-        \['+', ' + '],
-        \['-', ' - '],
-        \['*', ' * '],
-        \['/', ' / ']
+let g:switch_custom_definitions = [
+      \['+', ' + '],
+      \['-', ' - '],
+      \['*', ' * '],
+      \['/', ' / '],
+      \{
+      \ '\(\k\+\)' : '''\1''',
+      \ '''\(.\{-}\)''' : '"\1"',
+      \ '"\(.\{-}\)"' : '\1',
+      \},
       \]
+" string -> 'string' -> \"string\"
 " do not use default mapping (gs)
 let g:switch_mapping = ""
 nnoremap <leader>s :Switch<CR>
@@ -327,8 +332,11 @@ augroup MyAutoCmd
   autocmd!
 augroup END
 
-" Load ~/.vim/after/"colorscheme" to add minor changes of colorscheme
-" without changing original one.
+" Enable markdown
+"autocmd MyAutoCmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd MyAutoCmd BufNewFile,BufReadPost *.md,*.markdown setlocal filetype=ghmarkdown
+
+" Load ~/.vim/after/"colorscheme" to fix/add colorscheme without changing original color.
 function! s:load_after_colors()
   if has('win32')
     let color = expand('~/vimfiles/after/colors/' . g:colors_name . '.vim')
