@@ -5,3 +5,4 @@
 !.nvim/bundle/neobundle.vim
 .vimperator/info/*
 .vimperator/vimperator-plugins/*
+.zsh/.zcompdump
