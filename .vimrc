@@ -465,7 +465,7 @@ set foldcolumn=4 " width of the leftside columns of folding guide
 
 " Load and save
 set autoread " when a file is modified outside Vim, reload the file automatically.
-set autowriteall
+"set autowriteall
 set nobackup
 set noswapfile
 set noundofile
