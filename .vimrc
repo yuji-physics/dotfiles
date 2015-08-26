@@ -550,6 +550,12 @@ inoremap '' ''<Left>
 inoremap `<Enter> ``<Left><CR><ESC><S-o>
 inoremap `` ``<Left>
 
+vnoremap <c-a> <c-a>gv
+vnoremap <c-x> <c-x>gv
+vnoremap g<c-a> g<c-a>gv
+vnoremap g<c-x> g<c-x>gv
+vnoremap > >gv
+vnoremap < <gv
 " toggles
 " <F7>: vimfiler
 " <F8>: paste
@@ -559,18 +565,7 @@ inoremap `` ``<Left>
 " <F12>
 "
 " toggle vimfiler safe mode
-"nnoremap <F7> <Plug>(vimfiler_toggle_safe_mode)
+nnoremap <F7> <Plug>(vimfiler_toggle_safe_mode)
 " toggle neocomplete
 nnoremap <F10> :NeoCompleteToggle<CR>
-" toggle hilightsearch
-"let g:hlstate = 0
-"nnoremap <expr><F9> call toggle_hilight_search()
-"function! s:toggle_hilight_search()
-" if (g:hlstate == 0)
-"  return nohlsearch
-" else
-"  return set hlsearch
-" endif
-" let g:hlstate = 1 - hlstate
-"endfunction
 " }}}
