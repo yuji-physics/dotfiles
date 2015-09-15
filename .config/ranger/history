@@ -1,0 +1,50 @@
+open_with MicrosoftPowerPoint
+open_with pptx
+open_with ptx
+open_with ppt
+open_with jpg
+open_with Firefox
+open_with FireFox
+open_with a
+open_with 1
+rename 1976ApJ___203__124E.pdf
+open_with preview
+open_with PREVIEW
+open_with Preview
+open_with firefox
+open_with pdf
+open_with PDF
+open_with Pdf
+
+open_with c
+open_with t
+!open
+delete 
+set colorscheme=solarized
+set colorscheme=snow
+set colorscheme=jungle
+set colorscheme=default
+c
+touch memo.txt
+rename memo.md
+mdless
+mdless memo.md
+has w3m
+mdlessgfm memo.md
+open -a MacVim memo.md
+Preview
+AliasCommand 
+abort 
+!
+ls
+open_with q
+R
+open_with 
+b
+m
+man
+help
+cd /Users/Yuji/Documents/labo/mypapers/OHpaper/contents/Reference/tobe
+cd /Users/Yuji/Downloads/
+open_with .DS_Store
+open_with open 
