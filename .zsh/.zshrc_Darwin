@@ -25,7 +25,7 @@ export RANGER_LOAD_DEFAULT_RC=FALSE
 #export TCL_LIBRARY=/usr/local/Cellar/tcl-tk/8.6.3/lib/tcl8.6
 export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"
 export PYTHONDONTWRITEBYTECODE=1
-export QTDIR=/usr/local/Cellar/qt5/5.4.1/
+export QTDIR=/usr/local/qt5/5.5/
 PATH=$QTDIR/bin:$PATH
 eval `/usr/libexec/path_helper -s`
 #-------------------------------
@@ -48,3 +48,16 @@ alias rm="rm -i"
 if [ -z $TMUX ]; then
   tmux -2
 fi
+
+function mdless(){
+  grip --export $1 /dev/stdout | w3m -T text/html
+}
+
+function mdlessgfm(){
+  grip --gfm --export $1 /dev/stdout | w3m -T text/html
+}
+
+function google(){
+  arg=$(echo $@ | sed -e "s/  */\+/g")
+  w3m "http://www.google.co.jp/search?q=${arg}&hl=ja&biw=&bih=&gbv=1"
+}
