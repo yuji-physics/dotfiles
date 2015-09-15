@@ -44,6 +44,8 @@ else
   ln -sfn ~/dotfiles/.nvimrc ~/.nvimrc
   ln -sfn ~/dotfiles/.vimperator ~/.vimperator
   ln -sfn ~/dotfiles/.vimperatorrc ~/.vimperatorrc
+  [ ! -e "${HOME}/.config" ] && mkdir "${HOME}/.config"
+  ln -sfn ~/dotfiles/.config/ranger ~/.config/ranger
   if [ ${OS} = "Linux" ];then
     ln -sfn ~/dotfiles/.conkyrc ~/.conkyrc
   fi
