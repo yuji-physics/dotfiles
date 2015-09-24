@@ -36,6 +36,7 @@ if [ -n "$(type gsed)" ];then
 fi
 alias python32="PYTHONPATH=\"/usr/local/lib/python2.7/site-packages\" VERSIONER_PYTHON_PREFER_32_BIT=yes /usr/bin/python" # Homebrew python is 64 bit only? 
 if [ -n "$(type gls)" ];then
+  alias l="gls --color"
   alias ls="gls --color"
   alias la="gls -a --color"
   alias ll="gls -lh --color"
