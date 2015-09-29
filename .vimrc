@@ -336,7 +336,7 @@ augroup END
 "autocmd MyAutoCmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd MyAutoCmd BufNewFile,BufReadPost *.md,*.markdown setlocal filetype=ghmarkdown
 
-" Load ~/.vim/after/"colorscheme" to fix/add colorscheme without changing original color.
+" Load ~/.vim/after/"colorscheme" to modify the colorscheme without changing original syntax file.
 function! s:load_after_colors()
   if has('win32')
     let color = expand('~/vimfiles/after/colors/' . g:colors_name . '.vim')
@@ -518,6 +518,9 @@ nnoremap <CR> i<CR><ESC>
 " go to normal mode from insert mode with jj
 inoremap jj <Esc>
 
+" for ANSI keyboard
+nnoremap ; :
+
 " move cursor in insert mode
 "inoremap <C-h> <Esc>ha
 "inoremap <C-j> <Esc>ja
@@ -568,4 +571,15 @@ vnoremap < <gv
 nnoremap <F7> <Plug>(vimfiler_toggle_safe_mode)
 " toggle neocomplete
 nnoremap <F10> :NeoCompleteToggle<CR>
+" }}}
+" === Abbreviation === {{{
+abbreviate etal et al.
+" }}}
+" === Functions and Commands=== {{{
+" compile tex with platex and dvipdfmx
+:command! Texmake :call Myfunc_texmake()
+:function! Myfunc_texmake()
+  echo system("platex " . expand("%"))
+  echo system("dvipdfmx " . expand("%:r") . ".dvi")
+:endfunction
 " }}}
