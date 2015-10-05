@@ -1,50 +1,50 @@
-open_with MicrosoftPowerPoint
-open_with pptx
-open_with ptx
-open_with ppt
-open_with jpg
-open_with Firefox
-open_with FireFox
-open_with a
-open_with 1
-rename 1976ApJ___203__124E.pdf
-open_with preview
-open_with PREVIEW
-open_with Preview
-open_with firefox
-open_with pdf
-open_with PDF
-open_with Pdf
-
-open_with c
-open_with t
-!open
-delete 
-set colorscheme=solarized
-set colorscheme=snow
-set colorscheme=jungle
-set colorscheme=default
-c
-touch memo.txt
-rename memo.md
-mdless
-mdless memo.md
-has w3m
-mdlessgfm memo.md
-open -a MacVim memo.md
-Preview
+!shell
+shell 
+shell ls
+shell -w
+shell -w df
 AliasCommand 
-abort 
-!
-ls
-open_with q
-R
+-h
+help 
+terminal 
+rename Crutcher-1973.pdf
+rename Elitzur-1976.pdf
+rename Crutcher-1977.pdf
+rename Myers-1978.pdf
+rename Mattila-1979.pdf
+rename Crutcher-1979.pdf
+rename Crutcher-1993.pdf
+rename Troland-2008.pdf
+rename Litvak-1969.pdf
+move ../
+move
 open_with 
-b
-m
-man
+terminal
+sh
+shell
+j
+mkdir env
+h
+mv env soft
+rename soft
+open
 help
-cd /Users/Yuji/Documents/labo/mypapers/OHpaper/contents/Reference/tobe
-cd /Users/Yuji/Downloads/
-open_with .DS_Store
-open_with open 
+rename karma.md
+d
+mv RADEX.md
+rename RADEX.md
+open_with vim
+mkdir OH
+delete
+find w
+search 
+find ww
+del
+delete 
+search doc
+cd
+mkdir 2015_07-09
+
+cut
+paste
+open_with open
