@@ -11,7 +11,7 @@ install caskroom/cask/brew-cask
 # pip3 does not work without --with-brewed-openssl option.
 install python --with-brewed-openssl
 install python3 --with-brewed-openssl
-install ag
+# install ag
 install coreutils
 install git
 install gnu-sed
@@ -22,7 +22,8 @@ install lha
 install macvim --with-cscope --with-lua --HEAD
 install --HEAD neovim
 install nkf
-install qt5 --with-example --with-docs
+install peco
+# install qt5 --with-example --with-docs
 install ranger
 install reattach-to-user-namespace
 install ricty
