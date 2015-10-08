@@ -6,3 +6,6 @@
 .vimperator/info/*
 .vimperator/vimperator-plugins/*
 .zsh/.zcompdump
+.config/ranger/bookmarks
+.config/ranger/history
+
