@@ -35,7 +35,6 @@ mv RADEX.md
 rename RADEX.md
 open_with vim
 mkdir OH
-delete
 find w
 search 
 find ww
@@ -48,3 +47,4 @@ mkdir 2015_07-09
 cut
 paste
 open_with open
+delete
