@@ -51,7 +51,9 @@ NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'matze/vim-tex-fold'
 NeoBundle 'AndrewRadev/switch.vim'
+"NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'jtratner/vim-flavored-markdown.git'
+NeoBundle 'vim-jp/vim-go-extra'
 "NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
 
 " Color schemes
@@ -134,11 +136,17 @@ if neobundle#is_installed('neocomplete')
   endif
   let g:neocomplete#keyword_patterns._ = '\h\w*'
 
-  " settings for jedi
-  "if !exists('g:neocomplete#force_omni_input_patterns')
-  "  let g:neocomplete#force_omni_input_patterns= {}
-  "endif
-  "let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+  " Use omnifunc
+  if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns= {}
+  endif
+  " go
+  let g:neocomplete#force_omni_input_patterns.go = '\h\w\.\w*'
+  " python
+  let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+  " python-jedi
+  let g:jedi#completions_enabled = 0
+  let g:jedi#auto_vim_configuration = 0
 
   " Key Mappings
   " select a candidate by <CR>
@@ -353,10 +361,11 @@ autocmd MyAutoCmd ColorScheme * call s:load_after_colors()
 
 " Enable omni completions
 autocmd MyAutoCmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd MyAutoCmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd MyAutoCmd FileType html,markdown,ghmarkdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd MyAutoCmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd MyAutoCmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd MyAutoCmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"autocmd MyAutoCmd FileType python setlocal omnifunc=jedi#completions
 
 " clear anzu-status automatically
 autocmd MyAutoCmd CursorHold,CursorHoldI,WinLeave,TabLeave * call anzu#clear_search_status()
@@ -490,7 +499,7 @@ set backspace=indent,eol,start
 "set clipboard+=unnamed
 set history=50
 set vb t_vb=
-
+exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
 " }}}
 " === KEY MAPPINGS === {{{
 " move cursor on displayed lines (think wrapped line as a line)
