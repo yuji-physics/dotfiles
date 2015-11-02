@@ -33,7 +33,7 @@ NeoBundle 'Shougo/vimproc', {
       \   'mac' : 'make -f make_mac.mak',
       \   'unix' : 'make -f make_unix.mak',
       \ }}
-NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neocomplete'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/vimshell'
@@ -51,7 +51,6 @@ NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'matze/vim-tex-fold'
 NeoBundle 'AndrewRadev/switch.vim'
-"NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'jtratner/vim-flavored-markdown.git'
 NeoBundle 'vim-jp/vim-go-extra'
 "NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
@@ -103,7 +102,7 @@ let g:vimfiler_file_icon = '-'
 let g:vimfiler_marked_file_icon = '*'
 nnoremap <silent> <leader>e :<C-u>VimFilerBufferDir -split -simple -winwidth=40<CR>
 " }}}
-" Neocompete or Neocomplcache{{{
+" Neocompete {{{
 if neobundle#is_installed('neocomplete')
   " Disable AutoComplPop
   let g:acp_enableAtStartup = 0
@@ -140,13 +139,18 @@ if neobundle#is_installed('neocomplete')
   if !exists('g:neocomplete#force_omni_input_patterns')
     let g:neocomplete#force_omni_input_patterns= {}
   endif
+  " C
+  let g:neocomplete#force_omni_input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?'
+  " C++
+  let g:neocomplete#force_omni_input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
   " go
   let g:neocomplete#force_omni_input_patterns.go = '\h\w\.\w*'
   " python
   let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-  " python-jedi
-  let g:jedi#completions_enabled = 0
-  let g:jedi#auto_vim_configuration = 0
+  "let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
+  " disable jedi (python)
+  "let g:jedi#completions_enabled = 0
+  "let g:jedi#auto_vim_configuration = 0
 
   " Key Mappings
   " select a candidate by <CR>
@@ -164,16 +168,6 @@ if neobundle#is_installed('neocomplete')
   " manual completion
   inoremap <expr><C-c>  neocomplete#start_manual_complete()
 
-elseif neobundle#is_installed('neocomplcache')
-  let g:neocomplcache_enable_at_startup = 1
-  let g:neocomplcache_enable_ignore_case = 1
-  let g:neocomplcache_enable_smart_case = 1
-  if !exists('g:neocomplcache_keyword_patterns')
-    let g:neocomplcache_keyword_patterns = {}
-  endif
-  let g:neocomplcache_keyword_patterns._ = '\h\w*'
-  let g:neocomplcache_enable_camel_case_completion = 1
-  let g:neocomplcache_enable_underbar_completion = 1
 endif
 "}}}
 " Neosnippet{{{
