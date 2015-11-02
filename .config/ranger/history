@@ -1,5 +1,3 @@
-!shell
-shell 
 shell ls
 shell -w
 shell -w df
@@ -27,7 +25,6 @@ mkdir env
 h
 mv env soft
 rename soft
-open
 help
 rename karma.md
 d
@@ -36,7 +33,6 @@ rename RADEX.md
 open_with vim
 mkdir OH
 find w
-search 
 find ww
 del
 delete 
@@ -46,5 +42,9 @@ mkdir 2015_07-09
 
 cut
 paste
-open_with open
+open_with lq
 delete
+search 
+search go
+open
+open_with open
