@@ -64,3 +64,27 @@ function google(){
   arg=$(echo $@ | sed -e "s/  */\+/g")
   w3m "http://www.google.co.jp/search?q=${arg}&hl=ja&biw=&bih=&gbv=1"
 }
+
+if which peco &> /dev/null; then
+  function peco-select-history(){
+    local tac
+    if which tac > /dev/null;then
+      tac="tac"
+    elif which gtac > /dev/null;then
+      tac="gtac"
+    else
+      tac="tail -r"
+    fi
+    BUFFER=$(\history -n 1|\
+      eval $tac | \
+      peco --query "$LBUFFER")
+    CURSOR=$#BUFFER
+    zle clear-screen
+  }
+  zle -N peco-select-history
+  bindkey '^R' peco-select-history
+
+  function agvim(){
+    vim $(ag $@ | peco --query "$LBUFFER" | awk -F : '{print "-c " $2 " " $1}')
+}
+fi
