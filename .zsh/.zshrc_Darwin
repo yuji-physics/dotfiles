@@ -33,6 +33,7 @@ eval `/usr/libexec/path_helper -s`
 #-------------------------------
 # alias
 #-------------------------------
+alias mv="mv -i"
 alias vim="/usr/local/bin/vim"
 alias git="/usr/local/bin/git"
 if [ -n "$(type gsed)" ];then
