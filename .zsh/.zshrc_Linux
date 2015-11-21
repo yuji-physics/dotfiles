@@ -18,4 +18,6 @@ alias ls="ls --color"
 alias la="ls -a --color"
 alias ll="ls -l --color"
 
-xmodmap ${HOME}/.Xmodmap
+if [ -e ${HOME}/.Xmodmap ]; then
+  xmodmap ${HOME}/.Xmodmap
+fi
