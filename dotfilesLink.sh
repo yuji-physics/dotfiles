@@ -26,7 +26,7 @@ if [ $OS = "Win" ]; then
   #ln -sfn ~/dotfiles/.bash_profile ~/.bash_profile
   #ln -sfn ~/dotfiles/.bashrc ~/.bashrc
   #ln -sfn ~/dotfiles/.inputrc ~/.inputrc
-  echo 'Execute dotfilesLink.bat in "cmd prompt" to make links for DOS.'
+  echo 'Execute dotfilesLink.bat in "cmd prompt" to make links.'
   # DOS symbolic links
   # Do not work well now. Execute in cmd.
   # cmd /C dotfilesLink.bat.lnk
@@ -44,6 +44,7 @@ else
   ln -sfn ~/dotfiles/.nvimrc ~/.nvimrc
   ln -sfn ~/dotfiles/.vimperator ~/.vimperator
   ln -sfn ~/dotfiles/.vimperatorrc ~/.vimperatorrc
+  ln -sfn ~/dotfiles/.latexmkrc ~/.latexmkrc
   [ ! -e "${HOME}/.config" ] && mkdir "${HOME}/.config"
   ln -sfn ~/dotfiles/.config/ranger ~/.config/ranger
   if [ ${OS} = "Linux" ];then

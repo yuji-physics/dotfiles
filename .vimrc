@@ -44,7 +44,7 @@ NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'osyo-manga/vim-anzu'
-NeoBundle 'mattn/emmet-vim'
+"NeoBundle 'mattn/emmet-vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'itchyny/lightline.vim'
@@ -58,14 +58,14 @@ NeoBundle 'vim-jp/vim-go-extra'
 " Color schemes
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'nanotech/jellybeans.vim'
-NeoBundle 'sickill/vim-monokai'
-NeoBundle 'chriskempson/vim-tomorrow-theme'
-NeoBundle 'jonathanfilip/vim-lucius'
+"NeoBundle 'nanotech/jellybeans.vim'
+"NeoBundle 'sickill/vim-monokai'
+"NeoBundle 'chriskempson/vim-tomorrow-theme'
+"NeoBundle 'jonathanfilip/vim-lucius'
 
 call neobundle#end()
 
-" Disable menu.vim in gui-vim
+" Disable menu.vim in GUI mode.
 if has('gui_running')
   set guioptions=Mc
 endif
@@ -151,6 +151,9 @@ if neobundle#is_installed('neocomplete')
   " disable jedi (python)
   "let g:jedi#completions_enabled = 0
   "let g:jedi#auto_vim_configuration = 0
+
+  "Tex
+  let g:neocomplete#force_omni_input_patterns.tex = '\\\?\h\w*'
 
   " Key Mappings
   " select a candidate by <CR>
@@ -337,6 +340,7 @@ augroup END
 " Enable markdown
 "autocmd MyAutoCmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd MyAutoCmd BufNewFile,BufReadPost *.md,*.markdown setlocal filetype=ghmarkdown
+autocmd MyAutoCmd BufNewFile,BufReadPost *.tex setlocal filetype=tex
 
 " Load ~/.vim/after/"colorscheme" to modify the colorscheme without changing original syntax file.
 function! s:load_after_colors()
@@ -359,6 +363,7 @@ autocmd MyAutoCmd FileType html,markdown,ghmarkdown setlocal omnifunc=htmlcomple
 autocmd MyAutoCmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd MyAutoCmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd MyAutoCmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"autocmd MyAutoCmd FileType tex setlocal omnifunc=texcomplete#Complete
 "autocmd MyAutoCmd FileType python setlocal omnifunc=jedi#completions
 
 " clear anzu-status automatically
@@ -578,7 +583,7 @@ nnoremap <F10> :NeoCompleteToggle<CR>
 " === Abbreviation === {{{
 abbreviate etal et al.
 " }}}
-" === Functions and Commands=== {{{
+" === Functions and Commands === {{{
 " compile tex with platex and dvipdfmx
 :command! Texmake :call Myfunc_texmake()
 :function! Myfunc_texmake()
