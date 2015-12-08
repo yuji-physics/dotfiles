@@ -584,10 +584,4 @@ nnoremap <F10> :NeoCompleteToggle<CR>
 abbreviate etal et al.
 " }}}
 " === Functions and Commands === {{{
-" compile tex with platex and dvipdfmx
-:command! Texmake :call Myfunc_texmake()
-:function! Myfunc_texmake()
-  echo system("platex " . expand("%"))
-  echo system("dvipdfmx " . expand("%:r") . ".dvi")
-:endfunction
 " }}}
