@@ -44,24 +44,19 @@ NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'osyo-manga/vim-anzu'
-"NeoBundle 'mattn/emmet-vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'matze/vim-tex-fold'
-NeoBundle 'AndrewRadev/switch.vim'
 NeoBundle 'jtratner/vim-flavored-markdown.git'
 NeoBundle 'vim-jp/vim-go-extra'
-"NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
 
 " Color schemes
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'altercation/vim-colors-solarized'
-"NeoBundle 'nanotech/jellybeans.vim'
 "NeoBundle 'sickill/vim-monokai'
 "NeoBundle 'chriskempson/vim-tomorrow-theme'
-"NeoBundle 'jonathanfilip/vim-lucius'
 
 call neobundle#end()
 
@@ -314,22 +309,17 @@ endfunction"
 " Vim-tex-fold {{{
 let g:tex_fold_additional_envs=1
 " }}}
-" switch {{{
-let g:switch_custom_definitions = [
-      \['+', ' + '],
-      \['-', ' - '],
-      \['*', ' * '],
-      \['/', ' / '],
-      \{
-      \ '\(\k\+\)' : '''\1''',
-      \ '''\(.\{-}\)''' : '"\1"',
-      \ '"\(.\{-}\)"' : '\1',
-      \},
-      \]
-" string -> 'string' -> \"string\"
-" do not use default mapping (gs)
-let g:switch_mapping = ""
-nnoremap <leader>s :Switch<CR>
+" vim-quickrun {{{
+nmap <Leader>r <Plug>(quickrun)
+let g:quickrun_config = {}
+let g:quickrun_config.tex = {
+      \ 'command' : 'latexmk',
+      \ 'outputter' : 'error',
+      \ 'outputter/error/succes' : 'null',
+      \ 'outputter/error/error' : 'quickfix',
+      \ 'cmdopt' : ' -pvc -f',
+      \ 'exec' : '%c %o %s'
+      \}
 " }}}
 " }}}
 " === AUTO COMMANDS ==={{{
@@ -469,7 +459,7 @@ set foldenable
 set foldlevel=0 " fold everything when opening a file
 set foldmethod=marker
 set foldmarker={{{,}}}
-set foldcolumn=4 " width of the leftside columns of folding guide
+set foldcolumn=5 " width of the leftside columns of folding guide
 
 " Load and save
 set autoread " when a file is modified outside Vim, reload the file automatically.
