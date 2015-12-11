@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-$latex = 'platex -synctex=1 %O %S';
+$latex = 'platex %O %S';
 $bibtex = 'pbibtex %O %B';
 $dvipdf = 'dvipdfmx %O %S';
 # 0: not create pdf, 1: pdflatex, 2:ps -> ps2pdf, 3: dvi-> dvipdf

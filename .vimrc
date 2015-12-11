@@ -172,7 +172,8 @@ endif
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 " My own snippets
-let g:neosnippet#snippets_directory = '~/.vim/snippet'
+let s:my_snippet = '~/.vim/snippet/'
+let g:neosnippet#snippets_directory = s:my_snippet
 "}}}
 " vim-easy-align {{{
 vmap <CR> <Plug>(EasyAlign)
@@ -315,6 +316,7 @@ let g:tex_fold_additional_envs=1
 nmap <Leader>r <Plug>(quickrun)
 let g:quickrun_config = {}
 let g:quickrun_config.tex = {
+      \ 'runner' : 'vimproc',
       \ 'command' : 'latexmk',
       \ 'outputter' : 'error',
       \ 'outputter/error/succes' : 'null',
