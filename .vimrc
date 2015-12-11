@@ -171,6 +171,8 @@ endif
 " Neosnippet{{{
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
+" My own snippets
+let g:neosnippet#snippets_directory = '~/.vim/snippet'
 "}}}
 " vim-easy-align {{{
 vmap <CR> <Plug>(EasyAlign)
