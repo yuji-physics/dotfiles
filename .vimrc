@@ -313,16 +313,25 @@ endfunction"
 let g:tex_fold_additional_envs=1
 " }}}
 " vim-quickrun {{{
-nmap <Leader>r <Plug>(quickrun)
-let g:quickrun_config = {}
-let g:quickrun_config.tex = {
-      \ 'runner' : 'vimproc',
-      \ 'command' : 'latexmk',
-      \ 'outputter' : 'error',
-      \ 'outputter/error/succes' : 'null',
-      \ 'outputter/error/error' : 'quickfix',
-      \ 'cmdopt' : ' -pvc -f',
-      \ 'exec' : '%c %o %s'
+nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
+nmap <Leader>rm <Plug>(quickrun)
+nnoremap <silent> <Leader>rc :QuickRun -type texclean<CR>
+let g:quickrun_config = {
+      \ '_' : {
+      \   'runner' : 'vimproc',
+      \   'runner/vimproc/updatetime' : 60,
+      \   'split' : 'vertical 60sp',
+      \ },
+      \ 'tex' : {
+      \   'command' : 'latexmk',
+      \   'cmdopt' : ' -f -pv-',
+      \   'exec' : '%c %o %s'
+      \},
+      \ 'texclean' : {
+      \   'command' : 'latexmk',
+      \   'cmdopt' : ' -c',
+      \   'exec' : '%c %o %s'
+      \ }
       \}
 " }}}
 " }}}
