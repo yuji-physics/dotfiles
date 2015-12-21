@@ -324,7 +324,7 @@ let g:quickrun_config = {
       \ },
       \ 'tex' : {
       \   'command' : 'latexmk',
-      \   'cmdopt' : ' -f -pv-',
+      \   'cmdopt' : ' -f -g -silent',
       \   'exec' : '%c %o %s'
       \},
       \ 'texclean' : {
