@@ -230,6 +230,9 @@ let g:multi_cursor_quit_key='<Esc>'
 let g:syntastic_check_on_open=0
 let g:syntastic_check_on_wq=0
 let g:syntastic_c_check_header=1
+let g:syntastic_mode_map = {
+      \ "mode": "active",
+      \ "passive_filetypes": ["tex"] }
 if !empty($QTDIR)
   let g:syntastic_cpp_include_dirs=['include','$QTDIR/include']
 endif
@@ -316,6 +319,7 @@ let g:tex_fold_additional_envs=1
 nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
 nmap <Leader>rm <Plug>(quickrun)
 nnoremap <silent> <Leader>rc :QuickRun -type texclean<CR>
+nnoremap <silent> <Leader>ri :QuickRun -type texcleancache<CR>
 let g:quickrun_config = {
       \ '_' : {
       \   'runner' : 'vimproc',
@@ -324,13 +328,18 @@ let g:quickrun_config = {
       \ },
       \ 'tex' : {
       \   'command' : 'latexmk',
-      \   'cmdopt' : ' -f -g -silent',
+      \   'cmdopt' : ' -f',
       \   'exec' : '%c %o %s'
       \},
       \ 'texclean' : {
       \   'command' : 'latexmk',
       \   'cmdopt' : ' -c',
       \   'exec' : '%c %o %s'
+      \ },
+      \ 'texcleancache' : {
+      \   'command' : 'dvipdfmx',
+      \   'cmdopt' : ' -I 0',
+      \   'exec' : '%c %o %S:p:r.dvi'
       \ }
       \}
 " }}}

@@ -3,7 +3,7 @@
 # Preview pdf should be turned off, and use auto update function of Skim.app.
 $latex = 'platex %O %S';
 $bibtex = 'pbibtex %O %B';
-$dvipdf = 'dvipdfmx %O %S';
+$dvipdf = 'dvipdfmx -I 24 %O %S';
 # 0: not create pdf, 1: pdflatex, 2:ps -> ps2pdf, 3: dvi-> dvipdf
 $pdf_mode = 3;
 #$pdf_update_method = 4;
