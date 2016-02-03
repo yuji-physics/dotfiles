@@ -12,8 +12,9 @@ $HOME/bin(N-/)
 /usr/local/sbin(N-/)
 $path
 )
+
 #-------------------------------
-# PATH
+# Environment
 #-------------------------------
 PATH=/Applications/gnuplot.app:/Applications/gnuplot.app/bin:$PATH
 PATH=/Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin:$PATH
@@ -29,6 +30,12 @@ export GOROOT=/usr/local/opt/go/libexec
 export GOPATH=$HOME/.go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
+export CPATH=$CPATH:$HOME/myscript/c++/include:$HOME/myscript/c/include
+export C_INCLUDE_PATH=$C_INCLUDE_PATH:$HOME/myscript/c/include
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$HOME/myscript/c++/include
+export LIBRARY_PATH=$LIBRARY_PATH:$HOME/myscript/c++/lib:$HOME/myscript/c/lib
+export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$HOME/myscript/c++/lib:$HOME/myscript/c/lib
+
 eval `/usr/libexec/path_helper -s`
 #-------------------------------
 # alias
@@ -39,6 +46,7 @@ alias git="/usr/local/bin/git"
 if [ -n "$(type gsed)" ];then
   alias sed="/usr/local/bin/gsed"
 fi
+
 alias python32="PYTHONPATH=\"/usr/local/lib/python2.7/site-packages\" VERSIONER_PYTHON_PREFER_32_BIT=yes /usr/bin/python" # Homebrew python is 64 bit only? 
 if [ -n "$(type gls)" ];then
   alias l="gls --color"
