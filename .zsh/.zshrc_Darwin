@@ -36,6 +36,11 @@ export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$HOME/myscript/c++/include
 export LIBRARY_PATH=$LIBRARY_PATH:$HOME/myscript/c++/lib:$HOME/myscript/c/lib
 export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$HOME/myscript/c++/lib:$HOME/myscript/c/lib
 
+# Tex
+export TEXINPUTS=$TEXINPUTS:/usr/local/tex/sty
+export BSTINPUTS=$BSTINPUTS:/usr/local/tex/bst
+export BIBINPUTS=$BIBINPUTS:/usr/local/tex/bib
+
 eval `/usr/libexec/path_helper -s`
 #-------------------------------
 # alias
