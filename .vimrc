@@ -536,7 +536,7 @@ nnoremap <Space><Space> i<Space><ESC><Right>
 nnoremap <CR> i<CR><ESC>
 
 " go to normal mode from insert mode with jj
-inoremap jj <Esc>
+"inoremap jj <Esc>
 
 " for ANSI keyboard
 nnoremap ; :
