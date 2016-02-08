@@ -16,6 +16,7 @@ $path
 #-------------------------------
 # Environment
 #-------------------------------
+PATH=${PATH}:${HOME}/myscript/sh:${HOME}/myscript/python
 PATH=/Applications/gnuplot.app:/Applications/gnuplot.app/bin:$PATH
 PATH=/Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin:$PATH
 export EDITOR=vim
@@ -25,16 +26,11 @@ export RANGER_LOAD_DEFAULT_RC=FALSE
 #export TCL_LIBRARY=/usr/local/Cellar/tcl-tk/8.6.3/lib/tcl8.6
 export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"
 export PYTHONDONTWRITEBYTECODE=1
+
 # GO
 export GOROOT=/usr/local/opt/go/libexec
 export GOPATH=$HOME/.go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-
-export CPATH=$CPATH:$HOME/myscript/c++/include:$HOME/myscript/c/include
-export C_INCLUDE_PATH=$C_INCLUDE_PATH:$HOME/myscript/c/include
-export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$HOME/myscript/c++/include
-export LIBRARY_PATH=$LIBRARY_PATH:$HOME/myscript/c++/lib:$HOME/myscript/c/lib
-export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$HOME/myscript/c++/lib:$HOME/myscript/c/lib
 
 # Tex
 export TEXINPUTS=$TEXINPUTS:/usr/local/tex/sty
