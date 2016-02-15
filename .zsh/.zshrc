@@ -23,7 +23,7 @@ setopt hist_no_store
 setopt hist_verify
 setopt inc_append_history
 setopt EXTENDED_HISTORY
-# donot store some commands in history
+# do not save some commands at .zsh_history
 zshaddhistory(){
 local line=${1%%$'\n'}
 local cmd=${line%% *}
@@ -86,6 +86,7 @@ bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward
 bindkey '^R' history-incremental-search-backward
 bindkey '^S' history-incremental-search-forward
+bindkey '\e[Z' reverse-menu-complete
 
 #----------------------
 # Other resources
