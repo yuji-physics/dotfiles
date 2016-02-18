@@ -1,6 +1,7 @@
 " .vimrc
 " === PLUGINS === {{{
 let mapleader = ","
+let $PATH = "~/.pyenv/shims:".$PATH
 " NeoBundle{{{
 if !1 | finish | endif
 
@@ -51,6 +52,16 @@ NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'matze/vim-tex-fold'
 NeoBundle 'jtratner/vim-flavored-markdown.git'
 NeoBundle 'vim-jp/vim-go-extra'
+NeoBundleLazy 'lambdalisue/vim-django-support',{
+      \ 'autoload':{
+      \ 'filetypes': ['python', 'python3', 'djangohtml']
+      \}}
+NeoBundle 'davidhalter/jedi-vim'
+NeoBundleLazy 'lambdalisue/vim-pyenv', {
+      \ 'depends': ['davidhalter/jedi-vim'],
+      \ 'autoload': {
+      \'filetypes': ['python', 'python3', 'djangohtml']
+      \}}
 
 " Color schemes
 NeoBundle 'w0ng/vim-hybrid'
@@ -141,7 +152,7 @@ if neobundle#is_installed('neocomplete')
   " go
   let g:neocomplete#force_omni_input_patterns.go = '\h\w\.\w*'
   " python
-  let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+  "let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
   "let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
   " disable jedi (python)
   "let g:jedi#completions_enabled = 0
@@ -343,6 +354,19 @@ let g:quickrun_config = {
       \ }
       \}
 " }}}
+"{{{ jedi
+if jedi#init_python()
+  function! s:jedi_auto_force_py_version() abort
+    let major_version = pyenv#python#get_internal_major_version()
+    call jedi#force_py_version(major_version)
+  endfunction
+  augroup vim-pyenv-custom-sugroup
+    autocmd! *
+    autocmd User vim-pyenv-activate-post call s:jedi_auto_force_py_version()
+    autocmd User vim-pyenv-deactivate-post call s:jedi_auto_force_py_version()
+  augroup END
+endif
+"}}}
 " }}}
 " === AUTO COMMANDS ==={{{
 augroup MyAutoCmd
@@ -374,7 +398,7 @@ autocmd MyAutoCmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd MyAutoCmd FileType html,markdown,ghmarkdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd MyAutoCmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd MyAutoCmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd MyAutoCmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"autocmd MyAutoCmd FileType python setlocal omnifunc=pythoncomplete#Complete
 "autocmd MyAutoCmd FileType tex setlocal omnifunc=texcomplete#Complete
 "autocmd MyAutoCmd FileType python setlocal omnifunc=jedi#completions
 

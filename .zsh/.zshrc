@@ -11,9 +11,6 @@ setopt no_flow_control
 #---------------------
 # History
 #---------------------
-export HISTFILE=$HOME/.zsh_history
-export HISTSIZE=100000
-export SAVEHIST=100000
 setopt share_history
 setopt hist_ignore_dups
 setopt hist_ignore_all_dups
@@ -74,8 +71,6 @@ esac
 #----------------------
 # COLOR
 #----------------------
-#export LSCOLORS=exfxcxdxfxexexaxaxexex
-export LS_COLORS='di=04;34:ln=04;36:so=32:pi=33:ex=31:bd=39:cd=39:su=39:sg=39:tw=04;34:ow=04;34'
 # color of auto completion
 zstyle ':completion:*' list-colors 'di=04;34' 'ln=04;36' 'so=32' 'ex=31' 'bd=39' 'cd=39' 'su=39' 'sg=39' 'tw=04;34' 'ow=04;34'
 
@@ -93,4 +88,8 @@ bindkey '\e[Z' reverse-menu-complete
 #----------------------
 [ -f $ZDOTDIR/.zshrc_`uname` ] && . $ZDOTDIR/.zshrc_`uname`
 [ -f ~/.zshrc.local ] && . ~/.zshrc.local
-export PATH=/usr/local/bin:$PATH
+
+# initialize pyenv in the end
+if which pyenv 2>&1 > /dev/null; then
+  eval "$(pyenv init -)"
+fi

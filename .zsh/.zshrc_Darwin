@@ -19,23 +19,6 @@ $path
 PATH=${PATH}:${HOME}/myscript/sh:${HOME}/myscript/python
 PATH=/Applications/gnuplot.app:/Applications/gnuplot.app/bin:$PATH
 PATH=/Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin:$PATH
-export EDITOR=vim
-export PKG_CONFIG_PATH="/opt/X11/lib/pkgconfig:/usr/local/lib/pkgconfig"
-export RANGER_LOAD_DEFAULT_RC=FALSE
-#export TK_LIBRARY=/usr/local/Cellar/tcl-tk/8.6.3/lib/tk8.6
-#export TCL_LIBRARY=/usr/local/Cellar/tcl-tk/8.6.3/lib/tcl8.6
-export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"
-export PYTHONDONTWRITEBYTECODE=1
-
-# GO
-export GOROOT=/usr/local/opt/go/libexec
-export GOPATH=$HOME/.go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-
-# Tex
-export TEXINPUTS=$TEXINPUTS:/usr/local/tex/sty
-export BSTINPUTS=$BSTINPUTS:/usr/local/tex/bst
-export BIBINPUTS=$BIBINPUTS:/usr/local/tex/bib
 
 eval `/usr/libexec/path_helper -s`
 #-------------------------------
