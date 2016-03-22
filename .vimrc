@@ -2,81 +2,77 @@
 " === PLUGINS === {{{
 let mapleader = ","
 let $PATH = "~/.pyenv/shims:".$PATH
-" NeoBundle{{{
-if !1 | finish | endif
 
-if has('vim_starting')
-  set nocompatible               " Be iMproved
-  if has('win32')
-    set runtimepath+=~/vimfiles/bundle/neobundle.vim/
-  else
-    set runtimepath+=~/.vim/bundle/neobundle.vim/  
-  endif
+if &compatible
+  set nocompatible
 endif
-
-if has('win32')
-  call neobundle#begin(expand('~/vimfiles/bundle/'))
-else
-  call neobundle#begin(expand('~/.vim/bundle/'))
-endif
-
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'ujihisa/unite-colorscheme'
-NeoBundle 'Shougo/unite-outline'
-NeoBundle 'Shougo/vimfiler'
-NeoBundle 'Shougo/vimproc', {
-      \ 'build' : {
-      \   'windows' : 'make -f make_mingw32.mak',
-      \   'cygwin' : 'make -f make_cygwin.mak',
-      \   'mac' : 'make -f make_mac.mak',
-      \   'unix' : 'make -f make_unix.mak',
-      \ }}
-NeoBundle 'Shougo/neocomplete'
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'Shougo/vimshell'
-NeoBundle 'junegunn/vim-easy-align'
-NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-repeat'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'osyo-manga/vim-anzu'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'terryma/vim-multiple-cursors'
-NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'matze/vim-tex-fold'
-NeoBundle 'jtratner/vim-flavored-markdown.git'
-NeoBundle 'vim-jp/vim-go-extra'
-"NeoBundle 'davidhalter/jedi-vim'
-NeoBundleLazy 'lambdalisue/vim-pyenv', {
-      \ 'depends': ['Shougo/neosnippet'],
-      \ 'autoload': {
-      \   'filetypes': ['python', 'python3']
-      \}}
-NeoBundle 'mattn/emmet-vim'
-
-" Color schemes
-NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'altercation/vim-colors-solarized'
-"NeoBundle 'sickill/vim-monokai'
-"NeoBundle 'chriskempson/vim-tomorrow-theme'
-
-call neobundle#end()
 
 " Disable menu.vim in GUI mode.
 if has('gui_running')
   set guioptions=Mc
 endif
 
-filetype plugin indent on
+" Dein{{{
+if has('win32')
+  let s:dein_dir = expand('~/vimfiles/dein/repos/github.com/Shougo/dein.vim')
+else
+  let s:dein_dir = expand('~/.vim/dein/repos/github.com/Shougo/dein.vim')
+endif
 
-NeoBundleCheck
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_dir)
+    execute ' !git clone https://github.com/Shougo/dein.vim' s:dein_dir
+  endif
+  execute 'set runtimepath^=' . fnamemodify(s:dein_dir, ':p')
+endif
+
+call dein#begin(s:dein_dir)
+
+call dein#add('Shougo/dein.vim')
+call dein#add('Shougo/vimproc', {
+      \ 'build': {
+      \     'windows': 'make -f make_mingw32.mak',
+      \     'cygwin': 'make -f make_cygwin.mak',
+      \     'mac': 'make -f make_mac.mak',
+      \     'unix': 'make -f make_unix.mak',
+      \     }})
+call dein#add('Shougo/unite.vim', {
+      \ 'depends': ['vimproc'],
+      \ 'lazy': 1})
+call dein#add('Shougo/neoyank.vim')
+call dein#add('Shougo/neomru.vim')
+call dein#add('Shougo/vimfiler')
+call dein#add('Shougo/neocomplete.vim')
+call dein#add('Shougo/neosnippet')
+call dein#add('Shougo/neosnippet-snippets')
+call dein#add('Shougo/vimshell', {
+      \ 'lazy': 1})
+call dein#add('junegunn/vim-easy-align')
+call dein#add('Lokaltog/vim-easymotion')
+call dein#add('tpope/vim-surround')
+call dein#add('tpope/vim-repeat')
+call dein#add('tpope/vim-fugitive')
+call dein#add('thinca/vim-quickrun')
+call dein#add('osyo-manga/vim-anzu')
+call dein#add('scrooloose/syntastic')
+call dein#add('itchyny/lightline.vim')
+call dein#add('jtratner/vim-flavored-markdown.git')
+call dein#add('vim-jp/vim-go-extra')
+call dein#add('davidhalter/jedi-vim')
+call dein#add('lambdalisue/vim-pyenv', {
+      \ 'depends': ['davidhalter/jedi-vim'],
+      \ 'autoload': {
+      \     'filetypes': ['python', 'python3', 'djangohtml']
+      \     },
+      \ 'merged': 0})
+
+" Color schemes
+call dein#add('w0ng/vim-hybrid')
+call dein#add('altercation/vim-colors-solarized')
+
+call dein#end()
 " }}}
+filetype plugin indent on
 " Unite {{{
 "let g:unite_enable_start_insert = 1
 let g:unite_enable_ignore_case = 1
@@ -90,8 +86,6 @@ nnoremap <silent> <leader>ub :<C-u>Unite buffer<CR>
 nnoremap <silent> <leader>ur :<C-u>Unite register<CR>
 nnoremap <silent> <leader>uh :<C-u>Unite history/yank<CR>
 nnoremap <silent> <leader>ut :<C-u>Unite tab<CR>
-nnoremap <silent> <leader>uc :<C-u>Unite colorscheme<CR>
-nnoremap <silent> <leader>uo :<C-u>Unite outline<CR>
 " }}}
 " Vimfiler{{{
 "let g:vimfiler_as_default_explorer = 1
@@ -106,75 +100,129 @@ let g:vimfiler_marked_file_icon = '*'
 nnoremap <silent> <leader>e :<C-u>VimFilerBufferDir -split -simple -winwidth=40<CR>
 " }}}
 " Neocompete {{{
-if neobundle#is_installed('neocomplete')
-  " Disable AutoComplPop
-  let g:acp_enableAtStartup = 0
-  " Use neocomplete
-  let g:neocomplete#enable_at_startup = 1
-  " Use ignorecase
-  let g:neocomplete#enable_ignore_case = 1
-  " Use smartcase
-  let g:neocomplete#enable_smart_case = 1
+" Disable AutoComplPop
+let g:acp_enableAtStartup = 0
+" Use neocomplete
+let g:neocomplete#enable_at_startup = 1
+" Use ignorecase
+let g:neocomplete#enable_ignore_case = 1
+" Use smartcase
+let g:neocomplete#enable_smart_case = 1
 
-  " Pop-up Appearances
-  " maximum number of candidates displayed in a pop-up menu
-  let g:neocomplete#max_list = 30
-  " maximum width of a pop-up menu
-  let g:neocomplete#max_keyword_width = 80
+" Pop-up Appearances
+" maximum number of candidates displayed in a pop-up menu
+let g:neocomplete#max_list = 30
+" maximum width of a pop-up menu
+let g:neocomplete#max_keyword_width = 80
 
-  " Set minimum syntax keyword length
-  let g:neocomplete#sources#syntax#min_keyword_length = 4
-  let g:neocomplete#lock_buffer_name_pattern = "\*ku\*"
+" Set minimum syntax keyword length
+let g:neocomplete#sources#syntax#min_keyword_length = 4
+let g:neocomplete#lock_buffer_name_pattern = "\*ku\*"
 
-  " Define dictionary (same as help file)
-  let g:neocomplete#sources#dictionary#dictionaries = {
-        \ 'default' : '',
-        \ 'vimshell' : $HOME.'/.vimshell_hist',
-        \ 'scheme' : $HOME.'/.gosh_completions'
-        \}
-  " Define keyword (same as help file)
-  if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-  endif
-  let g:neocomplete#keyword_patterns._ = '\h\w*'
-
-  " Use omnifunc
-  if !exists('g:neocomplete#force_omni_input_patterns')
-    let g:neocomplete#force_omni_input_patterns= {}
-  endif
-  " C
-  let g:neocomplete#force_omni_input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?'
-  " C++
-  let g:neocomplete#force_omni_input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
-  " go
-  let g:neocomplete#force_omni_input_patterns.go = '\h\w\.\w*'
-  " python
-  let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-  "let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
-  " disable jedi (python)
-  "let g:jedi#completions_enabled = 0
-  "let g:jedi#auto_vim_configuration = 0
-
-  "Tex
-  let g:neocomplete#force_omni_input_patterns.tex = '\\\?\h\w*'
-
-  " Key Mappings
-  " select a candidate by <CR>
-  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-  function! s:my_cr_function()
-    return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-  endfunction
-
-  " close pop-up and a backword char by <BS>
-  inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-
-  " close pop-up by <Space>
-  inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
-
-  " manual completion
-  inoremap <expr><C-c>  neocomplete#start_manual_complete()
-
+" Define dictionary (same as help file)
+let g:neocomplete#sources#dictionary#dictionaries = {
+      \ 'default' : '',
+      \ 'vimshell' : $HOME.'/.vimshell_hist',
+      \ 'scheme' : $HOME.'/.gosh_completions'
+      \}
+" Define keyword (same as help file)
+if !exists('g:neocomplete#keyword_patterns')
+  let g:neocomplete#keyword_patterns = {}
 endif
+let g:neocomplete#keyword_patterns._ = '\h\w*'
+" Disable AutoComplPop
+let g:acp_enableAtStartup = 0
+" Use neocomplete
+let g:neocomplete#enable_at_startup = 1
+" Use ignorecase
+let g:neocomplete#enable_ignore_case = 1
+" Use smartcase
+let g:neocomplete#enable_smart_case = 1
+
+" Pop-up Appearances
+" maximum number of candidates displayed in a pop-up menu
+let g:neocomplete#max_list = 30
+" maximum width of a pop-up menu
+let g:neocomplete#max_keyword_width = 80
+
+" Set minimum syntax keyword length
+let g:neocomplete#sources#syntax#min_keyword_length = 4
+let g:neocomplete#lock_buffer_name_pattern = "\*ku\*"
+
+" Define dictionary (same as help file)
+let g:neocomplete#sources#dictionary#dictionaries = {
+      \ 'default' : '',
+      \ 'vimshell' : $HOME.'/.vimshell_hist',
+      \ 'scheme' : $HOME.'/.gosh_completions'
+      \}
+" Define keyword (same as help file)
+if !exists('g:neocomplete#keyword_patterns')
+  let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns._ = '\h\w*'
+
+" Use omnifunc
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns= {}
+endif
+" C
+let g:neocomplete#force_omni_input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?'
+" C++
+let g:neocomplete#force_omni_input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+" go
+let g:neocomplete#force_omni_input_patterns.go = '\h\w\.\w*'
+" python
+let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+"let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
+" disable jedi (python)
+"let g:jedi#completions_enabled = 0
+"let g:jedi#auto_vim_configuration = 0
+
+"Tex
+let g:neocomplete#force_omni_input_patterns.tex = '\\\?\h\w*'
+
+" Key Mappings
+" select a candidate by <CR>
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
+
+" Use omnifunc
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns= {}
+endif
+" C
+let g:neocomplete#force_omni_input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?'
+" C++
+let g:neocomplete#force_omni_input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+" go
+let g:neocomplete#force_omni_input_patterns.go = '\h\w\.\w*'
+" python
+"let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
+" disable jedi (python)
+"let g:jedi#completions_enabled = 0
+"let g:jedi#auto_vim_configuration = 0
+
+"Tex
+let g:neocomplete#force_omni_input_patterns.tex = '\\\?\h\w*'
+
+" Key Mappings
+" select a candidate by <CR>
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
+
+" close pop-up and a backword char by <BS>
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+
+" close pop-up by <Space>
+inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+
+" manual completion
+inoremap <expr><C-c>  neocomplete#start_manual_complete()
 "}}}
 " Neosnippet{{{
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
@@ -186,18 +234,6 @@ let g:neosnippet#snippets_directory = s:my_snippet
 " vim-easy-align {{{
 vmap <CR> <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
-" Usage of vim-easy-align{{{
-" 1. Select a region you want to align in the visual mode.
-" 2. <CR>(<CR><CR>)<# or  * or **><align target>
-"
-"         <CR>: right alignment
-"     <CR><CR>: left alignment
-" <CR><CR><CR>: center alignment
-"            #: align a #th <align target>
-"            *: align all targets
-"           **: align all targets in right and left alignment alternately
-" for e.g. select some equations in visual mode and press <CR><CR>**=
-" }}}
 " }}}
 " vim-easy-motion{{{
 let g:EasyMotion_do_mapping = 0
@@ -227,13 +263,6 @@ nmap * <Plug>(anzu-star)
 nmap # <Plug>(anzu-sharp)
 nnoremap <Esc><Esc> <Plug>(anzu#clear_search_status)
 " }}}
-" vim-multiple-cursors{{{
-" sometimes useful than <VISUAL BLOCK MODE>
-let g:multi_cursor_next_key='<C-n>'
-let g:multi_cursor_prev_key='<C-p>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<Esc>'
-" }}}
 " Syntastic{{{
 let g:syntastic_check_on_open=0
 let g:syntastic_check_on_wq=0
@@ -246,36 +275,26 @@ if !empty($QTDIR)
 endif
 nnoremap <silent> <leader>se :<C-u>Errors<CR>
 " }}}
-" vim-indent-guides{{{
-" define colors by myself
-let g:indent_guides_auto_colors=0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=234 " same as background
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=237
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_guide_size = 1 " when 0, same as shiftwidth
-let g:indentguides_start_level = 2
-let g:indent_guides_space_guides = 1
-" }}}
 " Lightline{{{
 " from http://itchyny.hatenablog.com/entry/20130828/1377653592
 let g:lightline = {
-        \ 'colorscheme': 'wombat',
-        \ 'mode_map': {'c': 'NORMAL'},
-        \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'fugitive', 'filename', 'anzu' ] ]
-        \ },
-        \ 'component_function': {
-        \   'anzu': 'anzu#search_status',
-        \   'modified': 'MyModified',
-        \   'readonly': 'MyReadonly',
-        \   'fugitive': 'MyFugitive',
-        \   'filename': 'MyFilename',
-        \   'fileformat': 'MyFileformat',
-        \   'filetype': 'MyFiletype',
-        \   'fileencoding': 'MyFileencoding',
-        \   'mode': 'MyMode'
-        \ }
-        \ }
+      \ 'colorscheme': 'wombat',
+      \ 'mode_map': {'c': 'NORMAL'},
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'fugitive', 'filename', 'anzu' ] ]
+      \ },
+      \ 'component_function': {
+      \   'anzu': 'anzu#search_status',
+      \   'modified': 'MyModified',
+      \   'readonly': 'MyReadonly',
+      \   'fugitive': 'MyFugitive',
+      \   'filename': 'MyFilename',
+      \   'fileformat': 'MyFileformat',
+      \   'filetype': 'MyFiletype',
+      \   'fileencoding': 'MyFileencoding',
+      \   'mode': 'MyMode'
+      \ }
+      \ }
 
 function! MyModified()
   return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
@@ -319,9 +338,6 @@ endfunction
 function! MyMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction"
-" }}}
-" Vim-tex-fold {{{
-let g:tex_fold_additional_envs=1
 " }}}
 " vim-quickrun {{{
 nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
@@ -379,7 +395,7 @@ autocmd MyAutoCmd BufNewFile,BufReadPost *.tex setlocal filetype=tex
 function! s:load_after_colors()
   if has('win32')
     let color = expand('~/vimfiles/after/colors/' . g:colors_name . '.vim')
-   else
+  else
     let color = expand('~/.vim/after/colors/' . g:colors_name . '.vim')
   endif
   if filereadable(color)
@@ -535,7 +551,7 @@ set vb t_vb=
 exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
 " }}}
 " === KEY MAPPINGS === {{{
-" move cursor on displayed lines (think wrapped line as a line)
+" treat wrapping line as a line when moving a cursor
 nnoremap j gj
 nnoremap k gk
 
@@ -557,23 +573,17 @@ nnoremap <silent> <Down> :5wincmd -<CR>
 nnoremap <Space><Space> i<Space><ESC><Right>
 nnoremap <CR> i<CR><ESC>
 
-" go to normal mode from insert mode with jj
+" escape insert mode with jj
 "inoremap jj <Esc>
 
 " for ANSI keyboard
 nnoremap ; :
 
-" move cursor in insert mode
-"inoremap <C-h> <Esc>ha
-"inoremap <C-j> <Esc>ja
-"inoremap <C-k> <Esc>ka
-"inoremap <C-l> <Esc>la
-
 " use <Tab> and <S-Tab> in pop-up menu
 inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" brackets and quotations
+" complete brackets and quotations
 inoremap (<Enter> ()<Left><CR><ESC><S-o>
 inoremap () ()<Left>
 
@@ -613,9 +623,4 @@ vnoremap < <gv
 nnoremap <F7> <Plug>(vimfiler_toggle_safe_mode)
 " toggle neocomplete
 nnoremap <F10> :NeoCompleteToggle<CR>
-" }}}
-" === Abbreviation === {{{
-abbreviate etal et al.
-" }}}
-" === Functions and Commands === {{{
 " }}}

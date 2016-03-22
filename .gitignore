@@ -1,4 +1,5 @@
 .vim/bundle/*
+.vim/dein/*
 .vim/.netrwhist
 !.vim/bundle/neobundle.vim
 .nvim/bundle/*
