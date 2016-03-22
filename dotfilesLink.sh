@@ -45,6 +45,7 @@ else
   ln -sfn ~/dotfiles/.vimperator ~/.vimperator
   ln -sfn ~/dotfiles/.vimperatorrc ~/.vimperatorrc
   ln -sfn ~/dotfiles/.latexmkrc ~/.latexmkrc
+  ln -sfn ~/dotfiles/.slate ~/.slate
   [ ! -e "${HOME}/.config" ] && mkdir "${HOME}/.config"
   ln -sfn ~/dotfiles/.config/ranger ~/.config/ranger
   if [ ${OS} = "Linux" ];then

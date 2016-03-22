@@ -42,7 +42,8 @@ cask install alfred
 cask install android-file-transfer
 cask install appcleaner
 #cask install aquaterm
-cask install bettertouchtool
+#cask install bettertouchtool
+cask install slate
 cask install dropbox
 cask install firefox
 cask install gimp
