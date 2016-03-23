@@ -20,6 +20,7 @@ else
 endif
 
 if &runtimepath !~# '/dein.vim'
+  " install dein.vim automatically if it does not exist
   if !isdirectory(s:dein_dir)
     execute ' !git clone https://github.com/Shougo/dein.vim' s:dein_dir
   endif
@@ -29,6 +30,7 @@ endif
 call dein#begin(s:dein_dir)
 
 call dein#add('Shougo/dein.vim')
+
 call dein#add('Shougo/vimproc', {
       \ 'build': {
       \     'windows': 'make -f make_mingw32.mak',
@@ -36,22 +38,27 @@ call dein#add('Shougo/vimproc', {
       \     'mac': 'make -f make_mac.mak',
       \     'unix': 'make -f make_unix.mak',
       \     }})
+
 call dein#add('Shougo/unite.vim', {
       \ 'depends': ['vimproc'],
       \ 'lazy': 1})
+
+" unite sources
 call dein#add('Shougo/neoyank.vim')
 call dein#add('Shougo/neomru.vim')
-call dein#add('Shougo/vimfiler')
+
 call dein#add('Shougo/neocomplete.vim')
 call dein#add('Shougo/neosnippet')
 call dein#add('Shougo/neosnippet-snippets')
+
+call dein#add('Shougo/vimfiler')
 call dein#add('Shougo/vimshell', {
       \ 'lazy': 1})
 call dein#add('junegunn/vim-easy-align')
 call dein#add('Lokaltog/vim-easymotion')
 call dein#add('tpope/vim-surround')
 call dein#add('tpope/vim-repeat')
-call dein#add('tpope/vim-fugitive')
+"call dein#add('tpope/vim-fugitive')
 call dein#add('thinca/vim-quickrun')
 call dein#add('osyo-manga/vim-anzu')
 call dein#add('scrooloose/syntastic')
@@ -386,9 +393,10 @@ augroup MyAutoCmd
   autocmd!
 augroup END
 
-" Enable markdown
+" Use github-flavored markdown (ghmarkdown)
 "autocmd MyAutoCmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd MyAutoCmd BufNewFile,BufReadPost *.md,*.markdown setlocal filetype=ghmarkdown
+
 autocmd MyAutoCmd BufNewFile,BufReadPost *.tex setlocal filetype=tex
 
 " Load ~/.vim/after/"colorscheme" to modify the colorscheme without changing original syntax file.
@@ -430,7 +438,7 @@ autocmd MyAutoCmd QuickFixCmdPost vimgrep call OpenModifiableQF()
 " === OPTIONS ( + etc.) === {{{
 " Languages
 if has('win32') && !has("gui_running")
-  " use sjis in Windows-cui
+  " use sjis in Windows
   set termencoding=sjis
 else
   set termencoding=utf-8
@@ -451,7 +459,6 @@ if !empty($CONEMUBUILD) || &t_Co > 2 || has("gui_running")
   colorscheme hybrid
   "colorscheme solarized
   " Variables required to display 256 colors in ConEmu(Windows).
-  " Similar options are written in .bashrc in case of mintty.
   if !empty($CONEMUBUILD)
     let &t_AB="\e[48;5;%dm"
     let &t_AF="\e[38;5;%dm"
@@ -461,7 +468,7 @@ endif
 " cursor line and cursor column
 set cursorline
 if !has('win32') || has("gui_running")
-  " cursorcolumn behaves badly in Windows-cui
+  " cursorcolumn is too poor on Windows
   set cursorcolumn
 endif
 highlight CursorLine term=none cterm=none ctermfg=none ctermbg=236
@@ -477,6 +484,7 @@ set list " show special characters
 if !has('win32') || has('gui_running')
   set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
 else
+  " Some special characters are not supported on Windows
   set listchars=tab:^-,trail:-,extends:»,precedes:«,nbsp:%,eol:$
 endif
 set notitle
@@ -551,6 +559,16 @@ set vb t_vb=
 exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
 " }}}
 " === KEY MAPPINGS === {{{
+" emacs-like maps on command-line mode
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-f> <Right>
+cnoremap <C-b> <Left>
+cnoremap <C-n> <Down>
+cnoremap <C-p> <Up>
+" paste
+cnoremap <C-y> <C-r>*
+
 " treat wrapping line as a line when moving a cursor
 nnoremap j gj
 nnoremap k gk
