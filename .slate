@@ -61,3 +61,9 @@ bind j:ctrl;cmd corner bottom-left resize:screenSizeX;screenSizeY/2
 
 # Maximize a window
 bind m:ctrl;cmd corner top-left resize:screenSizeX;screenSizeY
+
+# Move window to screen 0
+bind left:ctrl;cmd move screenOriginX;screenOriginY screenSizeX;screenSizeY 0
+
+# Move window to screen 1
+bind right:ctrl;cmd move screenOriginX;screenOriginY screenSizeX;screenSizeY 1
