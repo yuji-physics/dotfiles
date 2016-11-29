@@ -60,7 +60,13 @@ call dein#add('Lokaltog/vim-easymotion')
 call dein#add('tpope/vim-surround')
 call dein#add('tpope/vim-repeat')
 call dein#add('thinca/vim-quickrun')
-call dein#add('scrooloose/syntastic')
+" syntastic is much heavier than watchdogs
+"call dein#add('scrooloose/syntastic')
+call dein#add('osyo-manga/shabadou.vim')
+call dein#add('osyo-manga/vim-watchdogs')
+"call dein#add('cohama/vim-hier')
+call dein#add('jceb/vim-hier')
+call dein#add('dannyob/quickfixstatus')
 call dein#add('itchyny/lightline.vim')
 call dein#add('jtratner/vim-flavored-markdown.git')
 call dein#add('lambdalisue/vim-pyenv', {
@@ -193,24 +199,57 @@ map f <Plug>(easymotion-bd-fl)
 map t <Plug>(easymotion-bd-tl)
 nmap s <Plug>(easymotion-s2)
 omap z <Plug>(easymotion-s2)
+map <silent><leader>j <Plug>(easymotion-j)
+map <silent><leader>k <Plug>(easymotion-k)
 let g:EasyMotion_enter_jump_first = 1
 let g:EasyMotion_space_jump_first = 1
 " }}}
 " vim-repeat{{{
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count) 
 " "}}}
-" Syntastic{{{
-let g:syntastic_check_on_open=0
-let g:syntastic_check_on_wq=0
-let g:syntastic_c_check_header=1
-let g:syntastic_mode_map = {
-      \ "mode": "active",
-      \ "passive_filetypes": ["tex"] }
-if !empty($QTDIR)
-  let g:syntastic_cpp_include_dirs=['include','$QTDIR/include']
-endif
-nnoremap <silent> <leader>se :<C-u>Errors<CR>
+" vim-quickrun {{{
+nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
+nmap <Leader>rm <Plug>(quickrun)
+let g:quickrun_config = {
+      \ '_' : {
+      \   'runner' : 'vimproc',
+      \   'runner/vimproc/updatetime' : 60,
+      \   'split' : '5sp',
+      \ },
+      \ 'tex' : {
+      \   'command' : 'latexmk',
+      \   'cmdopt' : ' -f',
+      \   'exec' : '%c %o %s'
+      \ }
+      \}
 " }}}
+" Syntastic{{{
+"let g:syntastic_check_on_open=0
+"let g:syntastic_check_on_wq=0
+"let g:syntastic_c_check_header=1
+"let g:syntastic_mode_map = {
+"      \ "mode": "active",
+"      \ "passive_filetypes": ["tex"] }
+"if !empty($QTDIR)
+"  let g:syntastic_cpp_include_dirs=['include','$QTDIR/include']
+"endif
+"let g:syntastic_python_quiet_messages={"level": "errors"}
+"let g:syntastic_python_pylint_quiet_messages={"level": []}
+"nnoremap <silent> <leader>se :<C-u>Errors<CR>
+" }}}
+" vim-watchdogs {{{
+if !exists("g:quickrun_config")
+  let g:quickrun_config = {}
+endif
+let g:quickrun_config["watchdogs_checker/_"] = {
+      \ "outputter/quickfix/open_cmd" : "",
+      \ "errorformat": '%f:%l%m',
+      \}
+let g:watchdogs_check_BufWritePost_enable = 1
+call watchdogs#setup(g:quickrun_config)
+" highlight errors
+let g:hier_enabled = 1
+"}}}
 " Lightline{{{
 " copy of http://itchyny.hatenablog.com/entry/20130828/1377653592
 let g:lightline = {
@@ -274,22 +313,6 @@ function! MyMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction"
 " }}}
-" vim-quickrun {{{
-nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
-nmap <Leader>rm <Plug>(quickrun)
-let g:quickrun_config = {
-      \ '_' : {
-      \   'runner' : 'vimproc',
-      \   'runner/vimproc/updatetime' : 60,
-      \   'split' : '5sp',
-      \ },
-      \ 'tex' : {
-      \   'command' : 'latexmk',
-      \   'cmdopt' : ' -f',
-      \   'exec' : '%c %o %s'
-      \ }
-      \}
-" }}}
 " }}}
 " === OPTIONS ( + etc.) === {{{
 " Languages
@@ -314,6 +337,7 @@ if !empty($CONEMUBUILD) || &t_Co > 2 || has("gui_running")
   "let g:solarized_termcolors=256
   set background=dark
   colorscheme solarized
+  "colorscheme hybrid
   " Variables required to display 256 colors in ConEmu(Windows).
   if !empty($CONEMUBUILD)
     let &t_AB="\e[48;5;%dm"
