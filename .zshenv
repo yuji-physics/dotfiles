@@ -40,4 +40,21 @@ if [ $(uname -s) = "Darwin" ]; then
   export PKG_CONFIG_PATH="/opt/X11/lib/pkgconfig:/usr/local/lib/pkgconfig"
 fi
 
+# Astronomical tools
+# GLISH
+if [ -e "/usr/local/src/glish" ]; then
+  export GLISHROOT="/usr/local/src/glish"
+  source /usr/local/src/livedata/init.sh
+fi
+# Kvis
+if [ -e "/usr/local/karma" ]; then
+  export KARMABASE="/usr/local/karma"
+  export PATH="/usr/local/karma/bin:$PATH"
+  alias convert="/usr/local/bin/convert"
+fi
+# MIRIAD
+if [ -e "/usr/local/src/miriad/MIRRC.sh" ]; then
+  source /usr/local/src/miriad/MIRRC.sh
+fi
+
 export ZDOTDIR=$HOME/.zsh
