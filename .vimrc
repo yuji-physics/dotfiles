@@ -1,7 +1,7 @@
 " .vimrc
 " === PLUGINS === {{{
 let mapleader = ","
-let $PATH = "~/.pyenv/shims:".$PATH
+"let $PATH = "~/.pyenv/shims:".$PATH
 
 if &compatible
   set nocompatible
@@ -69,11 +69,11 @@ call dein#add('jceb/vim-hier')
 call dein#add('dannyob/quickfixstatus')
 call dein#add('itchyny/lightline.vim')
 call dein#add('jtratner/vim-flavored-markdown.git')
-call dein#add('lambdalisue/vim-pyenv', {
-      \ 'autoload': {
-      \     'filetypes': ['python', 'python3', 'djangohtml']
-      \     },
-      \ 'merged': 0})
+"call dein#add('lambdalisue/vim-pyenv', {
+"      \ 'autoload': {
+"      \     'filetypes': ['python', 'python3', 'djangohtml']
+"      \     },
+"      \ 'merged': 0})
 
 " Folding
 call dein#add('Konfekt/FastFold')
@@ -435,6 +435,7 @@ augroup END
 "autocmd MyAutoCmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd MyAutoCmd BufNewFile,BufReadPost *.md,*.markdown setlocal filetype=ghmarkdown
 autocmd MyAutoCmd BufNewFile,BufReadPost *.tex setlocal filetype=tex
+autocmd MyAutoCmd BufNewFile,BufReadPost *.class setlocal filetype=class
 
 " Enable omni completions
 autocmd MyAutoCmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
