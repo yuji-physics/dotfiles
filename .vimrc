@@ -437,6 +437,7 @@ augroup END
 autocmd MyAutoCmd BufNewFile,BufReadPost *.md,*.markdown setlocal filetype=ghmarkdown
 autocmd MyAutoCmd BufNewFile,BufReadPost *.tex setlocal filetype=tex
 autocmd MyAutoCmd BufNewFile,BufReadPost *.class setlocal filetype=class
+autocmd MyAutoCmd BufNewFile,BufReadPost *.gpl setlocal filetype=gnuplot
 
 " Enable omni completions
 autocmd MyAutoCmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
