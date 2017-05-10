@@ -393,7 +393,8 @@ set hidden " open new buffer with :e command even if current buffer is not saved
 " folding
 set foldenable
 set foldlevel=0 " fold everything when opening a file
-set foldmethod=marker " 'syntax' and 'expr' are sometimes too slow
+set foldmethod=marker " 'syntax' and 'expr' are slow
+"set foldmethod=indent
 set foldmarker={{{,}}}
 set foldcolumn=5 " width of the leftside columns of folding guide
 
@@ -452,6 +453,9 @@ function! OpenModifiableQF()
   set nowrap
 endfunction
 autocmd MyAutoCmd QuickFixCmdPost vimgrep call OpenModifiableQF()
+
+" fold by indent if filetype=C/C++
+autocmd MyAutoCmd BufNewFile,BufReadPost *.c,*.cpp,*.h,*.hpp setlocal foldmethod=indent
 " }}}
 " === KEY MAPPINGS === {{{
 " emacs-like maps on command-line mode
