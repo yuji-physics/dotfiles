@@ -14,9 +14,12 @@ export PATH
 #-------------------------------
 # alias
 #-------------------------------
+alias l="ls --color"
 alias ls="ls --color"
 alias la="ls -a --color"
 alias ll="ls -l --color"
+alias rm="rm -i"
+alias mv="mv -i"
 
 if [ -e ${HOME}/.Xmodmap ]; then
   xmodmap ${HOME}/.Xmodmap
