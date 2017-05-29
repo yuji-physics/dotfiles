@@ -457,6 +457,13 @@ autocmd MyAutoCmd QuickFixCmdPost vimgrep call OpenModifiableQF()
 
 " fold by indent if filetype=C/C++
 autocmd MyAutoCmd BufNewFile,BufReadPost *.c,*.cpp,*.h,*.hpp setlocal foldmethod=indent
+
+" Enable transparent background in gnome-terminal
+autocmd MyAutoCmd VimEnter,ColorScheme * highlight Normal ctermbg=NONE
+autocmd MyAutoCmd VimEnter,ColorScheme * highlight NonText ctermbg=NONE
+autocmd MyAutoCmd VimEnter,ColorScheme * highlight TablineSel ctermbg=NONE
+autocmd MyAutoCmd VimEnter,ColorScheme * highlight LineNr ctermbg=NONE
+autocmd MyAutoCmd VimEnter,ColorScheme * highlight CursorLineNr ctermbg=NONE
 " }}}
 " === KEY MAPPINGS === {{{
 " emacs-like maps on command-line mode
