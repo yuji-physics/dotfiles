@@ -416,6 +416,7 @@ set wrapscan
 " cmd completion
 set wildmode=list,full
 set wildmenu
+set wildignorecase
 set wildignore=*.o,*.obj,*/.git/*,*.pyc,*.png,*.jpg,*.aux,.DS_Store
 
 
