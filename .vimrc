@@ -82,6 +82,8 @@ call dein#add('matze/vim-tex-fold')
 " Color schemes
 call dein#add('w0ng/vim-hybrid')
 call dein#add('altercation/vim-colors-solarized')
+" Try SKK
+call dein#add('tyru/eskk.vim')
 
 call dein#end()
 "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -313,6 +315,11 @@ function! MyMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction"
 " }}}
+" eskk
+let g:eskk#directory="~/.eskk"
+let g:eskk#dictionary={'path': "~/.skk-jisyo", 'sorted': 0, 'encoding': 'utf-8',}
+let g:eskk#large_dictionary={'path': "~/.eskk/SKK=JISYO.L", 'sorted': 1, 'encoding': 'euc-jp'}
+let g:eskk#enable_completion=1
 " }}}
 " === OPTIONS ( + etc.) === {{{
 " Languages
@@ -351,7 +358,7 @@ endif
 "highlight CursorLine term=none cterm=none ctermfg=none ctermbg=236
 "highlight CursorColumn term=none cterm=none ctermfg=none ctermbg=236
 
-set number " show columnnumber
+"set number " show columnnumber
 set numberwidth=1 " minimal number to show column number.
 set laststatus=2 " always show status line
 set cmdheight=2
@@ -371,7 +378,7 @@ set showmatch " highlight matched pair when inserted?
 set matchtime=1 " 5 by default
 set matchpairs=(:),{:},[:],<:>,":",':',`:`
 
-" <tab> key
+" <tab> style
 set tabstop=2
 set shiftwidth=2
 set smarttab
@@ -393,13 +400,13 @@ set hidden " open new buffer with :e command even if current buffer is not saved
 " folding
 set foldenable
 set foldlevel=0 " fold everything when opening a file
-set foldmethod=marker " 'syntax' and 'expr' are slow
+set foldmethod=marker " 'syntax' and 'expr' are much expensive
 "set foldmethod=indent
 set foldmarker={{{,}}}
 set foldcolumn=5 " width of the leftside columns of folding guide
 
 " Load and save
-set autoread " when a file is modified outside Vim, reload the file automatically.
+set autoread " when a file is modified by another vim process, reload it automatically.
 "set autowriteall
 set nobackup
 set noswapfile
@@ -417,7 +424,7 @@ set wrapscan
 set wildmode=list,full
 set wildmenu
 set wildignorecase
-set wildignore=*.o,*.obj,*/.git/*,*.pyc,*.png,*.jpg,*.aux,.DS_Store
+set wildignore=*.o,*.obj,*/.git/*,*.pyc,*.png,*.jpg,*.aux,.DS_Store " Do not show these files
 
 
 " misc
@@ -467,7 +474,7 @@ autocmd MyAutoCmd VimEnter,ColorScheme * highlight LineNr ctermbg=NONE
 autocmd MyAutoCmd VimEnter,ColorScheme * highlight CursorLineNr ctermbg=NONE
 " }}}
 " === KEY MAPPINGS === {{{
-" emacs-like maps on command-line mode
+" emacs-like keymaps on command-line mode
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 cnoremap <C-f> <Right>
@@ -477,7 +484,7 @@ cnoremap <C-p> <Up>
 " paste
 cnoremap <C-y> <C-r>*
 
-" treat wrapping line as a line when moving a cursor
+" treat wrapping line as 'real' when moving a cursor
 nnoremap j gj
 nnoremap k gk
 
@@ -485,17 +492,17 @@ nnoremap k gk
 nnoremap g; g;zz
 nnoremap G Gzz
 
-" vimgrep results
+" see throw vimgrep results
 nnoremap <Space>n :cnext<CR>
 nnoremap <Space><S-n> :cprevious<CR>
 
-" resize window with cursor keys in normal mode
+" resize window with arrow keys in normal mode in place of cursor motion
 nnoremap <silent> <Left> :5wincmd <<CR>
 nnoremap <silent> <Right> :5wincmd ><CR>
 nnoremap <silent> <Up> :5wincmd +<CR>
 nnoremap <silent> <Down> :5wincmd -<CR>
 
-" insert <Space> and <Enter> in the normal mode
+" insert <Space> and <Enter> directly in the normal mode
 nnoremap <Space><Space> i<Space><ESC><Right>
 nnoremap <CR> i<CR><ESC>
 
@@ -509,7 +516,7 @@ nnoremap ; :
 inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" complete brackets and quotations
+" auto-complete brackets and '$' (for TeX)
 inoremap (<Enter> ()<Left><CR><ESC><S-o>
 inoremap () ()<Left>
 
@@ -522,6 +529,7 @@ inoremap <> <><Left>
 
 inoremap $$ $$<Left>
 
+" auto-complete quotations (", ', `)
 inoremap "<Enter> ""<Left><CR><ESC><S-o>
 inoremap "" ""<Left>
 
@@ -531,12 +539,15 @@ inoremap '' ''<Left>
 inoremap `<Enter> ``<Left><CR><ESC><S-o>
 inoremap `` ``<Left>
 
+" do not exit visual mode after counting up/down
 vnoremap <c-a> <c-a>gv
 vnoremap <c-x> <c-x>gv
 vnoremap g<c-a> g<c-a>gv
 vnoremap g<c-x> g<c-x>gv
+" do not exit visual mode after adding/reducing indent
 vnoremap > >gv
 vnoremap < <gv
+
 " toggles
 " <F7>: vimfiler
 " <F8>: paste
