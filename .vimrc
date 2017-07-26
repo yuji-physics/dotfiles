@@ -27,9 +27,9 @@ if &runtimepath !~# '/dein.vim'
   execute 'set runtimepath^=' . fnamemodify(s:dein_dir, ':p')
 endif
 
-"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-" start of plugins
-"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+"-----------------------------------------
+" plugins
+"-----------------------------------------
 call dein#begin(s:dein_dir)
 
 call dein#add('Shougo/dein.vim')
@@ -46,14 +46,15 @@ call dein#add('Shougo/unite.vim', {
 " unite sources
 call dein#add('Shougo/neoyank.vim')
 call dein#add('Shougo/neomru.vim')
+call dein#add('h1mesuke/unite-outline')
 
 call dein#add('Shougo/neocomplete.vim')
 call dein#add('Shougo/neosnippet')
 call dein#add('Shougo/neosnippet-snippets')
 
 call dein#add('Shougo/vimfiler')
-call dein#add('Shougo/vimshell', {
-      \ 'lazy': 1})
+"call dein#add('Shougo/vimshell', {
+"      \ 'lazy': 1})
 
 call dein#add('junegunn/vim-easy-align')
 call dein#add('Lokaltog/vim-easymotion')
@@ -82,8 +83,10 @@ call dein#add('matze/vim-tex-fold')
 " Color schemes
 call dein#add('w0ng/vim-hybrid')
 call dein#add('altercation/vim-colors-solarized')
-" Try SKK
-call dein#add('tyru/eskk.vim')
+" Twitter client (twibill.vim and open-browser.vim are required to use TweetVim)
+call dein#add('basyura/TweetVim')
+call dein#add('basyura/twibill.vim')
+call dein#add('tyru/open-browser.vim')
 
 call dein#end()
 "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -103,7 +106,8 @@ nnoremap <silent> <leader>uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR
 nnoremap <silent> <leader>ub :<C-u>Unite buffer<CR>
 nnoremap <silent> <leader>ur :<C-u>Unite register<CR>
 nnoremap <silent> <leader>uh :<C-u>Unite history/yank<CR>
-nnoremap <silent> <leader>ut :<C-u>Unite tab<CR>
+"nnoremap <silent> <leader>ut :<C-u>Unite tab<CR>
+nnoremap <silent> <leader>ut :<C-u>Unite tweetvim<CR>
 " }}}
 " Vimfiler{{{
 "let g:vimfiler_as_default_explorer = 1
@@ -315,11 +319,12 @@ function! MyMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction"
 " }}}
-" eskk
-let g:eskk#directory="~/.eskk"
-let g:eskk#dictionary={'path': "~/.skk-jisyo", 'sorted': 0, 'encoding': 'utf-8',}
-let g:eskk#large_dictionary={'path': "~/.eskk/SKK=JISYO.L", 'sorted': 1, 'encoding': 'euc-jp'}
-let g:eskk#enable_completion=1
+" TweetVim {{{
+let g:tweetvim_tweet_per_page=50
+let g:tweetvim_cache_size=20
+let g:tweetvim_include_rts=1
+let g:tweetvim_display_source=1
+" }}}
 " }}}
 " === OPTIONS ( + etc.) === {{{
 " Languages
