@@ -2,8 +2,14 @@
 # Common settings
 autoload -U compinit
 compinit
+
+# これまで移動したディレクトリが<tab>でリストされる
+setopt auto_pushd
+# Correct a wrong command
 setopt correct
+# Turn off beep
 setopt nobeep
+# PROMPT変数内で変数を展開する
 setopt prompt_subst
 setopt ignoreeof
 setopt no_tify
@@ -20,7 +26,7 @@ setopt hist_no_store
 setopt hist_verify
 setopt inc_append_history
 setopt EXTENDED_HISTORY
-# do not save some commands at .zsh_history
+# do not save some commands in .zsh_history
 zshaddhistory(){
 local line=${1%%$'\n'}
 local cmd=${line%% *}
@@ -36,13 +42,20 @@ local cmd=${line%% *}
 
 #---------------------
 
-setopt auto_pushd
 # exec `cd` with a directory name
 setopt auto_cd
 setopt combining_chars
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+# Set 'word' separators
+autoload -Uz select-word-style
+select-word-style default
+zstyle ':zle:*' word-chars " /=;@:{},|"
+zstyle ':zle:*' word-style unspecified
+
+# emacs-like line editing (use -v to vim-like editing)
 bindkey -e
-#bindkey -v
+#
 typeset -U path cdpath fpath manpath
 autoload -U promptinit
 promptinit
@@ -58,7 +71,7 @@ PROMPT=""
 PROMPT+="%F{green}%n@%m%f %F{cyan}$%f"
 RPROMPT=""
 #RPROMPT+="[%U%D %*%u]"
-RPROMPT+="[%U%F{blue}%~%f%u]"
+RPROMPT+="[%U%F{blue}%~%f%u] (%*)"
 # title
 case "${TERM}" in
 xterm*)
