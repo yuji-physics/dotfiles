@@ -370,11 +370,11 @@ set cmdheight=2
 set wrap
 set textwidth=0
 set list " show special characters
-if !has('win32') || has('gui_running')
+if (!has('win32') && !has('win64')) || has('gui_running')
   set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
-else
-  " Some special characters are not supported on Windows
-  set listchars=tab:^-,trail:-,extends:»,precedes:«,nbsp:%,eol:$
+"elseif has('win32') || has('win64')
+"  " '»' and '↲' are sometimes garbled on windows terminals.
+"  set listchars=tab:^-,trail:-,extends:»,precedes:«,nbsp:%,eol:$
 endif
 set notitle
 set showcmd
@@ -565,4 +565,7 @@ vnoremap < <gv
 nnoremap <F7> <Plug>(vimfiler_toggle_safe_mode)
 " toggle neocomplete
 nnoremap <F10> :NeoCompleteToggle<CR>
+
+" Open Terminal
+nnoremap <silent> <leader>t :<C-u>terminal ++close<CR>
 " }}}
