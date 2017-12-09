@@ -46,9 +46,15 @@ call dein#add('Shougo/unite.vim', {
 " unite sources
 call dein#add('Shougo/neoyank.vim')
 call dein#add('Shougo/neomru.vim')
-call dein#add('h1mesuke/unite-outline')
+"call dein#add('h1mesuke/unite-outline')
 
-call dein#add('Shougo/neocomplete.vim')
+"call dein#add('Shougo/neocomplete.vim')
+call dein#add('Shougo/deoplete.nvim')
+if !has('nvim')
+  call dein#add('roxma/nvim-yarp')
+  call dein#add('roxma/vim-hug-neovim-rpc')
+endif
+call dein#add('zchee/deoplete-jedi')
 call dein#add('Shougo/neosnippet')
 call dein#add('Shougo/neosnippet-snippets')
 
@@ -89,9 +95,6 @@ call dein#add('basyura/twibill.vim')
 call dein#add('tyru/open-browser.vim')
 
 call dein#end()
-"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-" end of plugins
-"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 " }}}
 filetype plugin indent on
 " Unite {{{
@@ -123,71 +126,86 @@ nnoremap <silent> <leader>e :<C-u>VimFilerBufferDir -split -simple -winwidth=40<
 " }}}
 " Neocompete {{{
 " Disable AutoComplPop
-let g:acp_enableAtStartup = 0
+"let g:acp_enableAtStartup = 0
 " Use neocomplete
-let g:neocomplete#enable_at_startup = 1
+"let g:neocomplete#enable_at_startup = 1
 " Use ignorecase
-let g:neocomplete#enable_ignore_case = 1
+"let g:neocomplete#enable_ignore_case = 1
 " Use smartcase
-let g:neocomplete#enable_smart_case = 1
+"let g:neocomplete#enable_smart_case = 1
 
 " maximum number of candidates displayed in a pop-up menu
-let g:neocomplete#max_list = 30
+"let g:neocomplete#max_list = 30
 " maximum width of a pop-up menu
-let g:neocomplete#max_keyword_width = 80
+"let g:neocomplete#max_keyword_width = 80
 " complete start length
-let g:neocomplete#auto_completion_start_length = 2
+"let g:neocomplete#auto_completion_start_length = 2
 
 " Set minimum syntax keyword length
-let g:neocomplete#sources#syntax#min_keyword_length = 4
-let g:neocomplete#lock_buffer_name_pattern = "\*ku\*"
+"let g:neocomplete#sources#syntax#min_keyword_length = 4
+"let g:neocomplete#lock_buffer_name_pattern = "\*ku\*"
 
 " Define dictionary (same as help file)
-let g:neocomplete#sources#dictionary#dictionaries = {
-      \ 'default' : '',
-      \ 'vimshell' : $HOME.'/.vimshell_hist',
-      \ 'scheme' : $HOME.'/.gosh_completions'
-      \}
+"let g:neocomplete#sources#dictionary#dictionaries = {
+"      \ 'default' : '',
+"      \ 'vimshell' : $HOME.'/.vimshell_hist',
+"      \ 'scheme' : $HOME.'/.gosh_completions'
+"      \}
 " Define keyword (same as help file)
-if !exists('g:neocomplete#keyword_patterns')
-  let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns._ = '\h\w*'
+"if !exists('g:neocomplete#keyword_patterns')
+"  let g:neocomplete#keyword_patterns = {}
+"endif
+"let g:neocomplete#keyword_patterns._ = '\h\w*'
 
 
 " Use omnifunc
-if !exists('g:neocomplete#force_omni_input_patterns')
-  let g:neocomplete#force_omni_input_patterns= {}
-endif
+"if !exists('g:neocomplete#force_omni_input_patterns')
+"  let g:neocomplete#force_omni_input_patterns= {}
+"endif
 " C
-let g:neocomplete#force_omni_input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?'
+"let g:neocomplete#force_omni_input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?'
 " C++
-let g:neocomplete#force_omni_input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+"let g:neocomplete#force_omni_input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
 " go
-let g:neocomplete#force_omni_input_patterns.go = '\h\w\.\w*'
+"let g:neocomplete#force_omni_input_patterns.go = '\h\w\.\w*'
 " python
-let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+"let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 "let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
 
 "Tex
-let g:neocomplete#force_omni_input_patterns.tex = '\\\?\h\w*'
+"let g:neocomplete#force_omni_input_patterns.tex = '\\\?\h\w*'
 
 " Key Mappings
 " select a candidate by <CR>
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-endfunction
+"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"function! s:my_cr_function()
+"  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+"endfunction
 
 " close pop-up and a backword char by <BS>
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+"inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 
 " close pop-up by <Space>
-inoremap <expr><Space> pumvisible() ? neocomplete#close_popup()."\<Space>" : "\<Space>"
+"inoremap <expr><Space> pumvisible() ? neocomplete#close_popup()."\<Space>" : "\<Space>"
 
 " manual completion
-inoremap <expr><C-c>  neocomplete#start_manual_complete()
+"inoremap <expr><C-c>  neocomplete#start_manual_complete()
+
+" toggle neocomplete
+"nnoremap <F10> :NeoCompleteToggle<CR>
+
 "}}}
+" Deoplete {{{
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#complete_method = 'complete'
+let g:deoplete#enable_ignore_case = 1
+let g:deoplete#enable_smart_case = 1
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function() abort
+  return deoplete#close_popup() . "\<CR>"
+endfunction
+autocmd CompleteDone * silent! pclose!
+" }}}
 " Neosnippet{{{
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
@@ -363,7 +381,7 @@ endif
 "highlight CursorLine term=none cterm=none ctermfg=none ctermbg=236
 "highlight CursorColumn term=none cterm=none ctermfg=none ctermbg=236
 
-"set number " show columnnumber
+"set number
 set numberwidth=1 " minimal number to show column number.
 set laststatus=2 " always show status line
 set cmdheight=2
@@ -414,23 +432,22 @@ set foldcolumn=5 " width of the leftside columns of folding guide
 set autoread " when a file is modified by another vim process, reload it automatically.
 "set autowriteall
 set nobackup
-set noswapfile
-set noundofile
+set noswapfile " do not create .swap file
+set noundofile " do not create .undo file
 
-set pastetoggle=<F8>
+set pastetoggle=<F8> " toggle paset mode
 
-" Search
-set incsearch " incremental search
+" Search (e.g. '/' command)
+set incsearch  " enable incremental search
 set ignorecase " match both upper/lowercase letters
-set smartcase " if the pattern contains capital letters, do not ignore case.
-set wrapscan
+set smartcase  " if the match pattern contains capital letters, disable ignore case.
+set wrapscan   " back to the first search result after the final one.
 
 " cmd completion
 set wildmode=list,full
 set wildmenu
 set wildignorecase
-set wildignore=*.o,*.obj,*/.git/*,*.pyc,*.png,*.jpg,*.aux,.DS_Store " Do not show these files
-
+set wildignore=*.o,*.obj,*/.git/*,*.pyc,*.png,*.jpg,*.aux,.DS_Store " do not show these files, which are usually not opened by vim
 
 " misc
 set mouse=a
@@ -457,7 +474,8 @@ autocmd MyAutoCmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd MyAutoCmd FileType html,markdown,ghmarkdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd MyAutoCmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd MyAutoCmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd MyAutoCmd FileType python setlocal omnifunc=python3complete#Complete
+autocmd MyAutoCmd FileType tex setlocal omnifunc=texcomplete#Complete
+"autocmd MyAutoCmd FileType python setlocal omnifunc=python3complete#Complete
 "autocmd MyAutoCmd FileType python setlocal omnifunc=pythoncomplete#Complete
 
 " vimgrep & quickfix
@@ -477,9 +495,12 @@ autocmd MyAutoCmd VimEnter,ColorScheme * highlight NonText ctermbg=NONE
 autocmd MyAutoCmd VimEnter,ColorScheme * highlight TablineSel ctermbg=NONE
 autocmd MyAutoCmd VimEnter,ColorScheme * highlight LineNr ctermbg=NONE
 autocmd MyAutoCmd VimEnter,ColorScheme * highlight CursorLineNr ctermbg=NONE
+
+" yapf code formatter for python
+autocmd FileType python nnoremap <leader>f :0,$!yapf<Cr>
 " }}}
 " === KEY MAPPINGS === {{{
-" emacs-like keymaps on command-line mode
+" emacs-like keybindins on command-line mode
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 cnoremap <C-f> <Right>
@@ -489,27 +510,26 @@ cnoremap <C-p> <Up>
 " paste
 cnoremap <C-y> <C-r>*
 
-" treat wrapping line as 'real' when moving a cursor
+" think wrapping line as a line when moving up/down
 nnoremap j gj
 nnoremap k gk
 
-" place cursor on the middle of the screen after some motions
+" place cursor on the middle of the screen after some big motions
 nnoremap g; g;zz
 nnoremap G Gzz
 
-" see throw vimgrep results
+" jump over vimgrep results by space+n/N
 nnoremap <Space>n :cnext<CR>
 nnoremap <Space><S-n> :cprevious<CR>
 
-" resize window with arrow keys in normal mode in place of cursor motion
+" resize window with arrow keys in normal mode
 nnoremap <silent> <Left> :5wincmd <<CR>
 nnoremap <silent> <Right> :5wincmd ><CR>
 nnoremap <silent> <Up> :5wincmd +<CR>
 nnoremap <silent> <Down> :5wincmd -<CR>
 
-" insert <Space> and <Enter> directly in the normal mode
+" insert <Space> from normal mode by double <Space>
 nnoremap <Space><Space> i<Space><ESC><Right>
-nnoremap <CR> i<CR><ESC>
 
 " escape insert mode with jj
 "inoremap jj <Esc>
@@ -521,51 +541,31 @@ nnoremap ; :
 inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" auto-complete brackets and '$' (for TeX)
+" brackets and '$' (for TeX)
 inoremap (<Enter> ()<Left><CR><ESC><S-o>
 inoremap () ()<Left>
-
 inoremap {<Enter> {}<Left><CR><ESC><S-o>
 inoremap {} {}<Left>
-
 inoremap [] []<Left>
-
 inoremap <> <><Left>
-
 inoremap $$ $$<Left>
 
-" auto-complete quotations (", ', `)
+" quotations (", ', `)
 inoremap "<Enter> ""<Left><CR><ESC><S-o>
 inoremap "" ""<Left>
-
 inoremap '<Enter> ''<Left><CR><ESC><S-o>
 inoremap '' ''<Left>
-
 inoremap `<Enter> ``<Left><CR><ESC><S-o>
 inoremap `` ``<Left>
 
-" do not exit visual mode after counting up/down
+" stay visual mode after some actions
 vnoremap <c-a> <c-a>gv
 vnoremap <c-x> <c-x>gv
 vnoremap g<c-a> g<c-a>gv
 vnoremap g<c-x> g<c-x>gv
-" do not exit visual mode after adding/reducing indent
 vnoremap > >gv
 vnoremap < <gv
 
-" toggles
-" <F7>: vimfiler
-" <F8>: paste
-" <F9>
-" <F10>: Neocomplete
-" <F11>
-" <F12>
-"
-" toggle vimfiler safe mode
-nnoremap <F7> <Plug>(vimfiler_toggle_safe_mode)
-" toggle neocomplete
-nnoremap <F10> :NeoCompleteToggle<CR>
-
-" Open Terminal
+" open terminal
 nnoremap <silent> <leader>t :<C-u>terminal ++close<CR>
 " }}}
