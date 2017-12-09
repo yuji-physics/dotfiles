@@ -36,7 +36,8 @@ if which ranger 2>&1 > /dev/null; then
 fi
 
 if [ $(uname -s) = "Darwin" ]; then
-  export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"
+  #export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/usr/local/Caskroom"
+  export HOMEBREW_CASK_OPTS="--appdir=/Applications"
   export PKG_CONFIG_PATH="/opt/X11/lib/pkgconfig:/usr/local/lib/pkgconfig"
 fi
 
