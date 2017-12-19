@@ -31,7 +31,6 @@ endif
 " plugins
 "-----------------------------------------
 call dein#begin(s:dein_dir)
-
 call dein#add('Shougo/dein.vim')
 call dein#add('Shougo/vimproc', {
       \ 'build': {
@@ -40,15 +39,13 @@ call dein#add('Shougo/vimproc', {
       \     'mac': 'make -f make_mac.mak',
       \     'unix': 'make -f make_unix.mak',
       \     }})
-call dein#add('Shougo/unite.vim', {
-      \ 'depends': ['vimproc'],
-      \ 'lazy': 1})
-" unite sources
+
+" Denite and its sources
+call dein#add('Shougo/denite.nvim')
 call dein#add('Shougo/neoyank.vim')
 call dein#add('Shougo/neomru.vim')
-"call dein#add('h1mesuke/unite-outline')
 
-"call dein#add('Shougo/neocomplete.vim')
+" Completions
 call dein#add('Shougo/deoplete.nvim')
 if !has('nvim')
   call dein#add('roxma/nvim-yarp')
@@ -58,143 +55,105 @@ call dein#add('zchee/deoplete-jedi')
 call dein#add('Shougo/neosnippet')
 call dein#add('Shougo/neosnippet-snippets')
 
-call dein#add('Shougo/vimfiler')
-"call dein#add('Shougo/vimshell', {
-"      \ 'lazy': 1})
-
-call dein#add('junegunn/vim-easy-align')
-call dein#add('Lokaltog/vim-easymotion')
+" Tools
+call dein#add('thinca/vim-quickrun')
 call dein#add('tpope/vim-surround')
 call dein#add('tpope/vim-repeat')
-call dein#add('thinca/vim-quickrun')
-" syntastic is much heavier than watchdogs
-"call dein#add('scrooloose/syntastic')
+call dein#add('junegunn/vim-easy-align')
+call dein#add('itchyny/lightline.vim')
+
+" Folding
+call dein#add('Konfekt/FastFold')
+call dein#add('tmhedberg/SimpylFold')
+call dein#add('matze/vim-tex-fold')
+
+" Color schemes
+call dein#add('w0ng/vim-hybrid')
+call dein#add('altercation/vim-colors-solarized')
+
+" Syntacs
+call dein#add('jtratner/vim-flavored-markdown.git')
+
+" Syntacs checker
 call dein#add('osyo-manga/shabadou.vim')
 call dein#add('osyo-manga/vim-watchdogs')
-"call dein#add('cohama/vim-hier')
 call dein#add('jceb/vim-hier')
 call dein#add('dannyob/quickfixstatus')
-call dein#add('itchyny/lightline.vim')
-call dein#add('jtratner/vim-flavored-markdown.git')
+
+" Go
+call dein#add('fatih/vim-go')
+
+" python with pyenv
 "call dein#add('lambdalisue/vim-pyenv', {
 "      \ 'autoload': {
 "      \     'filetypes': ['python', 'python3', 'djangohtml']
 "      \     },
 "      \ 'merged': 0})
 
-" Folding
-call dein#add('Konfekt/FastFold')
-call dein#add('tmhedberg/SimpylFold')
-call dein#add('matze/vim-tex-fold')
-" Color schemes
-call dein#add('w0ng/vim-hybrid')
-call dein#add('altercation/vim-colors-solarized')
-" Twitter client (twibill.vim and open-browser.vim are required to use TweetVim)
-call dein#add('basyura/TweetVim')
-call dein#add('basyura/twibill.vim')
-call dein#add('tyru/open-browser.vim')
-
 call dein#end()
 " }}}
 filetype plugin indent on
 " Unite {{{
 "let g:unite_enable_start_insert = 1
-let g:unite_enable_ignore_case = 1
-let g:unite_enable_smart_case = 1
-let g:unite_source_history_yank_enable = 1
-let g:unite_source_file_mru_limit = 200
-" let g:unite_winwidth = 40
-nnoremap <silent> <leader>ua :<C-u>Unite buffer file_mru<CR>
-nnoremap <silent> <leader>uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-nnoremap <silent> <leader>ub :<C-u>Unite buffer<CR>
-nnoremap <silent> <leader>ur :<C-u>Unite register<CR>
-nnoremap <silent> <leader>uh :<C-u>Unite history/yank<CR>
-"nnoremap <silent> <leader>ut :<C-u>Unite tab<CR>
-nnoremap <silent> <leader>ut :<C-u>Unite tweetvim<CR>
+"let g:unite_enable_ignore_case = 1
+"let g:unite_enable_smart_case = 1
+"let g:unite_source_history_yank_enable = 1
+"let g:unite_source_file_mru_limit = 200
+"" let g:unite_winwidth = 40
+"nnoremap <silent> <leader>ua :<C-u>Unite buffer file_mru<CR>
+"nnoremap <silent> <leader>uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+"nnoremap <silent> <leader>ub :<C-u>Unite buffer<CR>
+"nnoremap <silent> <leader>ur :<C-u>Unite register<CR>
+"nnoremap <silent> <leader>uh :<C-u>Unite history/yank<CR>
+""nnoremap <silent> <leader>ut :<C-u>Unite tab<CR>
+"nnoremap <silent> <leader>ut :<C-u>Unite tweetvim<CR>
 " }}}
-" Vimfiler{{{
-"let g:vimfiler_as_default_explorer = 1
-"let g:vimfiler_safe_mode_by_default = 0
-let g:vimfiler_enable_auto_cd = 1
-" Like Textmate icons.
-let g:vimfiler_tree_leaf_icon = ' '
-let g:vimfiler_tree_opened_icon = '▾'
-let g:vimfiler_tree_closed_icon = '▸'
-let g:vimfiler_file_icon = '-'
-let g:vimfiler_marked_file_icon = '*'
-nnoremap <silent> <leader>e :<C-u>VimFilerBufferDir -split -simple -winwidth=40<CR>
+" Denite {{{
+if executable('rg')
+  call denite#custom#var('grep', 'command', ['rg', '--threads', '1'])
+  call denite#custom#var('file_rec', 'command',
+        \ ['rg', '--files', '--glob', '!.git'])
+else
+  call denite#custom#var('grep', 'command', ['ag'])
+  call denite#custom#var('file_rec', 'command',
+        \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+endif
+call denite#custom#map(
+      \ 'insert',
+      \ '<C-j>',
+      \ '<denite:move_to_next_line>',
+      \ 'noremap')
+call denite#custom#map(
+      \ 'insert',
+      \ '<C-k>',
+      \ '<denite:move_to_previous_line>',
+      \ 'noremap')
+" I use <C-o> as tmux prefix key.
+" So, set <Esc> to insert -> normal
+" Type q or <esc> in normal mode to quit denite
+call denite#custom#map(
+      \ 'insert',
+      \ '<Esc>',
+      \ '<denite:enter_mode:normal>',
+      \ 'noremap')
+call denite#custom#map(
+      \ 'normal',
+      \ '<Esc>',
+      \ '<denite:quit>',
+      \ 'noremap')
+call denite#custom#option('default', 'prompt', '>')
+call denite#custom#option('search', 'prompt', '>')
+nnoremap <silent> <leader>ua :<C-u>Denite file_mru<CR>
+nnoremap <silent> <leader>uf :<C-u>Denite -buffer-name=file file<CR>
+nnoremap <silent> <leader>ub :<C-u>Denite buffer<CR>
+nnoremap <silent> <leader>ug :<C-u>Denite grep<CR>
+nnoremap <silent> <leader>ur :<C-u>Denite register<CR>
+nnoremap <silent> <leader>uh :<C-u>Denite neoyank<CR>
+nnoremap <silent> / :<C-u>Denite -buffer-name=search
+      \ -auto-highlight line<CR>
+nnoremap <silent> n :<C-u>Denite -buffer-name=search
+      \ -resume -mode=normal -refresh<CR>
 " }}}
-" Neocompete {{{
-" Disable AutoComplPop
-"let g:acp_enableAtStartup = 0
-" Use neocomplete
-"let g:neocomplete#enable_at_startup = 1
-" Use ignorecase
-"let g:neocomplete#enable_ignore_case = 1
-" Use smartcase
-"let g:neocomplete#enable_smart_case = 1
-
-" maximum number of candidates displayed in a pop-up menu
-"let g:neocomplete#max_list = 30
-" maximum width of a pop-up menu
-"let g:neocomplete#max_keyword_width = 80
-" complete start length
-"let g:neocomplete#auto_completion_start_length = 2
-
-" Set minimum syntax keyword length
-"let g:neocomplete#sources#syntax#min_keyword_length = 4
-"let g:neocomplete#lock_buffer_name_pattern = "\*ku\*"
-
-" Define dictionary (same as help file)
-"let g:neocomplete#sources#dictionary#dictionaries = {
-"      \ 'default' : '',
-"      \ 'vimshell' : $HOME.'/.vimshell_hist',
-"      \ 'scheme' : $HOME.'/.gosh_completions'
-"      \}
-" Define keyword (same as help file)
-"if !exists('g:neocomplete#keyword_patterns')
-"  let g:neocomplete#keyword_patterns = {}
-"endif
-"let g:neocomplete#keyword_patterns._ = '\h\w*'
-
-
-" Use omnifunc
-"if !exists('g:neocomplete#force_omni_input_patterns')
-"  let g:neocomplete#force_omni_input_patterns= {}
-"endif
-" C
-"let g:neocomplete#force_omni_input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?'
-" C++
-"let g:neocomplete#force_omni_input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
-" go
-"let g:neocomplete#force_omni_input_patterns.go = '\h\w\.\w*'
-" python
-"let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-"let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
-
-"Tex
-"let g:neocomplete#force_omni_input_patterns.tex = '\\\?\h\w*'
-
-" Key Mappings
-" select a candidate by <CR>
-"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-"function! s:my_cr_function()
-"  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-"endfunction
-
-" close pop-up and a backword char by <BS>
-"inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-
-" close pop-up by <Space>
-"inoremap <expr><Space> pumvisible() ? neocomplete#close_popup()."\<Space>" : "\<Space>"
-
-" manual completion
-"inoremap <expr><C-c>  neocomplete#start_manual_complete()
-
-" toggle neocomplete
-"nnoremap <F10> :NeoCompleteToggle<CR>
-
-"}}}
 " Deoplete {{{
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#complete_method = 'complete'
@@ -217,17 +176,6 @@ let g:neosnippet#snippets_directory = s:my_snippet
 vmap <CR> <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
 " }}}
-" vim-easy-motion{{{
-let g:EasyMotion_do_mapping = 0
-map f <Plug>(easymotion-bd-fl)
-map t <Plug>(easymotion-bd-tl)
-nmap s <Plug>(easymotion-s2)
-omap z <Plug>(easymotion-s2)
-map <silent><leader>j <Plug>(easymotion-j)
-map <silent><leader>k <Plug>(easymotion-k)
-let g:EasyMotion_enter_jump_first = 1
-let g:EasyMotion_space_jump_first = 1
-" }}}
 " vim-repeat{{{
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count) 
 " "}}}
@@ -246,20 +194,6 @@ let g:quickrun_config = {
       \   'exec' : '%c %o %s'
       \ }
       \}
-" }}}
-" Syntastic{{{
-"let g:syntastic_check_on_open=0
-"let g:syntastic_check_on_wq=0
-"let g:syntastic_c_check_header=1
-"let g:syntastic_mode_map = {
-"      \ "mode": "active",
-"      \ "passive_filetypes": ["tex"] }
-"if !empty($QTDIR)
-"  let g:syntastic_cpp_include_dirs=['include','$QTDIR/include']
-"endif
-"let g:syntastic_python_quiet_messages={"level": "errors"}
-"let g:syntastic_python_pylint_quiet_messages={"level": []}
-"nnoremap <silent> <leader>se :<C-u>Errors<CR>
 " }}}
 " vim-watchdogs {{{
 if !exists("g:quickrun_config")
@@ -337,12 +271,6 @@ function! MyMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction"
 " }}}
-" TweetVim {{{
-let g:tweetvim_tweet_per_page=50
-let g:tweetvim_cache_size=20
-let g:tweetvim_include_rts=1
-let g:tweetvim_display_source=1
-" }}}
 " }}}
 " === OPTIONS ( + etc.) === {{{
 " Languages
@@ -378,7 +306,7 @@ endif
 " cursor line and cursor column
 "set cursorline
 "set cursorcolumn
-"highlight CursorLine term=none cterm=none ctermfg=none ctermbg=236
+highlight CursorLine term=none cterm=none ctermfg=none ctermbg=222
 "highlight CursorColumn term=none cterm=none ctermfg=none ctermbg=236
 
 "set number
@@ -399,7 +327,7 @@ set showcmd
 set ruler " show current position (column and raw number)
 set showmatch " highlight matched pair when inserted?
 set matchtime=1 " 5 by default
-set matchpairs=(:),{:},[:],<:>,":",':',`:`
+set matchpairs=(:),{:},[:],<:>
 
 " <tab> style
 set tabstop=2
@@ -413,11 +341,11 @@ set shiftround
 set autoindent
 set smartindent
 
-" split window
+" location of split window
 set splitbelow
 set splitright
 
-" Buffer
+" buffer
 set hidden " open new buffer with :e command even if current buffer is not saved.
 
 " folding
