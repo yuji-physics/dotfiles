@@ -41,10 +41,6 @@ fi
 alias lc='echo -n "file count:" && ls -U1 | wc -l' # count files
 alias rm="rm -i"
 
-if [ -z $TMUX ]; then
-  tmux -2
-fi
-
 function mdless(){
   grip --export $1 /dev/stdout | w3m -T text/html
 }
