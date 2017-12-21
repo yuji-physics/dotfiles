@@ -94,30 +94,18 @@ call dein#add('fatih/vim-go')
 call dein#end()
 " }}}
 filetype plugin indent on
-" Unite {{{
-"let g:unite_enable_start_insert = 1
-"let g:unite_enable_ignore_case = 1
-"let g:unite_enable_smart_case = 1
-"let g:unite_source_history_yank_enable = 1
-"let g:unite_source_file_mru_limit = 200
-"" let g:unite_winwidth = 40
-"nnoremap <silent> <leader>ua :<C-u>Unite buffer file_mru<CR>
-"nnoremap <silent> <leader>uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-"nnoremap <silent> <leader>ub :<C-u>Unite buffer<CR>
-"nnoremap <silent> <leader>ur :<C-u>Unite register<CR>
-"nnoremap <silent> <leader>uh :<C-u>Unite history/yank<CR>
-""nnoremap <silent> <leader>ut :<C-u>Unite tab<CR>
-"nnoremap <silent> <leader>ut :<C-u>Unite tweetvim<CR>
-" }}}
 " Denite {{{
 if executable('rg')
   call denite#custom#var('grep', 'command', ['rg', '--threads', '1'])
   call denite#custom#var('file_rec', 'command',
         \ ['rg', '--files', '--glob', '!.git'])
 else
-  call denite#custom#var('grep', 'command', ['ag'])
   call denite#custom#var('file_rec', 'command',
         \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+  call denite#custom#var('grep', 'command', ['ag'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'pattern_opt', [])
+  call denite#custom#var('grep', 'default_opts', ['--follow', '--nogroup', '--nocolor'])
 endif
 call denite#custom#map(
       \ 'insert',
@@ -139,17 +127,32 @@ call denite#custom#map(
       \ 'noremap')
 call denite#custom#map(
       \ 'normal',
+      \ 'a',
+      \ '<denite:choose_action>',
+      \ 'noremap')
+call denite#custom#map(
+      \ 'normal',
+      \ 's',
+      \ '<denite:do_action:split>',
+      \ 'noremap')
+call denite#custom#map(
+      \ 'normal',
+      \ 'v',
+      \ '<denite:do_action:vsplit>',
+      \ 'noremap')
+call denite#custom#map(
+      \ 'normal',
       \ '<Esc>',
       \ '<denite:quit>',
       \ 'noremap')
 call denite#custom#option('default', 'prompt', '>')
 call denite#custom#option('search', 'prompt', '>')
-nnoremap <silent> <leader>ua :<C-u>Denite file_mru<CR>
-nnoremap <silent> <leader>uf :<C-u>Denite -buffer-name=file file<CR>
-nnoremap <silent> <leader>ub :<C-u>Denite buffer<CR>
-nnoremap <silent> <leader>ug :<C-u>Denite grep<CR>
-nnoremap <silent> <leader>ur :<C-u>Denite register<CR>
-nnoremap <silent> <leader>uh :<C-u>Denite neoyank<CR>
+nnoremap <silent> <leader>ua :<C-u>Denite -mode=normal file_mru<CR>
+nnoremap <silent> <leader>uf :<C-u>Denite -mode=normal -buffer-name=file file<CR>
+nnoremap <silent> <leader>ub :<C-u>Denite -mode=normal buffer<CR>
+nnoremap <silent> <leader>ug :<C-u>Denite -mode=normal grep<CR>
+nnoremap <silent> <leader>ur :<C-u>Denite -mode=normal register<CR>
+nnoremap <silent> <leader>uh :<C-u>Denite -mode=normal neoyank<CR>
 nnoremap <silent> / :<C-u>Denite -buffer-name=search
       \ -auto-highlight line<CR>
 nnoremap <silent> n :<C-u>Denite -buffer-name=search
@@ -435,7 +438,7 @@ autocmd MyAutoCmd VimEnter,ColorScheme * highlight LineNr ctermbg=NONE
 autocmd MyAutoCmd VimEnter,ColorScheme * highlight CursorLineNr ctermbg=NONE
 
 " yapf code formatter for python
-autocmd FileType python nnoremap <leader>f :0,$!yapf<Cr>
+autocmd FileType python nnoremap <leader>f :<C-u>0,$!yapf<Cr>
 " }}}
 " === KEY MAPPINGS === {{{
 " emacs-like keybindins on command-line mode

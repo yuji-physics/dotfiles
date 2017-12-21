@@ -15,7 +15,12 @@ function! IDLFold(lnum)
   let idl_envs = '\(for\|if\|switch\)'
 
   " fold syntax
+  " procedure
   if line =~ '^\s*pro\s\+'
+    return 'a1'
+  endif
+  " function
+  if line =~ '^\s*function\s\+'
     return 'a1'
   endif
   if line =~ '^\s*end\s*\(;.*\)\?$'
