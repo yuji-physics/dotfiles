@@ -52,6 +52,7 @@ if !has('nvim')
   call dein#add('roxma/vim-hug-neovim-rpc')
 endif
 call dein#add('zchee/deoplete-jedi')
+call dein#add('zchee/deoplete-go')
 call dein#add('Shougo/neosnippet')
 call dein#add('Shougo/neosnippet-snippets')
 
@@ -271,6 +272,15 @@ function! MyMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction"
 " }}}
+" vim-go{{{
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+autocmd FileType go nnoremap <leader>f :GoFmt<Cr>
+autocmd FileType go nnoremap <leader>l :GoLint<Cr>
+autocmd FileType go nnoremap <leader>r :GoRun<Cr>
+autocmd FileType go nnoremap <leader>b :GoBuild<Cr>
+"}}}
 " }}}
 " === OPTIONS ( + etc.) === {{{
 " Languages
