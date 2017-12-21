@@ -274,6 +274,12 @@ function! MyMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction"
 " }}}
+" vim-go{{{
+autocmd FileType go nnoremap <leader>r :<C-u>GoRun<CR>
+autocmd FileType go nnoremap <leader>b :<C-u>GoBuild<CR>
+autocmd FileType go nnoremap <leader>f :<C-u>Gofmt<CR>
+autocmd FileType go nnoremap <leader>l :<C-u>GoLint<CR>
+" }}}
 " }}}
 " === OPTIONS ( + etc.) === {{{
 " Languages
@@ -428,7 +434,7 @@ autocmd MyAutoCmd VimEnter,ColorScheme * highlight LineNr ctermbg=NONE
 autocmd MyAutoCmd VimEnter,ColorScheme * highlight CursorLineNr ctermbg=NONE
 
 " yapf code formatter for python
-autocmd FileType python nnoremap <leader>f :0,$!yapf<Cr>
+autocmd FileType python nnoremap <leader>f :<C-u>0,$!yapf<Cr>
 " }}}
 " === KEY MAPPINGS === {{{
 " emacs-like keybindins on command-line mode
