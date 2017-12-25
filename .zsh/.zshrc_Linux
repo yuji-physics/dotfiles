@@ -21,6 +21,15 @@ alias ll="ls -l --color"
 alias rm="rm -i"
 alias mv="mv -i"
 
+# IDL
+if [ -e /usr/local/harris/idl86/bin/idl_setup.bash ]; then
+  . /usr/local/harris/idl86/bin/idl_setup.bash ]
+  export IDL_PATH=$HOME/IDL:'<IDL_DEFAULT>'
+  export IDL_PROMPT='> '
+  #export IDL_QUIET=1
+fi
+
+
 if [ -e ${HOME}/.Xmodmap ]; then
   xmodmap ${HOME}/.Xmodmap
 fi
