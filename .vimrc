@@ -154,11 +154,12 @@ nnoremap <silent> <leader>ub :<C-u>Denite buffer<CR>
 nnoremap <silent> <leader>ug :<C-u>Denite grep<CR>
 nnoremap <silent> <leader>ur :<C-u>Denite register<CR>
 nnoremap <silent> <leader>uh :<C-u>Denite neoyank<CR>
-nnoremap <silent> <leader>ul :<C-u>Denite line<CR>
 nnoremap <silent> / :<C-u>Denite -buffer-name=search
       \ -auto-highlight line<CR>
 nnoremap <silent> n :<C-u>Denite -buffer-name=search
-      \ -resume -mode=normal -refresh<CR>
+      \ -auto-highlight -resume -mode=normal -refresh<CR>
+nnoremap <silent> <leader>un :<C-u>Denite -resume -cursor-pos=+1 -immediately<CR>
+nnoremap <silent> <leader>up :<C-u>Denite -resume -cursor-pos=-1 -immediately<CR>
 " }}}
 " Deoplete {{{
 let g:deoplete#enable_at_startup = 1
