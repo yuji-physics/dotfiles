@@ -156,23 +156,12 @@ nnoremap <silent> <leader>ur :<C-u>Denite -mode=normal register<CR>
 nnoremap <silent> <leader>uh :<C-u>Denite -mode=normal neoyank<CR>
 nnoremap <silent> <leader>ua :<C-u>Denite file_mru<CR>
 nnoremap <silent> <leader>uf :<C-u>Denite -buffer-name=file file_rec<CR>
-<<<<<<< HEAD
-nnoremap <silent> <leader>ub :<C-u>Denite buffer<CR>
-nnoremap <silent> <leader>ug :<C-u>Denite grep<CR>
-nnoremap <silent> <leader>ur :<C-u>Denite register<CR>
-nnoremap <silent> <leader>uh :<C-u>Denite neoyank<CR>
-nnoremap <silent> / :<C-u>Denite -buffer-name=search
+nnoremap <silent> ,/ :<C-u>Denite -buffer-name=search
       \ -auto-highlight line<CR>
-nnoremap <silent> n :<C-u>Denite -buffer-name=search
+nnoremap <silent> <leader>n :<C-u>Denite -buffer-name=search
       \ -auto-highlight -resume -mode=normal -refresh<CR>
 nnoremap <silent> <leader>un :<C-u>Denite -resume -cursor-pos=+1 -immediately<CR>
 nnoremap <silent> <leader>up :<C-u>Denite -resume -cursor-pos=-1 -immediately<CR>
-=======
-nnoremap <silent> <leader>un :<C-u>Denite -buffer-name=search
-      \ -resume -mode=normal -refresh<CR>
-nnoremap <silent> <leader>u/ :<C-u>Denite -buffer-name=search
-      \ -auto-highlight line<CR>
->>>>>>> refs/remotes/origin/master
 " }}}
 " Deoplete {{{
 let g:deoplete#enable_at_startup = 1
