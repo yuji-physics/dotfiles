@@ -100,13 +100,14 @@ if executable('rg')
   call denite#custom#var('file_rec', 'command',
         \ ['rg', '--files', '--glob', '!.git'])
 else
+  call denite#custom#var('grep', 'command', ['ag'])
   call denite#custom#var('file_rec', 'command',
         \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-  call denite#custom#var('grep', 'command', ['ag'])
-  call denite#custom#var('grep', 'recursive_opts', [])
-  call denite#custom#var('grep', 'pattern_opt', [])
-  call denite#custom#var('grep', 'default_opts', ['--follow', '--nogroup', '--nocolor'])
 endif
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', [])
+call denite#custom#var('grep', 'default_opts', ['--follow', '--nogroup', '--nocolor'])
+call denite#custom#source('file_mru', 'matchers', ['matcher_substring'])
 call denite#custom#map(
       \ 'insert',
       \ '<C-j>',
@@ -153,6 +154,8 @@ nnoremap <silent> <leader>ub :<C-u>Denite -mode=normal buffer<CR>
 nnoremap <silent> <leader>ug :<C-u>Denite -mode=normal grep<CR>
 nnoremap <silent> <leader>ur :<C-u>Denite -mode=normal register<CR>
 nnoremap <silent> <leader>uh :<C-u>Denite -mode=normal neoyank<CR>
+nnoremap <silent> <leader>ua :<C-u>Denite file_mru<CR>
+nnoremap <silent> <leader>uf :<C-u>Denite -buffer-name=file file_rec<CR>
 nnoremap <silent> <leader>un :<C-u>Denite -buffer-name=search
       \ -resume -mode=normal -refresh<CR>
 nnoremap <silent> <leader>u/ :<C-u>Denite -buffer-name=search
