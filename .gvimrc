@@ -2,7 +2,11 @@ colorscheme solarized
 set background=dark
 syntax on
 "set transparency=10
-set guifont=Ricty_Discord:h16
+if has('unix')
+  set guifont=DejaVu\ Sans\ Mono\ 12
+else
+  set guifont=Ricty_Discord:h16
+endif
 "set imdisable
 "English Menu
 source $VIMRUNTIME/delmenu.vim
