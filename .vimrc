@@ -69,7 +69,6 @@ call dein#add('tmhedberg/SimpylFold')
 call dein#add('matze/vim-tex-fold')
 
 " Color schemes
-call dein#add('w0ng/vim-hybrid')
 call dein#add('altercation/vim-colors-solarized')
 
 " Syntacs
@@ -97,17 +96,26 @@ filetype plugin indent on
 " Denite {{{
 if executable('rg')
   call denite#custom#var('grep', 'command', ['rg', '--threads', '1'])
+  call denite#custom#var('grep', 'default_opts', ['--vimgrep', '--no-heading'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
+  call denite#custom#var('grep', 'separator', ['--'])
+  call denite#custom#var('grep', 'final_opts', [])
   call denite#custom#var('file_rec', 'command',
         \ ['rg', '--files', '--glob', '!.git'])
 elseif executable('ag')
   call denite#custom#var('grep', 'command', ['ag'])
+  call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'pattern_opt', [])
+  call denite#custom#var('grep', 'final_opts', [])
   call denite#custom#var('file_rec', 'command',
         \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
 else
   call denite#custom#var('grep', 'default_opts', ['--follow', '--nogroup', '--nocolor'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'pattern_opt', [])
 endif
-call denite#custom#var('grep', 'recursive_opts', [])
-call denite#custom#var('grep', 'pattern_opt', [])
 call denite#custom#source('file_mru', 'matchers', ['matcher_substring'])
 call denite#custom#map(
       \ 'insert',
