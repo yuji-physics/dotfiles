@@ -103,6 +103,6 @@ bindkey '\e[Z' reverse-menu-complete
 [ -f ~/.zshrc.local ] && . ~/.zshrc.local
 
 # initialize pyenv in the end
-if which pyenv 2>&1 > /dev/null; then
+if which pyenv > /dev/null 2>&1 ; then
   eval "$(pyenv init -)"
 fi
