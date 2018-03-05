@@ -26,7 +26,11 @@ if &runtimepath !~# '/dein.vim'
     execute ' !git clone https://github.com/Shougo/dein.vim' s:dein_dir
   endif
   "execute 'set runtimepath^=' . fnamemodify(s:dein_dir, ':p')
-  set runtimepath+=~/vimfiles/dein/repos/github.com/Shougo/dein.vim
+  if has('win32')
+    set runtimepath+=~/vimfiles/dein/repos/github.com/Shougo/dein.vim
+  else
+    set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
+  endif
 endif
 
 "-----------------------------------------
