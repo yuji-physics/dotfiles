@@ -15,6 +15,7 @@ endif
 " Dein{{{
 if has('win32')
   let s:dein_dir = expand('~/vimfiles/dein/repos/github.com/Shougo/dein.vim')
+  let g:python3_host_prog = expand('~/AppData/Local/Programs/Python/Python35/python.exe')
 else
   let s:dein_dir = expand('~/.vim/dein/repos/github.com/Shougo/dein.vim')
 endif
@@ -24,7 +25,8 @@ if &runtimepath !~# '/dein.vim'
   if !isdirectory(s:dein_dir)
     execute ' !git clone https://github.com/Shougo/dein.vim' s:dein_dir
   endif
-  execute 'set runtimepath^=' . fnamemodify(s:dein_dir, ':p')
+  "execute 'set runtimepath^=' . fnamemodify(s:dein_dir, ':p')
+  set runtimepath+=~/vimfiles/dein/repos/github.com/Shougo/dein.vim
 endif
 
 "-----------------------------------------
@@ -314,21 +316,21 @@ set helplang=en
 
 " Appearances
 " colorscheme and highlight
-if !empty($CONEMUBUILD) || &t_Co > 2 || has("gui_running")
+if has('win32') && !has("gui_running")
+  set term=win32
+elseif !empty($CONEMUBUILD) || &t_Co > 2 || has("gui_running")
   set term=xterm
-  set t_Co=256
-  syntax on
-  set hlsearch
-  "let g:solarized_termcolors=256
-  set background=dark
-  colorscheme solarized
-  "colorscheme hybrid
   " Variables required to display 256 colors in ConEmu(Windows).
   if !empty($CONEMUBUILD)
     let &t_AB="\e[48;5;%dm"
     let &t_AF="\e[38;5;%dm"
   endif
 endif
+set t_Co=256
+syntax on
+set hlsearch
+set background=dark
+colorscheme solarized
 
 " cursor line and cursor column
 "set cursorline
@@ -343,12 +345,7 @@ set cmdheight=2
 set wrap
 set textwidth=0
 set list " show special characters
-if (!has('win32') && !has('win64')) || has('gui_running')
-  set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
-"elseif has('win32') || has('win64')
-"  " '»' and '↲' are sometimes garbled on windows terminals.
-"  set listchars=tab:^-,trail:-,extends:»,precedes:«,nbsp:%,eol:$
-endif
+set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
 set notitle
 set showcmd
 set ruler " show current position (column and raw number)
