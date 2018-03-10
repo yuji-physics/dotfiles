@@ -15,7 +15,7 @@ endif
 " Dein{{{
 if has('win32')
   let s:dein_dir = expand('~/vimfiles/dein/repos/github.com/Shougo/dein.vim')
-  let g:python3_host_prog = expand('~/AppData/Local/Programs/Python/Python35/python.exe')
+  let g:python3_host_prog = expand('~/AppData/Local/Programs/Python/Python36/python.exe')
 else
   let s:dein_dir = expand('~/.vim/dein/repos/github.com/Shougo/dein.vim')
 endif
@@ -220,17 +220,17 @@ let g:quickrun_config = {
       \}
 " }}}
 " vim-watchdogs {{{
-if !exists("g:quickrun_config")
-  let g:quickrun_config = {}
-endif
-let g:quickrun_config["watchdogs_checker/_"] = {
-      \ "outputter/quickfix/open_cmd" : "",
-      \ "errorformat": '%f:%l%m',
-      \}
-let g:watchdogs_check_BufWritePost_enable = 1
-call watchdogs#setup(g:quickrun_config)
-" highlight errors
-let g:hier_enabled = 1
+"if !exists("g:quickrun_config")
+"  let g:quickrun_config = {}
+"endif
+"let g:quickrun_config["watchdogs_checker/_"] = {
+"      \ "outputter/quickfix/open_cmd" : "",
+"      \ "errorformat": '%f:%l%m',
+"      \}
+"let g:watchdogs_check_BufWritePost_enable = 1
+"call watchdogs#setup(g:quickrun_config)
+"" highlight errors
+"let g:hier_enabled = 1
 "}}}
 " Lightline{{{
 " copy of http://itchyny.hatenablog.com/entry/20130828/1377653592
