@@ -307,12 +307,7 @@ autocmd FileType go nnoremap <leader>b :GoBuild<Cr>
 " }}}
 " === OPTIONS ( + etc.) === {{{
 " Languages
-if has('win32') && !has("gui_running")
-  " use sjis in Windows
-  set termencoding=sjis
-else
-  set termencoding=utf-8
-endif
+set termencoding=utf-8
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,ucs-bom,cp932,sjis,euc-jp
@@ -321,16 +316,16 @@ set helplang=en
 " Appearances
 " colorscheme and highlight
 if has('win32') && !has("gui_running")
-  set term=win32
-elseif !empty($CONEMUBUILD) || &t_Co > 2 || has("gui_running")
-  set term=xterm
-  " Variables required to display 256 colors in ConEmu(Windows).
+  set t_Co=256
   if !empty($CONEMUBUILD)
+    set term=pcansi
     let &t_AB="\e[48;5;%dm"
     let &t_AF="\e[38;5;%dm"
   endif
+elseif &t_Co > 2 || has("gui_running")
+  set t_Co=256
+  set term=xterm
 endif
-set t_Co=256
 syntax on
 set hlsearch
 set background=dark
