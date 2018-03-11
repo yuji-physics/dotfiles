@@ -78,6 +78,7 @@ call dein#add('matze/vim-tex-fold')
 call dein#add('altercation/vim-colors-solarized')
 
 " Syntacs
+call dein#add('udalov/kotlin-vim')
 call dein#add('jtratner/vim-flavored-markdown.git')
 
 " Syntacs checker
