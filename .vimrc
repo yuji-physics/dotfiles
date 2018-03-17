@@ -407,6 +407,7 @@ set backspace=indent,eol,start
 "set clipboard+=unnamed
 set history=50
 set vb t_vb=
+set nf=""
 exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
 " }}}
 " === AUTO COMMANDS ==={{{
