@@ -317,15 +317,15 @@ set helplang=en
 " Appearances
 " colorscheme and highlight
 if has('win32') && !has("gui_running")
-  set t_Co=256
   if !empty($CONEMUBUILD)
     set term=pcansi
     let &t_AB="\e[48;5;%dm"
     let &t_AF="\e[38;5;%dm"
   endif
-elseif &t_Co > 2 || has("gui_running")
   set t_Co=256
+elseif &t_Co > 2 || has("gui_running")
   set term=xterm
+  set t_Co=256
 endif
 syntax on
 set hlsearch
