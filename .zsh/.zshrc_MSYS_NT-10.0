@@ -1,0 +1,16 @@
+#.zshrc_MSYS_NT-6.3
+#
+#-------------------------------
+# PATH
+#-------------------------------
+export PYTHONDONTWRITEBYTECODE=1
+#-------------------------------
+# alias
+#-------------------------------
+alias l="ls --color"
+alias ls="ls --color"
+alias la="ls -a --color"
+alias ll="ls -lh --color"
+alias rm="rm -i"
+alias cp="cp -i"
+alias mv="mv -i"
