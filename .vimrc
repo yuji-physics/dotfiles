@@ -90,6 +90,9 @@ call dein#add('dannyob/quickfixstatus')
 " Go
 call dein#add('fatih/vim-go')
 
+" Julia
+call dein#add('JuliaEditorSupport/julia-vim')
+
 " python with pyenv
 "call dein#add('lambdalisue/vim-pyenv', {
 "      \ 'autoload': {
