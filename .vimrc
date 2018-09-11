@@ -58,7 +58,7 @@ if !has('nvim')
   call dein#add('roxma/vim-hug-neovim-rpc')
 endif
 call dein#add('zchee/deoplete-jedi')
-call dein#add('zchee/deoplete-go')
+call dein#add('zchee/deoplete-go', {'build': 'make'})
 call dein#add('Shougo/neosnippet')
 call dein#add('Shougo/neosnippet-snippets')
 
