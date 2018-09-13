@@ -5,7 +5,7 @@ syntax on
 if has('unix')
   set guifont=DejaVu\ Sans\ Mono\ 12
 else
-  set guifont=Ricty_Discord:h16
+  set guifont=Cica:h12
 endif
 "set imdisable
 "English Menu

@@ -15,7 +15,7 @@ endif
 " Dein{{{
 if has('win32')
   let s:dein_dir = expand('~/vimfiles/dein/repos/github.com/Shougo/dein.vim')
-  let g:python3_host_prog = expand('~/AppData/Local/Programs/Python/Python36/python.exe')
+  let g:python3_host_prog = expand('~/Python36/python.exe')
 else
   let s:dein_dir = expand('~/.vim/dein/repos/github.com/Shougo/dein.vim')
 endif
@@ -58,7 +58,7 @@ if !has('nvim')
   call dein#add('roxma/vim-hug-neovim-rpc')
 endif
 call dein#add('zchee/deoplete-jedi')
-call dein#add('zchee/deoplete-go')
+call dein#add('zchee/deoplete-go', {'build': 'make'})
 call dein#add('Shougo/neosnippet')
 call dein#add('Shougo/neosnippet-snippets')
 
@@ -89,6 +89,9 @@ call dein#add('dannyob/quickfixstatus')
 
 " Go
 call dein#add('fatih/vim-go')
+
+" Julia
+call dein#add('JuliaEditorSupport/julia-vim')
 
 " python with pyenv
 "call dein#add('lambdalisue/vim-pyenv', {

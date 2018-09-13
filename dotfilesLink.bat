@@ -1,5 +1,6 @@
 ::Make windows sym-links.
 ::Windows native
+<<<<<<< HEAD
 mklink    "%USERPROFILE%\_gvimrc"             "%USERPROFILE%\dotfiles\.gvimrc"
 mklink /D "%USERPROFILE%\vimfiles"            "%USERPROFILE%\dotfiles\.vim"
 mklink    "%USERPROFILE%\_vimrc"              "%USERPROFILE%\dotfiles\.vimrc"
@@ -12,6 +13,16 @@ mklink    "%USERPROFILE%\.minttyrc"           "%USERPROFILE%\dotfiles\.minttyrc"
 mklink /D "%USERPROFILE%\.zsh"                "%USERPROFILE%\dotfiles\.zsh"
 mklink    "%USERPROFILE%\.zshenv"             "%USERPROFILE%\dotfiles\.zshenv"
 mklink    "%USERPROFILE%\.tmux.conf"          "%USERPROFILE%\dotfiles\.tmux.conf"
+=======
+mklink    "%USERPROFILE%\_gvimrc"       "%USERPROFILE%\dotfiles\.gvimrc"
+mklink /D "%USERPROFILE%\vimfiles"      "%USERPROFILE%\dotfiles\.vim"
+mklink    "%USERPROFILE%\_vimrc"        "%USERPROFILE%\dotfiles\.vimrc"
+mklink    "%USERPROFILE%\.bash_profile" "%USERPROFILE%\dotfiles\.bash_profile"
+mklink    "%USERPROFILE%\.bashrc"       "%USERPROFILE%\dotfiles\.bashrc"
+mklink    "%USERPROFILE%\.inputrc"      "%USERPROFILE%\dotfiles\.inputrc"
+mklink /D "%USERPROFILE%\.zsh"          "%USERPROFILE%\dotfiles\.zsh"
+mklink    "%USERPROFILE%\.zshenv"       "%USERPROFILE%\dotfiles\.zshenv"
+>>>>>>> refs/remotes/origin/master
 ::msys2
 mklink    "C:\msys64\home\%USERNAME%\.bash_profile" "C:\msys64\home\%USERNAME%\dotfiles\.bash_profile"
 mklink    "C:\msys64\home\%USERNAME%\.bashrc"       "C:\msys64\home\%USERNAME%\dotfiles\.bashrc"
