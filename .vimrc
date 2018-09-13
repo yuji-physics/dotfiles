@@ -15,7 +15,7 @@ endif
 " Dein{{{
 if has('win32')
   let s:dein_dir = expand('~/vimfiles/dein/repos/github.com/Shougo/dein.vim')
-  let g:python3_host_prog = expand('~/Python36/python.exe')
+  let g:python3_host_prog = expand('C:\Python36\python.exe')
 else
   let s:dein_dir = expand('~/.vim/dein/repos/github.com/Shougo/dein.vim')
 endif

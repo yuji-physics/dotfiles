@@ -14,7 +14,4 @@ alias ll="ls -lh --color"
 alias rm="rm -i"
 alias cp="cp -i"
 alias mv="mv -i"
-<<<<<<< HEAD
 alias vim="C:/vim80/vim"
-=======
->>>>>>> refs/remotes/origin/master
