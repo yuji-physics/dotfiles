@@ -1,7 +1,7 @@
 " .vimrc
 " === PLUGINS === {{{
 let mapleader = ","
-"let $PATH = "~/.pyenv/shims:".$PATH
+"let $PATH = '~/.pyenv/shims:'.$PATH
 
 if &compatible
   set nocompatible
@@ -92,6 +92,9 @@ call dein#add('fatih/vim-go')
 
 " Julia
 call dein#add('JuliaEditorSupport/julia-vim')
+
+" db
+call dein#add('vim-scripts/dbext.vim')
 
 " python with pyenv
 "call dein#add('lambdalisue/vim-pyenv', {
@@ -307,6 +310,11 @@ autocmd FileType go nnoremap <leader>f :GoFmt<Cr>
 autocmd FileType go nnoremap <leader>l :GoLint<Cr>
 autocmd FileType go nnoremap <leader>r :GoRun<Cr>
 autocmd FileType go nnoremap <leader>b :GoBuild<Cr>
+"}}}
+"dbext{{{
+let g:dbext_default_SQLITE_bin = 'sqlite3'
+let g:dbext_default_profile_test = 'type=SQLITE:dbname='.expand('~/test.db')
+let g:dbext_default_profile = 'test'
 "}}}
 " }}}
 " === OPTIONS ( + etc.) === {{{
