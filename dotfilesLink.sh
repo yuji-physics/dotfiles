@@ -39,9 +39,12 @@ else
   ln -sfn ~/dotfiles/.tmux.conf ~/.tmux.conf
   ln -sfn ~/dotfiles/.vim ~/.vim
   ln -sfn ~/dotfiles/.vimrc ~/.vimrc
+  if [ ! -d ~/.config ]; then
+    mkdir -p ~/.config
+  fi
+  ln -sfn ~/dotfiles/.vim ~/.config/nvim
+  ln -sfn ~/dotfiles/.vimrc ~/.config/nvim/init.vim
   ln -sfn ~/dotfiles/.gvimrc ~/.gvimrc
-  ln -sfn ~/dotfiles/.nvim ~/.nvim
-  ln -sfn ~/dotfiles/.nvimrc ~/.nvimrc
   ln -sfn ~/dotfiles/.vimperator ~/.vimperator
   ln -sfn ~/dotfiles/.vimperatorrc ~/.vimperatorrc
   ln -sfn ~/dotfiles/.latexmkrc ~/.latexmkrc
