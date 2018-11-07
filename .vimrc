@@ -14,10 +14,11 @@ endif
 
 " Dein{{{
 if has('win32')
-  let s:dein_dir = expand('~/vimfiles/dein/repos/github.com/Shougo/dein.vim')
+  "let s:dein_dir = expand('~/vimfiles/dein/repos/github.com/Shougo/dein.vim')
+  let s:dein_dir = expand('~/.cache/dein/repos/github.com/Shougo/dein.vim')
   let g:python3_host_prog = expand('C:\Python36\python.exe')
 else
-  let s:dein_dir = expand('~/.vim/dein/repos/github.com/Shougo/dein.vim')
+  let s:dein_dir = expand('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 endif
 
 if &runtimepath !~# '/dein.vim'
@@ -25,85 +26,87 @@ if &runtimepath !~# '/dein.vim'
   if !isdirectory(s:dein_dir)
     execute ' !git clone https://github.com/Shougo/dein.vim' s:dein_dir
   endif
-  "execute 'set runtimepath^=' . fnamemodify(s:dein_dir, ':p')
-  if has('win32')
-    set runtimepath+=~/vimfiles/dein/repos/github.com/Shougo/dein.vim
-  else
-    set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
-  endif
+  execute 'set runtimepath^=' . fnamemodify(s:dein_dir, ':p')
 endif
 
 "-----------------------------------------
 " plugins
 "-----------------------------------------
-call dein#begin(s:dein_dir)
-call dein#add('Shougo/dein.vim')
-call dein#add('Shougo/vimproc', {
-      \ 'build': {
-      \     'windows': 'make -f make_mingw32.mak',
-      \     'cygwin': 'make -f make_cygwin.mak',
-      \     'mac': 'make -f make_mac.mak',
-      \     'unix': 'make -f make_unix.mak',
-      \     }})
+if dein#load_state('~/.cache/dein')
+  call dein#begin('~/.cache/dein')
+  call dein#add(s:dein_dir)
+  call dein#add('Shougo/vimproc', {
+        \ 'build': {
+        \     'windows': 'make -f make_mingw32.mak',
+        \     'cygwin': 'make -f make_cygwin.mak',
+        \     'mac': 'make -f make_mac.mak',
+        \     'unix': 'make -f make_unix.mak',
+        \     }})
 
-" Denite and its sources
-call dein#add('Shougo/denite.nvim')
-call dein#add('Shougo/neoyank.vim')
-call dein#add('Shougo/neomru.vim')
+  " Denite and its sources
+  call dein#add('Shougo/denite.nvim')
+  call dein#add('Shougo/neoyank.vim')
+  call dein#add('Shougo/neomru.vim')
 
-" Completions
-call dein#add('Shougo/deoplete.nvim')
-if !has('nvim')
-  call dein#add('roxma/nvim-yarp')
-  call dein#add('roxma/vim-hug-neovim-rpc')
+  " Deoplete
+  call dein#add('Shougo/deoplete.nvim')
+  if !has('nvim')
+    call dein#add('roxma/nvim-yarp')
+    call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
+
+  " Deoplete sources and snippets
+  call dein#add('zchee/deoplete-jedi')
+  call dein#add('zchee/deoplete-go', {'build': 'make'})
+  call dein#add('Shougo/neosnippet')
+  call dein#add('Shougo/neosnippet-snippets')
+
+  " Tools
+  call dein#add('Shougo/defx.nvim')
+  call dein#add('thinca/vim-quickrun')
+  call dein#add('tpope/vim-surround')
+  call dein#add('tpope/vim-repeat')
+  call dein#add('junegunn/vim-easy-align')
+  call dein#add('itchyny/lightline.vim')
+  call dein#add('kassio/neoterm')
+
+  " Folding
+  call dein#add('Konfekt/FastFold')
+  call dein#add('tmhedberg/SimpylFold')
+  call dein#add('matze/vim-tex-fold')
+
+  " Color schemes
+  call dein#add('altercation/vim-colors-solarized')
+
+  " Syntacs checker
+  call dein#add('osyo-manga/shabadou.vim')
+  call dein#add('osyo-manga/vim-watchdogs')
+  call dein#add('jceb/vim-hier')
+  call dein#add('dannyob/quickfixstatus')
+
+  " Language supports
+  " Kotlin
+  call dein#add('udalov/kotlin-vim')
+
+  " Markdown
+  call dein#add('jtratner/vim-flavored-markdown.git')
+
+  " Go
+  call dein#add('fatih/vim-go')
+
+  " Julia
+  call dein#add('JuliaEditorSupport/julia-vim')
+
+  " Python (pyenv)
+  "call dein#add('lambdalisue/vim-pyenv', {
+  "      \ 'autoload': {
+  "      \     'filetypes': ['python', 'python3', 'djangohtml']
+  "      \     },
+  "      \ 'merged': 0})
+
+  call dein#end()
+  call dein#save_state()
 endif
-call dein#add('zchee/deoplete-jedi')
-call dein#add('zchee/deoplete-go', {'build': 'make'})
-call dein#add('Shougo/neosnippet')
-call dein#add('Shougo/neosnippet-snippets')
-
-" Tools
-call dein#add('thinca/vim-quickrun')
-call dein#add('tpope/vim-surround')
-call dein#add('tpope/vim-repeat')
-call dein#add('junegunn/vim-easy-align')
-call dein#add('itchyny/lightline.vim')
-
-" Folding
-call dein#add('Konfekt/FastFold')
-call dein#add('tmhedberg/SimpylFold')
-call dein#add('matze/vim-tex-fold')
-
-" Color schemes
-call dein#add('altercation/vim-colors-solarized')
-
-" Syntacs
-call dein#add('udalov/kotlin-vim')
-call dein#add('jtratner/vim-flavored-markdown.git')
-
-" Syntacs checker
-call dein#add('osyo-manga/shabadou.vim')
-call dein#add('osyo-manga/vim-watchdogs')
-call dein#add('jceb/vim-hier')
-call dein#add('dannyob/quickfixstatus')
-
-" Go
-call dein#add('fatih/vim-go')
-
-" Julia
-call dein#add('JuliaEditorSupport/julia-vim')
-
-" db
-call dein#add('vim-scripts/dbext.vim')
-
-" python with pyenv
-"call dein#add('lambdalisue/vim-pyenv', {
-"      \ 'autoload': {
-"      \     'filetypes': ['python', 'python3', 'djangohtml']
-"      \     },
-"      \ 'merged': 0})
-
-call dein#end()
 " }}}
 filetype plugin indent on
 " Denite {{{
@@ -202,6 +205,9 @@ smap <C-k> <Plug>(neosnippet_expand_or_jump)
 " My own snippets
 let s:my_snippet = '~/.vim/snippet/'
 let g:neosnippet#snippets_directory = s:my_snippet
+"}}}
+"Defx {{{
+nnoremap <silent> <leader>f :<C-u>Defx -split=vertical -direction=topleft<CR>
 "}}}
 " vim-easy-align {{{
 vmap <CR> <Plug>(EasyAlign)
@@ -311,11 +317,12 @@ autocmd FileType go nnoremap <leader>l :GoLint<Cr>
 autocmd FileType go nnoremap <leader>r :GoRun<Cr>
 autocmd FileType go nnoremap <leader>b :GoBuild<Cr>
 "}}}
-"dbext{{{
-let g:dbext_default_SQLITE_bin = 'sqlite3'
-let g:dbext_default_profile_test = 'type=SQLITE:dbname='.expand('~/test.db')
-let g:dbext_default_profile = 'test'
-"}}}
+" neoterm{{{
+" let g:neoterm_split_on_tnew=1 " deprecated. Use :<mods> Tnew to use split
+" e.g., :vert Tnew, :bot Tnew, :top Tnew
+let g:neoterm_autoinsert=1
+" }}}
+
 " }}}
 " === OPTIONS ( + etc.) === {{{
 " Languages
@@ -335,8 +342,13 @@ if has('win32') && !has("gui_running")
   endif
   set t_Co=256
 elseif &t_Co > 2 || has("gui_running")
-  set term=xterm
-  set t_Co=256
+  if has('nvim')
+    "set termguicolors
+    set t_Co=256
+  else
+    set term=xterm
+    set t_Co=256
+  endif
 endif
 syntax on
 set hlsearch
@@ -531,5 +543,13 @@ vnoremap > >gv
 vnoremap < <gv
 
 " open terminal
-nnoremap <silent> <leader>t :<C-u>terminal ++close<CR>
+if has('nvim')
+  nnoremap <silent> <leader>t :<C-u>bot Tnew<CR>
+else
+  nnoremap <silent> <leader>t :<C-u>terminal ++close<CR>
+endif
+
+" go to command mode with Esc in terminal
+tnoremap <silent> <ESC> <C-\><C-n>
+
 " }}}
