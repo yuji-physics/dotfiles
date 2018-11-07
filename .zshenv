@@ -17,8 +17,9 @@ if [ -e "${HOME}/.pyenv" ]; then
 fi
 
 # GO
-if [ -e "/usr/local/go" ]; then
-  export GOROOT=/usr/local/go
+#if [ -e "/usr/local/go" ]; then
+if type go >/dev/null 2&>1; then
+  export GOROOT=$(go env GOROOT)
   export GOPATH=$HOME/go
   export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 fi
