@@ -14,9 +14,8 @@ endif
 
 " Dein{{{
 if has('win32')
-  "let s:dein_dir = expand('~/vimfiles/dein/repos/github.com/Shougo/dein.vim')
   let s:dein_dir = expand('~/.cache/dein/repos/github.com/Shougo/dein.vim')
-  let g:python3_host_prog = expand('C:\Python36\python.exe')
+  let g:python3_host_prog = expand('C:\Program Files\Python37\python.exe')
 else
   let s:dein_dir = expand('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 endif
@@ -26,7 +25,12 @@ if &runtimepath !~# '/dein.vim'
   if !isdirectory(s:dein_dir)
     execute ' !git clone https://github.com/Shougo/dein.vim' s:dein_dir
   endif
-  execute 'set runtimepath^=' . fnamemodify(s:dein_dir, ':p')
+  if has('win32')
+    set runtimepath^=~/.cache/dein/repos/github.com/Shougo/dein.vim
+  else
+    set runtimepath^=~/.cache/dein/repos/github.com/Shougo/dein.vim
+    "execute 'set runtimepath^=' . fnamemodify(s:dein_dir, ':p')
+  endif
 endif
 
 "-----------------------------------------
@@ -77,6 +81,7 @@ if dein#load_state('~/.cache/dein')
 
   " Color schemes
   call dein#add('altercation/vim-colors-solarized')
+  call dein#add('icymind/NeoSolarized')
 
   " Syntacs checker
   call dein#add('osyo-manga/shabadou.vim')
@@ -106,6 +111,10 @@ if dein#load_state('~/.cache/dein')
 
   call dein#end()
   call dein#save_state()
+endif
+
+if has('vim_starting') && dein#check_install()
+  call dein#install()
 endif
 " }}}
 filetype plugin indent on
@@ -366,8 +375,12 @@ endif
 syntax on
 set hlsearch
 set background=dark
-colorscheme solarized
-
+if has('nvim')
+  colorscheme NeoSolarized
+  set guifont=Cica:h12
+else
+  colorscheme solarized
+endif
 " cursor line and cursor column
 "set cursorline
 "set cursorcolumn
@@ -440,6 +453,7 @@ set wildignore=*.o,*.obj,*/.git/*,*.pyc,*.png,*.jpg,*.aux,.DS_Store " do not sho
 " misc
 set mouse=a
 set backspace=indent,eol,start
+set autochdir
 "set clipboard+=unnamed
 set history=50
 set vb t_vb=
