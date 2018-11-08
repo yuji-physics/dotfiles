@@ -207,7 +207,19 @@ let s:my_snippet = '~/.vim/snippet/'
 let g:neosnippet#snippets_directory = s:my_snippet
 "}}}
 "Defx {{{
-nnoremap <silent> <leader>f :<C-u>Defx -split=vertical -direction=topleft<CR>
+nnoremap <silent> <leader>f :<C-u>Defx -split=vertical -direction=topleft -winwidth=50<CR>
+autocmd FileType defx call s:defx_my_settings()
+function! s:defx_my_settings() abort
+  nnoremap <silent><buffer><expr> <CR>    defx#do_action('open')
+  nnoremap <silent><buffer><expr> c       defx#do_action('copy')
+  nnoremap <silent><buffer><expr> m       defx#do_action('move')
+  nnoremap <silent><buffer><expr> p       defx#do_action('paste')
+  nnoremap <silent><buffer><expr> h       defx#do_action('cd', ['..'])
+  nnoremap <silent><buffer><expr> l       defx#do_action('open')
+  nnoremap <silent><buffer><expr> q       defx#do_action('quit')
+  nnoremap <silent><buffer><expr> <space> defx#do_action('toggle_select') . 'j'
+endfunction
+
 "}}}
 " vim-easy-align {{{
 vmap <CR> <Plug>(EasyAlign)
@@ -218,6 +230,7 @@ silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 " "}}}
 " vim-quickrun {{{
 nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
+nmap <silent><Leader>rs :<C-u>QuickRun -outputter null<CR>
 nmap <Leader>rm <Plug>(quickrun)
 let g:quickrun_config = {
       \ '_' : {
@@ -377,10 +390,10 @@ set matchtime=1 " 5 by default
 set matchpairs=(:),{:},[:],<:>
 
 " <tab> style
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 set smarttab
-set softtabstop=2
+set softtabstop=4
 set expandtab
 set shiftround
 
