@@ -334,6 +334,7 @@ endfunction"
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
+let g:go_version_warning = 0 " suppress version warning, since I use neovim 0.3.0 on Mac right now.
 autocmd FileType go nnoremap <leader>f :GoFmt<Cr>
 autocmd FileType go nnoremap <leader>l :GoLint<Cr>
 autocmd FileType go nnoremap <leader>r :GoRun<Cr>
