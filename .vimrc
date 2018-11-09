@@ -219,7 +219,9 @@ let g:neosnippet#snippets_directory = s:my_snippet
 nnoremap <silent> <leader>f :<C-u>Defx -split=vertical -direction=topleft -winwidth=50<CR>
 autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
-  nnoremap <silent><buffer><expr> <CR>    defx#do_action('open')
+  "nnoremap <silent><buffer><expr> <CR>    defx#do_action('open')
+  nnoremap <silent><buffer><expr> <CR>    defx#do_action('drop')
+  nnoremap <silent><buffer><expr> a       defx#do_action('execute_system')
   nnoremap <silent><buffer><expr> c       defx#do_action('copy')
   nnoremap <silent><buffer><expr> m       defx#do_action('move')
   nnoremap <silent><buffer><expr> p       defx#do_action('paste')
