@@ -1,5 +1,10 @@
-colorscheme solarized
-set background=dark
+if has('nvim')
+    colorscheme solarized
+    set background=dark
+else
+    colorscheme NeoSolarized
+    set background=dark
+endif
 syntax on
 "set transparency=10
 if has('unix')

@@ -1,3 +1,5 @@
+.vim/init.vim
+.vim/ginit.vim
 .vim/bundle/*
 .vim/dein/*
 .vim/.netrwhist

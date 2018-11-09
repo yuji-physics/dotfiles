@@ -44,6 +44,7 @@ else
   fi
   ln -sfn ~/dotfiles/.vim ~/.config/nvim
   ln -sfn ~/dotfiles/.vimrc ~/.config/nvim/init.vim
+  ln -sfn ~/dotfiles/.gvimrc ~/.config/nvim/ginit.vim
   ln -sfn ~/dotfiles/.gvimrc ~/.gvimrc
   ln -sfn ~/dotfiles/.vimperator ~/.vimperator
   ln -sfn ~/dotfiles/.vimperatorrc ~/.vimperatorrc

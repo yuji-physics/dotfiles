@@ -377,7 +377,6 @@ set hlsearch
 set background=dark
 if has('nvim')
   colorscheme NeoSolarized
-  set guifont=Cica:h12
 else
   colorscheme solarized
 endif
