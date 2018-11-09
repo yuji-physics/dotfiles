@@ -216,7 +216,7 @@ let s:my_snippet = '~/.vim/snippet/'
 let g:neosnippet#snippets_directory = s:my_snippet
 "}}}
 "Defx {{{
-nnoremap <silent> <leader>f :<C-u>Defx -split=vertical -direction=topleft -winwidth=50<CR>
+nnoremap <silent> <leader>f :<C-u>Defx -split=vertical -direction=topleft -winwidth=40<CR>
 autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
   "nnoremap <silent><buffer><expr> <CR>    defx#do_action('open')
