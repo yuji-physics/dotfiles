@@ -502,7 +502,7 @@ autocmd MyAutoCmd VimEnter,ColorScheme * highlight LineNr ctermbg=NONE
 autocmd MyAutoCmd VimEnter,ColorScheme * highlight CursorLineNr ctermbg=NONE
 
 " yapf code formatter for python
-autocmd FileType python nnoremap <leader>f :<C-u>0,$!yapf<Cr>
+autocmd FileType python nnoremap <leader>pf :<C-u>0,$!yapf<Cr>
 " }}}
 " === KEY MAPPINGS === {{{
 " emacs-like keybindins on command-line mode
