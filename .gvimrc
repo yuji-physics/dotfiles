@@ -1,8 +1,8 @@
 if has('nvim')
-    colorscheme solarized
+    colorscheme Neosolarized
     set background=dark
 else
-    colorscheme NeoSolarized
+    colorscheme Solarized
     set background=dark
 endif
 syntax on
