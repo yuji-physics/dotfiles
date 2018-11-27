@@ -251,7 +251,7 @@ let g:quickrun_config = {
       \ },
       \ 'tex' : {
       \   'command' : 'latexmk',
-      \   'cmdopt' : ' -f',
+      \   'cmdopt' : ' -f -quiet',
       \   'exec' : '%c %o %s'
       \ }
       \}
