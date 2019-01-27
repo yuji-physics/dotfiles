@@ -65,6 +65,14 @@ if dein#load_state('~/.cache/dein')
   call dein#add('Shougo/neosnippet')
   call dein#add('Shougo/neosnippet-snippets')
 
+  " vim-lsp
+  call dein#add('prabirshrestha/async.vim')
+  call dein#add('prabirshrestha/vim-lsp')
+  call dein#add('prabirshrestha/asyncomplete.vim')
+  call dein#add('prabirshrestha/asyncomplete-lsp.vim')
+  call dein#add('prabirshrestha/asyncomplete-buffer.vim')
+  call dein#add('prabirshrestha/asyncomplete-neosnippet.vim')
+
   " Tools
   call dein#add('Shougo/defx.nvim')
   call dein#add('thinca/vim-quickrun')
@@ -97,7 +105,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('jtratner/vim-flavored-markdown.git')
 
   " Go
-  call dein#add('fatih/vim-go')
+  "call dein#add('fatih/vim-go')
 
   " Julia
   call dein#add('JuliaEditorSupport/julia-vim')
@@ -198,15 +206,16 @@ nnoremap <silent> <leader>un :<C-u>Denite -resume -cursor-pos=+1 -immediately<CR
 nnoremap <silent> <leader>up :<C-u>Denite -resume -cursor-pos=-1 -immediately<CR>
 " }}}
 " Deoplete {{{
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#complete_method = 'complete'
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_smart_case = 1
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function() abort
-  return deoplete#close_popup() . "\<CR>"
-endfunction
-autocmd CompleteDone * silent! pclose!
+"let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 0
+"let g:deoplete#complete_method = 'complete'
+"let g:deoplete#enable_ignore_case = 1
+"let g:deoplete#enable_smart_case = 1
+"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"function! s:my_cr_function() abort
+"  return deoplete#close_popup() . "\<CR>"
+"endfunction
+"autocmd CompleteDone * silent! pclose!
 " }}}
 " Neosnippet{{{
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
@@ -333,19 +342,47 @@ function! MyMode()
 endfunction"
 " }}}
 " vim-go{{{
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_version_warning = 0 " suppress version warning, since I use neovim 0.3.0 on Mac right now.
-autocmd FileType go nnoremap <leader>f :GoFmt<Cr>
-autocmd FileType go nnoremap <leader>l :GoLint<Cr>
-autocmd FileType go nnoremap <leader>r :GoRun<Cr>
-autocmd FileType go nnoremap <leader>b :GoBuild<Cr>
+"let g:go_highlight_functions = 1
+"let g:go_highlight_methods = 1
+"let g:go_highlight_structs = 1
+"let g:go_version_warning = 0 " suppress version warning, since I use neovim 0.3.0 on Mac right now.
+"autocmd FileType go nnoremap <leader>f :GoFmt<Cr>
+"autocmd FileType go nnoremap <leader>l :GoLint<Cr>
+"autocmd FileType go nnoremap <leader>r :GoRun<Cr>
+"autocmd FileType go nnoremap <leader>b :GoBuild<Cr>
 "}}}
 " neoterm{{{
 " let g:neoterm_split_on_tnew=1 " deprecated. Use :<mods> Tnew to use split
 " e.g., :vert Tnew, :bot Tnew, :top Tnew
 let g:neoterm_autoinsert=1
+" }}}
+" vim-lsp {{{
+if executable('pyls')
+    au User lsp_setup call lsp#register_server({
+                \'name': 'pyls',
+                \'cmd': {server_info->['pyls']},
+                \'whitelist': ['python'],
+                \})
+endif
+if executable('gopls')
+    au User lsp_setup call lsp#register_server({
+                \'name': 'gopls',
+                \'cmd': {server_info->['gopls', '-mode', 'stdio']},
+                \'whitelist': ['go'],
+                \})
+endif
+" asyncomplete
+call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
+            \'name': 'neosnippet',
+            \'whitelist': ['*'],
+            \'completor': function('asyncomplete#sources#neosnippet#completor'),
+            \}))
+call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+            \'name': 'buffer',
+            \'whitelist': ['*'],
+            \'blacklist': ['go'],
+            \'completor': function('asyncomplete#sources#buffer#completor'),
+            \}))
 " }}}
 
 " }}}
