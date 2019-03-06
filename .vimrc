@@ -69,6 +69,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('prabirshrestha/async.vim')
   call dein#add('prabirshrestha/vim-lsp')
   call dein#add('prabirshrestha/asyncomplete.vim')
+  call dein#add('prabirshrestha/asyncomplete-file.vim')
   call dein#add('prabirshrestha/asyncomplete-lsp.vim')
   call dein#add('prabirshrestha/asyncomplete-buffer.vim')
   call dein#add('prabirshrestha/asyncomplete-neosnippet.vim')
@@ -377,12 +378,17 @@ call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_opt
             \'whitelist': ['*'],
             \'completor': function('asyncomplete#sources#neosnippet#completor'),
             \}))
-call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
-            \'name': 'buffer',
+call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+            \'name': 'file',
             \'whitelist': ['*'],
-            \'blacklist': ['go'],
-            \'completor': function('asyncomplete#sources#buffer#completor'),
+            \'completor': function('asyncomplete#sources#file#completor'),
             \}))
+"call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+"            \'name': 'buffer',
+"            \'whitelist': ['*'],
+"            \'blacklist': ['go'],
+"            \'completor': function('asyncomplete#sources#buffer#completor'),
+"            \}))
 " }}}
 
 " }}}
