@@ -1,4 +1,4 @@
-" .vimrc
+﻿" .vimrc
 " === PLUGINS === {{{
 let mapleader = ","
 "let $PATH = '~/.pyenv/shims:'.$PATH
@@ -623,5 +623,8 @@ endif
 
 " go to command mode with Esc in terminal
 tnoremap <silent> <ESC> <C-\><C-n>
+
+" paste
+noremap! <S-Insert> <C-R>+
 
 " }}}
